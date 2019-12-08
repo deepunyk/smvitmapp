@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".studProfileActivity">
+    tools:context=".facProfileActivity">
 
 
     <ScrollView
@@ -88,7 +88,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
-                    android:id="@+id/usnTxt"
+                    android:id="@+id/fidTxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
@@ -113,17 +113,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/editBut" />
 
                 <TextView
-                    android:id="@+id/secTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline10"
-                    app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-                <TextView
                     android:id="@+id/emailTxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -135,7 +124,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
-                    android:id="@+id/semTxt"
+                    android:id="@+id/mobTxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
@@ -184,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="USN"
+                    android:text="FID"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
                     app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
@@ -197,27 +186,17 @@
                     android:text="E-mail"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toBottomOf="@+id/usnTxt" />
+                    app:layout_constraintTop_toBottomOf="@+id/fidTxt" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Semester"
+                    android:text="Mobile"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
                     app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Section"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toBottomOf="@+id/semTxt" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -227,7 +206,7 @@
                     android:text="Branch"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toBottomOf="@+id/secTxt" />
+                    app:layout_constraintTop_toBottomOf="@+id/mobTxt" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline8"

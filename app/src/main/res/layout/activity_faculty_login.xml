@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:transitionName="studLayout"
-    tools:context=".loginActivity">
+    tools:context=".facultyLogin">
 
     <HorizontalScrollView
         android:layout_width="0dp"
@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline12"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline11"
-                app:layout_constraintTop_toBottomOf="@+id/usnText"
+                app:layout_constraintTop_toBottomOf="@+id/fidText"
                 app:primaryColor="@color/colorPrimaryDark">
 
                 <studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -113,18 +113,18 @@
                 app:srcCompat="@drawable/college_logo" />
 
             <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                android:id="@+id/usnText"
+                android:id="@+id/fidText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:labelText="USN"
+                app:labelText="FID"
                 app:layout_constraintEnd_toStartOf="@+id/guideline12"
                 app:layout_constraintStart_toStartOf="@+id/guideline11"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:primaryColor="@color/colorPrimaryDark">
 
                 <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                    android:id="@+id/usnTxt"
+                    android:id="@+id/fidTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"

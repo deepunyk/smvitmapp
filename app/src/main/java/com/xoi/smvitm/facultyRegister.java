@@ -42,17 +42,15 @@ import java.util.Map;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class studRegisterActivity extends AppCompatActivity {
+public class facultyRegister extends AppCompatActivity {
 
-    ExtendedEditText nameTxt, passTxt, conPassTxt, usnTxt, emailTxt;
-    MaterialSpinner semSpin, secSpin, brSpin;
-    String semAr[] = {"2","4","6","8"};
-    String secAr[] = {"A","B","C"};
-    String brAr[] = {"Computer Science","Electronics","Mechanical","Civil"};
+    ExtendedEditText nameTxt, passTxt, conPassTxt, fidTxt, emailTxt, mobileTxt;
+    MaterialSpinner brSpin;
+    String brAr[] = {"Computer Science","Electronics","Mechanical","Civil","Basic Science"};
     Button regBut;
     TextView proPicTxt, loadTxt;
-    String name, pass, conpass, usn, email, sem, sec, br;
-    String url ="http://smvitmapp.xtoinfinity.tech/php/register.php";
+    String name, pass, conpass, fid, email, br, mobile;
+    String url ="http://smvitmapp.xtoinfinity.tech/php/facultyRegister.php";
     CircularImageView profileImg;
     int IMG_REQUEST = 1;
     Bitmap bitmap;
@@ -67,15 +65,14 @@ public class studRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stud_register);
+        setContentView(R.layout.activity_faculty_register);
 
         nameTxt = (ExtendedEditText)findViewById(R.id.nameTxt);
+        mobileTxt = (ExtendedEditText)findViewById(R.id.mobileTxt);
         passTxt = (ExtendedEditText)findViewById(R.id.passTxt);
         conPassTxt = (ExtendedEditText)findViewById(R.id.conPassTxt);
-        usnTxt = (ExtendedEditText)findViewById(R.id.usnTxt);
+        fidTxt = (ExtendedEditText)findViewById(R.id.fidTxt);
         emailTxt = (ExtendedEditText)findViewById(R.id.emailTxt);
-        semSpin = (MaterialSpinner)findViewById(R.id.semSpin);
-        secSpin = (MaterialSpinner)findViewById(R.id.secSpin);
         brSpin = (MaterialSpinner)findViewById(R.id.brSpin);
         regBut = (Button)findViewById(R.id.regBut);
         proPicTxt = (TextView) findViewById(R.id.proPicTxt);
@@ -108,10 +105,6 @@ public class studRegisterActivity extends AppCompatActivity {
             }
         });
 
-        semSpin.setItems(semAr);
-
-        secSpin.setItems(secAr);
-
         brSpin.setItems(brAr);
 
 
@@ -120,16 +113,15 @@ public class studRegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 br = Integer.toString(brSpin.getSelectedIndex()+1);
-                sem = semAr[semSpin.getSelectedIndex()];
-                sec = secAr[secSpin.getSelectedIndex()];
                 name = nameTxt.getText().toString().trim();
                 pass = passTxt.getText().toString();
                 conpass = conPassTxt.getText().toString();
-                usn = usnTxt.getText().toString().trim().toUpperCase();
+                fid = fidTxt.getText().toString().trim().toUpperCase();
+                mobile = mobileTxt.getText().toString().trim();
                 email = emailTxt.getText().toString().trim();
 
-                if(name.equals("")|| pass.equals("")||usn.equals("")||email.equals("")){
-                    Toast.makeText(studRegisterActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                if(name.equals("")|| pass.equals("")||fid.equals("")||email.equals("")){
+                    Toast.makeText(facultyRegister.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     try {
@@ -139,15 +131,15 @@ public class studRegisterActivity extends AppCompatActivity {
                                 load();
                                 register();
                             } else {
-                                Toast.makeText(studRegisterActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(facultyRegister.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else{
-                            Toast.makeText(studRegisterActivity.this, "Please enter your sode-edu email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(facultyRegister.this, "Please enter your sode-edu email", Toast.LENGTH_SHORT).show();
                         }
                     }
                     catch (Exception e){
-                        Toast.makeText(studRegisterActivity.this, "Please enter your sode-edu email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(facultyRegister.this, "Please enter your sode-edu email", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -194,19 +186,19 @@ public class studRegisterActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         String finResponse = response.substring(0,4);
                         if(finResponse.equals("1062")){
-                            Toast.makeText(studRegisterActivity.this, "You have already registered with this USN.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(facultyRegister.this, "You have already registered with this FID.", Toast.LENGTH_LONG).show();
                         }
                         else if(finResponse.equals("1452")){
-                            Toast.makeText(studRegisterActivity.this, "Please check your branch, sem, section.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(facultyRegister.this, "Please check your branch.", Toast.LENGTH_LONG).show();
                         }
                         else if(response.equals("success;")){
-                            Toast.makeText(studRegisterActivity.this, "Registered Successfully, please login to continure.", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(studRegisterActivity.this, loginActivity.class);
+                            Toast.makeText(facultyRegister.this, "Registered Successfully, please login to continure.", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(facultyRegister.this, facultyLogin.class);
                             startActivity(intent);
                             finish();
                         }
                         else{
-                            Toast.makeText(studRegisterActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(facultyRegister.this, ""+response, Toast.LENGTH_SHORT).show();
                         }
                         doneLoad();
                     }
@@ -214,20 +206,19 @@ public class studRegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(studRegisterActivity.this, ""+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(facultyRegister.this, ""+error, Toast.LENGTH_SHORT).show();
                     }
                 }
         ){
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("usn",usn);
+                params.put("fid",fid);
+                params.put("mobile",mobile);
                 params.put("pass",pass);
                 params.put("name",name);
                 params.put("email",email);
                 params.put("br",br);
-                params.put("sem",sem);
-                params.put("sec",sec);
                 if(select == 1) {
                     params.put("proPic", imgString(bitmap));
                 }else{
@@ -260,7 +251,7 @@ public class studRegisterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(studRegisterActivity.this, loginActivity.class);
+        Intent intent = new Intent(facultyRegister.this, facultyLogin.class);
         startActivity(intent);
         finish();
     }

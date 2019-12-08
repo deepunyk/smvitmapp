@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".studRegisterActivity">
+    tools:context=".facultyRegister">
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
@@ -117,7 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        app:labelText="NAME"
+                        app:labelText="Name"
                         app:primaryColor="@color/colorPrimaryDark">
 
                         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -146,15 +146,32 @@
                     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                     <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:labelText="Mobile"
+                        app:primaryColor="@color/colorPrimaryDark">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/mobileTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorAccent"
+                            android:inputType="number"/>
+
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
                         android:id="@+id/text_field_boxes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        app:labelText="USN"
+                        app:labelText="FID"
                         app:primaryColor="@color/colorPrimaryDark">
 
                         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                            android:id="@+id/usnTxt"
+                            android:id="@+id/fidTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimaryDark"
@@ -195,22 +212,6 @@
                             android:inputType="textPassword"/>
 
                     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/semSpin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:shadowColor="@color/colorAccent"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/secSpin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:shadowColor="@color/colorAccent"
-                        android:textColor="@color/colorPrimaryDark" />
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
                         android:id="@+id/brSpin"

@@ -24,18 +24,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class loginActivity extends AppCompatActivity {
+public class facultyLogin extends AppCompatActivity {
 
-    EditText usnTxt, passTxt;
+    EditText fidTxt, passTxt;
     Button logBut;
     TextView regTxt;
-    String usn, pass;
-    String url ="http://smvitmapp.xtoinfinity.tech/php/login.php";
+    String fid, pass;
+    String url ="http://smvitmapp.xtoinfinity.tech/php/facLogin.php";
     SharedPreferences sharedPreferences;
     ImageView bckImg;
     Animation _translateAnimation;
@@ -43,10 +41,10 @@ public class loginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_faculty_login);
 
         sharedPreferences = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
-        usnTxt = (EditText)findViewById(R.id.usnTxt);
+        fidTxt = (EditText)findViewById(R.id.fidTxt);
         passTxt = (EditText)findViewById(R.id.passTxt);
         logBut = (Button)findViewById(R.id.logBut);
         regTxt = (TextView) findViewById(R.id.regTxt);
@@ -59,27 +57,24 @@ public class loginActivity extends AppCompatActivity {
         _translateAnimation.setInterpolator(new LinearInterpolator());
         bckImg.setAnimation(_translateAnimation);
 
-
-
-        regTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(loginActivity.this, studRegisterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         logBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usn = usnTxt.getText().toString().toUpperCase();
+                fid = fidTxt.getText().toString().toUpperCase();
                 pass = passTxt.getText().toString();
-                if(usn.equals("")||pass.equals("")){
-                    Toast.makeText(loginActivity.this, "Please fill both the fields", Toast.LENGTH_SHORT).show();
+                if(fid.equals("")||pass.equals("")){
+                    Toast.makeText(facultyLogin.this, "Please fill both the fields", Toast.LENGTH_SHORT).show();
                 }else {
                     login();
                 }
+            }
+        });
+        regTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(facultyLogin.this, facultyRegister.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -89,11 +84,11 @@ public class loginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(loginActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(facultyLogin.this, ""+response, Toast.LENGTH_SHORT).show();
                         if(response.equals("success;")){
-                            sharedPreferences.edit().putString("usn",usn).apply();
-                            sharedPreferences.edit().putString("login","1").apply();
-                            Intent intent = new Intent(loginActivity.this, studProfileActivity.class);
+                            sharedPreferences.edit().putString("fid",fid).apply();
+                            sharedPreferences.edit().putString("login","2").apply();
+                            Intent intent = new Intent(facultyLogin.this, facProfileActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -102,14 +97,14 @@ public class loginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(loginActivity.this, ""+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(facultyLogin.this, ""+error, Toast.LENGTH_SHORT).show();
                     }
                 }
         ){
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("usn",usn);
+                params.put("fid",fid);
                 params.put("pass",pass);
                 return params;
             };
@@ -124,7 +119,7 @@ public class loginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(loginActivity.this, selectLogin.class);
+        Intent intent = new Intent(facultyLogin.this, selectLogin.class);
         startActivity(intent);
         finish();
     }

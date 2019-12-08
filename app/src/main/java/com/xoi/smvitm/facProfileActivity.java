@@ -25,29 +25,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class studProfileActivity extends AppCompatActivity {
+public class facProfileActivity extends AppCompatActivity {
 
-    TextView usnTxt, nameTxt, secTxt, semTxt, brTxt, emailTxt;
+    TextView fidTxt, nameTxt, mobTxt, brTxt, emailTxt;
     CircularImageView proPic;
-    String url = "http://smvitmapp.xtoinfinity.tech/php/studDetails.php?usn=";
+    String url = "http://smvitmapp.xtoinfinity.tech/php/facDetails.php?fid=";
     SharedPreferences sharedPreferences;
-    String usn, name, sec, sem, br, email, pic;
+    String fid, name, mobile, br, email, pic;
     Button outBut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stud_profile);
+        setContentView(R.layout.activity_fac_profile);
 
         sharedPreferences = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
 
-        usn= sharedPreferences.getString("usn","");
+        fid= sharedPreferences.getString("fid","");
 
         outBut = (Button)findViewById(R.id.outBut);
-        usnTxt = (TextView)findViewById(R.id.usnTxt);
+        fidTxt = (TextView)findViewById(R.id.fidTxt);
         nameTxt = (TextView)findViewById(R.id.nameTxt);
-        secTxt = (TextView)findViewById(R.id.secTxt);
-        semTxt = (TextView)findViewById(R.id.semTxt);
+        mobTxt = (TextView)findViewById(R.id.mobTxt);
         brTxt = (TextView)findViewById(R.id.brTxt);
         emailTxt = (TextView)findViewById(R.id.emailTxt);
         proPic = (CircularImageView)findViewById(R.id.profileImg);
@@ -56,12 +55,12 @@ public class studProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sharedPreferences.edit().clear().apply();
-                Intent intent = new Intent(studProfileActivity.this, loginActivity.class);
+                Intent intent = new Intent(facProfileActivity.this, facultyLogin.class);
                 startActivity(intent);
                 finish();
             }
         });
-        usnTxt.setText(usn);
+        fidTxt.setText(fid);
 
         getDetails();
 
@@ -69,7 +68,7 @@ public class studProfileActivity extends AppCompatActivity {
     }
 
     private void getDetails() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+usn,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+fid,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -93,19 +92,17 @@ public class studProfileActivity extends AppCompatActivity {
     private void parseItems(String jsonResposnce) {
         try {
             JSONObject jobj = new JSONObject(jsonResposnce);
-            JSONArray jarray = jobj.getJSONArray("student");
+            JSONArray jarray = jobj.getJSONArray("faculty");
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jo = jarray.getJSONObject(i);
                 name = jo.getString("name");
-                sem = jo.getString("sem");
-                sec = jo.getString("section");
+                mobile = jo.getString("mobile");
                 email = jo.getString("email");
                 pic = jo.getString("profilepic");
                 br = jo.getString("branchId");
             }
             nameTxt.setText(name);
-            semTxt.setText(sem);
-            secTxt.setText(sec);
+            mobTxt.setText(mobile);
             emailTxt.setText(email);
             setBranch();
             Glide.with(this).load(pic).into(proPic);
@@ -124,8 +121,11 @@ public class studProfileActivity extends AppCompatActivity {
         else if(br.equals("3")){
             brTxt.setText("Mechanical");
         }
-        else{
+        else if(br.equals("4")){
             brTxt.setText("Civil");
+        }
+        else{
+            brTxt.setText("Basic Science");
         }
     }
 }

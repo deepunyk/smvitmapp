@@ -39,12 +39,19 @@ public class splashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(sharedPreferences.contains("login")){
-                    Intent intent = new Intent(splashActivity.this, studProfileActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if(sharedPreferences.getString("login","").equals("1")) {
+                        Intent intent = new Intent(splashActivity.this, studProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        Intent intent = new Intent(splashActivity.this, facProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
                 else{
-                    Intent intent = new Intent(splashActivity.this, loginActivity.class);
+                    Intent intent = new Intent(splashActivity.this, selectLogin.class);
                     ActivityOptions option = ActivityOptions.makeSceneTransitionAnimation(splashActivity.this,
                             Pair.<View, String>create(splashLogo,"colLogo"));
                     startActivity(intent,option.toBundle());

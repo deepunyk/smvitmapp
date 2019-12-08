@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/basic</item>
         <item>@font/playfair_display_sc_bold</item>
+        <item>@font/roboto_bold</item>
         <item>@font/roboto_medium</item>
     </array>
 </resources>
