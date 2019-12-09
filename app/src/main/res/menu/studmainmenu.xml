@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navFeed"
+        android:icon = "@drawable/ic_homeico"
+        android:title="Home"
+        />
+    <item
+        android:id="@+id/navAcc"
+        android:icon = "@drawable/ic_accico"
+        android:title="Accessories"
+        />
+    <item
+        android:id="@+id/navClass"
+        android:icon = "@drawable/ic_classico"
+        android:title="Classroom"
+        />
+    <item
+        android:id="@+id/navPro"
+        android:icon = "@drawable/ic_usrico"
+        android:title="Profile"
+        />
+
+</menu>

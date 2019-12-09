@@ -40,7 +40,7 @@ public class splashActivity extends AppCompatActivity {
             public void run() {
                 if(sharedPreferences.contains("login")){
                     if(sharedPreferences.getString("login","").equals("1")) {
-                        Intent intent = new Intent(splashActivity.this, studProfileActivity.class);
+                        Intent intent = new Intent(splashActivity.this, studMainActivity.class);
                         startActivity(intent);
                         finish();
                     }

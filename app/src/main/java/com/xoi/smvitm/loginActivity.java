@@ -93,7 +93,7 @@ public class loginActivity extends AppCompatActivity {
                         if(response.equals("success;")){
                             sharedPreferences.edit().putString("usn",usn).apply();
                             sharedPreferences.edit().putString("login","1").apply();
-                            Intent intent = new Intent(loginActivity.this, studProfileActivity.class);
+                            Intent intent = new Intent(loginActivity.this, studMainActivity.class);
                             startActivity(intent);
                             finish();
                         }

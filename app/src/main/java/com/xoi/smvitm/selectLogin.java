@@ -6,14 +6,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class selectLogin extends AppCompatActivity {
 
     ConstraintLayout studConLayout, facConLayout;
     ImageView colLogo;
+    boolean doubleBackToExitPressedOnce = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,7 @@ public class selectLogin extends AppCompatActivity {
         colLogo = (ImageView)findViewById(R.id.colLogo);
         facConLayout = (ConstraintLayout)findViewById(R.id.facConLayout);
 
+        final Handler handler = new Handler();
 
         studConLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +40,7 @@ public class selectLogin extends AppCompatActivity {
                         pairs);
                 startActivity(intent,option.toBundle());
                 selectLogin.this.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             }
         });
 
@@ -48,7 +54,27 @@ public class selectLogin extends AppCompatActivity {
                         pairs);
                 startActivity(intent,option.toBundle());
                 selectLogin.this.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

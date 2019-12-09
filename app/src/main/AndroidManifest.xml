@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".facultyRegister"></activity>
+        <activity android:name=".studMainActivity"></activity>
+        <activity android:name=".facultyRegister" />
         <activity android:name=".facProfileActivity" />
         <activity android:name=".facultyLogin" />
         <activity android:name=".selectLogin" />
@@ -27,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
