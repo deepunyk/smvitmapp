@@ -1,0 +1,96 @@
+package com.xoi.smvitm;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.app.DownloadManager;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+public class PDFReader extends AppCompatActivity {
+    WebView webView;
+    ProgressBar progressBar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pdfreader);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Circulars");
+
+        String pdfurl = getIntent().getStringExtra("pdfurl");
+        Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();
+        String url = "http://docs.google.com/gview?embedded=true&url=" + pdfurl;
+
+        webView = (WebView) findViewById(R.id.webView);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+        webView.setWebViewClient(new WebViewClient());
+
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+
+                if (newProgress == 100) {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        webView.loadUrl(url);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.download_menu_icon, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.download_pdf:
+                String pdfurl = getIntent().getStringExtra("pdfurl");
+                DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(pdfurl));
+                request.setTitle("PDF");
+                request.setDescription("Downloading");
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Document.pdf");
+                downloadmanager.enqueue(request);
+                return true;
+
+            case R.id.share_pdf:
+                String sharepdfurl = getIntent().getStringExtra("pdfurl");
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String share_body = sharepdfurl;
+                intent.putExtra(Intent.EXTRA_SUBJECT, share_body);
+                intent.putExtra(Intent.EXTRA_TEXT, share_body);
+                startActivity(Intent.createChooser(intent, "Share Using"));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}

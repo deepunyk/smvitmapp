@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class studMainActivity extends AppCompatActivity {
 
     studMainPageAdapter pageAdapter;
     BottomNavigationViewEx studBN;
-    ViewPager vp;
+    ViewPager vp,hvp;
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -29,7 +30,6 @@ public class studMainActivity extends AppCompatActivity {
         vp.setAdapter(pageAdapter);
 
         studBN.setupWithViewPager(vp);
-
     }
 
     @Override
