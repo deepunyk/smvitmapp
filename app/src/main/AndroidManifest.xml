@@ -13,9 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".facMainActivity"></activity>
-        <activity android:name=".editStudProfActivity" />
-        <activity android:name=".studMainActivity" />
+        <activity android:name=".studMainActivity"></activity>
         <activity android:name=".facultyRegister" />
         <activity android:name=".facProfileActivity" />
         <activity android:name=".facultyLogin" />

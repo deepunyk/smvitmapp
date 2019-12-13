@@ -16,8 +16,11 @@
         app:itemTextColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/studmainmenu" />
+
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/studVP"
@@ -25,7 +28,15 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/studBN"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+    </androidx.viewpager.widget.ViewPager>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
