@@ -1,10 +1,8 @@
 package com.xoi.smvitm;
 
 
-<<<<<<< HEAD
-=======
+
 import android.content.Intent;
->>>>>>> 9423487... ganpat
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,10 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-=======
+
 import android.widget.Button;
->>>>>>> 9423487... ganpat
 
 public class studaccFragment extends Fragment {
 
@@ -27,9 +23,7 @@ public class studaccFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-<<<<<<< HEAD
-        return inflater.inflate(R.layout.fragment_studacc, container, false);
-=======
+
         View view = inflater.inflate(R.layout.fragment_studacc, container, false);
 
         Button btnStore = (Button) view.findViewById(R.id.btnstore);
@@ -41,7 +35,7 @@ public class studaccFragment extends Fragment {
             }
         });
         return view;
->>>>>>> 9423487... ganpat
+
     }
 
 }
