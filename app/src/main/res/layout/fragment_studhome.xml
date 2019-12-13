@@ -11,9 +11,9 @@
         android:id="@+id/homeTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/colorPrimaryDark"
         app:itemIconTint="@color/navicon"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemTextColor="@color/white"
         app:menu="@menu/homemenu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
