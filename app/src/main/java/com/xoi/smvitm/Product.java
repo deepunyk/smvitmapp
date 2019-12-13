@@ -2,41 +2,33 @@ package com.xoi.smvitm;
 public class Product {
     private int id;
     private String title;
-    private String shortdesc;
-    private double rating;
-    private double price;
+    private String des;
+    private String cat;
+    private String price;
+    private String date;
     private String image;
 
-    public Product(int id, String title, String shortdesc, double rating, double price, String image) {
+    public Product(int id, String title, String des, String cat, String price,String date, String image) {
         this.id = id;
         this.title = title;
-        this.shortdesc = shortdesc;
-        this.rating = rating;
+        this.des = des;
+        this.cat = cat;
         this.price = price;
+        this.date = date;
         this.image = image;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
-    public String getShortdesc() {
-        return shortdesc;
-    }
+    public String getDes() { return des; }
 
-    public double getRating() {
-        return rating;
-    }
+    public String getCat() { return cat; }
 
-    public double getPrice() {
-        return price;
-    }
+    public String getPrice() { return price; }
 
-    public String getImage() {
-        return image;
-    }
+    public String getDate() { return date; }
+
+    public String getImage() { return image; }
 }

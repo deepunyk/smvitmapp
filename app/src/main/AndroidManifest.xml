@@ -22,6 +22,7 @@
         <activity android:name=".loginActivity" />
         <activity android:name=".studProfileActivity" />
         <activity android:name=".studRegisterActivity" />
+        <activity android:name=".storeActivity"/>
         <activity android:name=".studMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
