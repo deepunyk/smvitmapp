@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".studMainActivity">
+    tools:context=".storeActivity">
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/studBN"
@@ -16,38 +16,16 @@
         app:itemTextColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/studmainmenu" />
+        app:menu="@menu/storemainmenu" />
 
-
-
-=======
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/studmainmenu" />
-
->>>>>>> 39d2639... ganpat
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/studVP"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/studBN"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-    </androidx.viewpager.widget.ViewPager>
-
-
-
-
-=======
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
->>>>>>> 39d2639... ganpat
 
 </androidx.constraintlayout.widget.ConstraintLayout>

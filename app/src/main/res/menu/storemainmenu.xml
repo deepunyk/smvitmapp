@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navExp"
+        android:icon = "@drawable/explore"
+        android:title="Explore"
+        />
+    <item
+        android:id="@+id/navChat"
+        android:icon = "@drawable/chat"
+        android:title="Chat"
+        />
+    <item
+        android:id="@+id/navSell"
+        android:icon = "@drawable/sell"
+        android:title="Sell"
+        />
+    <item
+        android:id="@+id/navAds"
+        android:icon = "@drawable/ads"
+        android:title="My Ads"
+        />
+
+    <item
+        android:id="@+id/navTran"
+        android:icon = "@drawable/transaction"
+        android:title="Transaction"
+        />
+
+</menu>

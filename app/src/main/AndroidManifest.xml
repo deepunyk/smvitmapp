@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PDFReader"></activity>
-        <activity android:name=".splashActivity" />
+        <activity android:name=".storeActivity" />
+        <activity android:name=".studMainActivity" />
         <activity android:name=".facultyRegister" />
         <activity android:name=".facProfileActivity" />
         <activity android:name=".facultyLogin" />
@@ -22,7 +22,7 @@
         <activity android:name=".loginActivity" />
         <activity android:name=".studProfileActivity" />
         <activity android:name=".studRegisterActivity" />
-        <activity android:name=".studMainActivity">
+        <activity android:name=".splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
