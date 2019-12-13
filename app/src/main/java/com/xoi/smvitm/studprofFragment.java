@@ -37,7 +37,8 @@ public class studprofFragment extends Fragment {
     String url = "http://smvitmapp.xtoinfinity.tech/php/studDetails.php?usn=";
     SharedPreferences sharedPreferences;
     String usn, name, sec, sem, br, email, pic;
-    Button outBut;
+    Button outBut, editBut;
+
 
     public studprofFragment() {
         // Required empty public constructor
@@ -61,6 +62,17 @@ public class studprofFragment extends Fragment {
         brTxt = (TextView)view.findViewById(R.id.brTxt);
         emailTxt = (TextView)view.findViewById(R.id.emailTxt);
         proPic = (CircularImageView)view.findViewById(R.id.profileImg);
+        editBut = (Button)view.findViewById(R.id.editBut);
+
+        editBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), editStudProfActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
 
         outBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +129,12 @@ public class studprofFragment extends Fragment {
             secTxt.setText(sec);
             emailTxt.setText(email);
             setBranch();
+            sharedPreferences.edit().putString("Username",name).apply();
+            sharedPreferences.edit().putString("Usersem",sem).apply();
+            sharedPreferences.edit().putString("Usersec",sec).apply();
+            sharedPreferences.edit().putString("Useremail",email).apply();
+            sharedPreferences.edit().putString("Userbranch",br).apply();
+            sharedPreferences.edit().putString("Userprofilepic",pic).apply();
             Glide.with(this).load(pic).into(proPic);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -125,16 +143,20 @@ public class studprofFragment extends Fragment {
 
     public void setBranch(){
         if(br.equals("1")){
-            brTxt.setText("Computer Science");
+            br = "Computer Science";
+            brTxt.setText(br);
         }
         else if(br.equals("2")){
-            brTxt.setText("Electronics");
+            br = "Electronics";
+            brTxt.setText(br);
         }
         else if(br.equals("3")){
-            brTxt.setText("Mechanical");
+            br = "Mechanical";
+            brTxt.setText(br);
         }
         else{
-            brTxt.setText("Civil");
+            br = "Civil";
+            brTxt.setText(br);
         }
     }
 
