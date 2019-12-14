@@ -122,6 +122,10 @@ public class storeexploreFragment extends Fragment {
             }else {
                 initRecyclerView();
             }
+
+            /*storeProductsAdapter storeProductsAdapter = new storeProductsAdapter(title,shortdesc,rating,price,image,getActivity());
+            recyclerView.setAdapter(storeProductsAdapter);*/
+            //storeProductsAdapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
