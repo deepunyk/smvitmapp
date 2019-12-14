@@ -18,28 +18,41 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 public class PDFReader extends AppCompatActivity {
     WebView webView;
-    ProgressBar progressBar;
+    LottieAnimationView loadAnim;
+    TextView loadTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfreader);
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Circulars");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        loadAnim = (LottieAnimationView)findViewById(R.id.loadanim);
+        loadTxt = (TextView)findViewById(R.id.loadtxt);
+
 
         String pdfurl = getIntent().getStringExtra("pdfurl");
         Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfurl;
 
         webView = (WebView) findViewById(R.id.webView);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.VISIBLE);
+        loadAnim.setVisibility(View.VISIBLE);
+        loadTxt.setVisibility(View.VISIBLE);
         webView.setWebViewClient(new WebViewClient());
 
         WebSettings webSettings = webView.getSettings();
@@ -51,13 +64,20 @@ public class PDFReader extends AppCompatActivity {
                 super.onProgressChanged(view, newProgress);
 
                 if (newProgress == 100) {
-                    progressBar.setVisibility(View.GONE);
+                    loadAnim.setVisibility(View.GONE);
+                    loadTxt.setVisibility(View.GONE);
                 }
             }
         });
 
         webView.loadUrl(url);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,6 +36,8 @@ public class feedFragment extends Fragment {
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapter;
     private List<FeedItems> feedItems;
+    LottieAnimationView loadAnim;
+    TextView loadTxt;
 
 
     public feedFragment() {
@@ -42,6 +48,12 @@ public class feedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_feed, container, false);
+
+        loadAnim = (LottieAnimationView)view.findViewById(R.id.loadanim);
+        loadTxt = (TextView)view.findViewById(R.id.loadtxt);
+
+        loadAnim.setVisibility(View.VISIBLE);
+        loadTxt.setVisibility(View.VISIBLE);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -55,12 +67,14 @@ public class feedFragment extends Fragment {
 
     private void getItems(){
 
-        final ProgressDialog loading =  ProgressDialog.show(getActivity(),"Loading","please wait",false,true);
+       // final ProgressDialog loading =  ProgressDialog.show(getActivity(),"Loading","please wait",false,true);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    loading.dismiss();
+                   // loading.dismiss();
+                    loadAnim.setVisibility(View.GONE);
+                    loadTxt.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
 
@@ -71,7 +85,9 @@ public class feedFragment extends Fragment {
 
                                 jo.getString("name"),
                                 jo.getString("description"),
-                                jo.getString("imglink")
+                                jo.getString("imglink"),
+                                jo.getString("photographer_name"),
+                                jo.getString("blogger_name")
                         );
 
                         feedItems.add(items);
@@ -87,7 +103,9 @@ public class feedFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                loading.dismiss();
+               // loading.dismiss();
+                loadAnim.setVisibility(View.GONE);
+                loadTxt.setVisibility(View.GONE);
                 Toast.makeText(getActivity().getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }

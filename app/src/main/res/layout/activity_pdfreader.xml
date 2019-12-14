@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PDFReader"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".PDFReader">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,18 +16,30 @@
 
 
     <WebView
-        android:layout_below="@+id/toolbar"
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
 
-    <ProgressBar
-        android:visibility="gone"
-        android:id="@+id/progressbar"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadanim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="xload.json"
+        app:lottie_loop="true" />
 
-    </ProgressBar>
+    <TextView
+        android:id="@+id/loadtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loadanim"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:text="Loading PDF... Please Wait..."
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone" />
 
 </RelativeLayout>

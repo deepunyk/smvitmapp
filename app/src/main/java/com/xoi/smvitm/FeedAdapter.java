@@ -46,12 +46,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         final String imgurl = items.getImglink();
         final String title = items.getTitle();
         final String description = items.getDescription();
+        final String photographer_name = items.getPhotographer_name();
+        final String blogger_name = items.getBlogger_name();
 
         Glide.with(context)
                 .load(imgurl)
+                .placeholder(R.drawable.college_logo)
                 .into(holder.imgview);
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
+
+       holder.imgview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -60,6 +64,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
                     intent.putExtra("title", title);
                     intent.putExtra("description", description);
                     intent.putExtra("imgurl", imgurl);
+                    intent.putExtra("photographer_name", photographer_name);
+                    intent.putExtra("blogger_name", blogger_name);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     }
@@ -82,17 +88,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title, description;
-        public ImageView imgview,like,comment,share;
+        public ImageView imgview;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
             title = (TextView) itemView.findViewById(R.id.title);
             description = (TextView) itemView.findViewById(R.id.description);
             imgview = (ImageView) itemView.findViewById(R.id.imgview);
-            like = (ImageView) itemView.findViewById(R.id.like);
-            comment = (ImageView) itemView.findViewById(R.id.comment);
-            share = (ImageView) itemView.findViewById(R.id.share);
+
 
 
         }
