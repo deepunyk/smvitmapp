@@ -7,12 +7,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:id="@+id/parent_layout">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="120dp"
             android:layout_height="90dp"
+            android:src="@drawable/college_logo"
             android:padding="4dp" />
 
         <TextView
@@ -21,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/imageView"
-            android:text="Apple MacBook Air Core i5 5th Gen - (8 GB/128 GB SSD/Mac OS Sierra)"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:text="Arduino Development Board UNO 3"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
             android:textColor="#000000" />
 
         <TextView
@@ -34,7 +36,7 @@
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/imageView"
             android:text="2019-12-13"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/textViewCat"
@@ -47,7 +49,7 @@
             android:background="#960404"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:text="4.7"
+            android:text="Boards"
             android:textColor="@color/white"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:textStyle="bold" />
@@ -60,7 +62,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/imageView"
-            android:text="INR 56990"
+            android:text="₹ 450"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textStyle="bold" />
 

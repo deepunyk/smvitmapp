@@ -1,6 +1,7 @@
 package com.xoi.smvitm;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +30,7 @@ public class storeexploreFragment extends Fragment {
     private static final String URL_DATA = "http://smvitmapp.xtoinfinity.tech/php/storeitems.php";
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapter;
-    private List<Product> circularItems;
+    private List<Product> productItems;
 
     public storeexploreFragment() {
     }
@@ -41,7 +44,7 @@ public class storeexploreFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        circularItems = new ArrayList<>();
+        productItems = new ArrayList<>();
 
         getItems();
 
@@ -69,13 +72,20 @@ public class storeexploreFragment extends Fragment {
                                 jo.getString("cat"),
                                 jo.getString("price"),
                                 jo.getString("date"),
-                                jo.getString("imgLink")
+                                jo.getString("imgLink")/*,
+                                jo.getString("mobile"),
+                                jo.getString("owner"),
+                                jo.getString("name"),
+                                jo.getString("sem"),
+                                jo.getString("section"),
+                                jo.getString("email"),
+                                jo.getString("branchid")*/
                         );
 
-                        circularItems.add(items);
+                        productItems.add(items);
                     }
 
-                    adapter = new storeProductsAdapter(circularItems,getActivity().getApplicationContext());
+                    adapter = new storeProductsAdapter(productItems,getActivity().getApplicationContext());
                     recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
