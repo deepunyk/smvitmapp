@@ -38,7 +38,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/circular_title"
+                            android:id="@+id/event_title"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="6dp"
@@ -49,13 +49,15 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/circular_date"
+                            android:id="@+id/event_description"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="6dp"
-                            android:fontFamily="serif-monospace"
+                            android:fontFamily="monospace"
                             android:padding="2dp"
-                            android:textSize="20sp">
+                            android:textSize="16sp"
+                            android:maxLines="1"
+                            android:ellipsize="end">
 
                         </TextView>
 
@@ -98,13 +100,13 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/viewpdf_button"
+                android:id="@+id/view_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:background="@color/colorPrimaryDark"
                 android:padding="2dp"
-                android:text="VIEW PDF"
+                android:text="VIEW"
                 android:textColor="@color/white"
                 android:layout_marginStart="100dp"
                 android:layout_marginEnd="100dp"

@@ -47,7 +47,7 @@ public class PDFReader extends AppCompatActivity {
 
 
         String pdfurl = getIntent().getStringExtra("pdfurl");
-        Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfurl;
 
         webView = (WebView) findViewById(R.id.webView);
