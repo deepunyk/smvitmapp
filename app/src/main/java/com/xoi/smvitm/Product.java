@@ -2,41 +2,66 @@ package com.xoi.smvitm;
 public class Product {
     private int id;
     private String title;
-    private String shortdesc;
-    private double rating;
-    private double price;
-    private String image;
+    private String des;
+    private String cat;
+    private String price;
+    private String date;
+    private String imgLink;
+    /*private String mobile;
+    private String owner;
+    private String name;
+    private String sem;
+    private String section;
+    private String email;
+    private String branchid;*/
 
-    public Product(int id, String title, String shortdesc, double rating, double price, String image) {
+    public Product(int id, String title, String des, String cat, String price,String date,
+                   String imgLink/*,String mobile,String owner,String name,String sem,
+                   String section,String email,String branchid*/) {
+
         this.id = id;
         this.title = title;
-        this.shortdesc = shortdesc;
-        this.rating = rating;
+        this.des = des;
+        this.cat = cat;
         this.price = price;
-        this.image = image;
+        this.date = date;
+        this.imgLink = imgLink;
+        /*this.mobile = mobile;
+        this.owner = owner;
+        this.name = name;
+        this.sem = sem;
+        this.section = section;
+        this.email = email;
+        this.branchid = branchid;*/
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
-    public String getShortdesc() {
-        return shortdesc;
-    }
+    public String getDes() { return des; }
 
-    public double getRating() {
-        return rating;
-    }
+    public String getCat() { return cat; }
 
-    public double getPrice() {
-        return price;
-    }
+    public String getPrice() { return price; }
 
-    public String getImage() {
-        return image;
-    }
+    public String getDate() { return date; }
+
+    public String getImage() { return imgLink; }
+
+/*    public String getMobile() { return mobile; }
+
+    public String getOwner() { return owner; }
+
+    public String getName() { return name; }
+
+    public String getSem() { return sem; }
+
+    public String getSection() { return section; }
+
+    public String getEmail() { return email; }
+
+    public String getBranchid() { return branchid; }*/
+
+
 }
