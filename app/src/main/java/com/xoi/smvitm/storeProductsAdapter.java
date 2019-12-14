@@ -11,65 +11,56 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class storeProductsAdapter extends RecyclerView.Adapter<storeProductsAdapter.ProductViewHolder> {
 
+    private List<Product> list;
+    private Context context;
 
-    private Context mCtx;
-    private ArrayList<String> title = new ArrayList<String>();
-    private ArrayList<String> shortdesc = new ArrayList<String>();
-    private ArrayList<String> rating = new ArrayList<String>();
-    private ArrayList<String> price= new ArrayList<String>();
-    private ArrayList<String> imageLink = new ArrayList<String>();
-
-    public storeProductsAdapter(ArrayList<String> title,ArrayList<String> shortdesc,ArrayList<String> rating,ArrayList <String> price,ArrayList<String> imageLink,Context mCtx) {
-        this.mCtx = mCtx;
-
-        this.title = title;
-        this.shortdesc = shortdesc;
-        this.rating = rating;
-        this.price = price;
-        this.imageLink = imageLink;
+    public storeProductsAdapter(List<Product> list, Context context) {
+        this.list = list;
+        this.context = context;
     }
+
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.store_item, null);
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
+        Product product =list.get(position);
 
-        holder.textViewTitle.setText(title.get(position));
-        holder.textViewShortDesc.setText(shortdesc.get(position));
-        holder.textViewRating.setText(rating.get(position));
-        holder.textViewPrice.setText("₹ "+price.get(position));
-        Glide.with(mCtx).load(imageLink.get(position)).into(holder.imageView);
+        holder.textViewTitle.setText(product.getTitle());
+        holder.textViewDate.setText(product.getDate());
+        holder.textViewCat.setText(product.getCat());
+        holder.textViewPrice.setText("₹ "+product.getPrice());
+        Glide.with(context)
+                .load(product.getImage())
+                .into(holder.imageView);
 
-        if(title.get(position).equals("-")){
-            holder.textViewTitle.setVisibility(View.GONE);
-        }
     }
 
     @Override
     public int getItemCount() {
-        return title.size();
+        return list.size();
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewShortDesc, textViewRating, textViewPrice;
+        TextView textViewTitle, textViewDate, textViewCat, textViewPrice;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewShortDesc = itemView.findViewById(R.id.textViewShortDesc);
-            textViewRating = itemView.findViewById(R.id.textViewRating);
+            textViewDate = itemView.findViewById(R.id.textViewDate);
+            textViewCat = itemView.findViewById(R.id.textViewCat);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
             imageView = itemView.findViewById(R.id.imageView);
         }
