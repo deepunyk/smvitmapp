@@ -17,6 +17,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res',
+                           'src/main/res/layouts/classroom',
+                           'src/main/res/layouts/studHome',
+                           'src/main/res/layouts/studMain',
+                           'src/main/res/layouts/store',
+                           'src/main/res/layouts/facMain',
+                           'src/main/res/layouts/auth']
+        }
+    }
 }
 
 dependencies {
@@ -36,7 +47,7 @@ dependencies {
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.4'
     implementation 'com.airbnb.android:lottie:3.3.0'
     implementation 'com.google.android.material:material:1.0.0'
-
+    implementation 'com.github.clans:fab:1.6.4'
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
     implementation "com.android.support:design:28.0.0"
     implementation 'com.arasthel:asyncjob-library:1.0.3'

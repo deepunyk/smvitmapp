@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".store.storeProductDetails">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/college_logo"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@id/imageView"
+                android:text="Arduino Development Board UNO 3"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTitle"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="2019-12-13"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:id="@+id/textViewCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewDate"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#960404"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Boards"
+                android:textColor="@color/white"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewCat"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="₹ 450"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewDesTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewPrice"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Description:"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewDes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewDesTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="The Arduino Uno R3 is a open source microcontroller board based on the ATmega328 chip. This Board has 14 digital input/output pins, 6 analog input pins, Onboard 16 MHz ceramic resonator.Arduino is an open-source electronics platform based on easy-to-use hardware and software. Arduino boards are able to read inputs - light on a sensor, a finger on a button, or a Twitter message - and turn it into an output - activating a motor, turning on an LED, publishing something online."
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewDes"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Owner Details:"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerNameTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Name:      "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerTag"
+                android:layout_toRightOf="@+id/ownerNameTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Ganpat Patel"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerUSNTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerNameTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="USN:         "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerUSN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerNameTag"
+                android:layout_toRightOf="@+id/ownerUSNTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="4MW17CS031"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerMobileTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerUSNTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Mobile:     "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerUSNTag"
+                android:layout_toRightOf="@+id/ownerMobileTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="9671234567"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerEmailTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerMobileTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Eamil:       "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerMobileTag"
+                android:layout_toRightOf="@+id/ownerEmailTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="ganapt.17cs031@sode-edu.in"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ownerBranchTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerEmailTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Branch:     "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/ownerBranch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerEmailTag"
+                android:layout_toRightOf="@+id/ownerBranchTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Computer Science and Engineering"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/ownerSectionTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerSemTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Section:    "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/ownerSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerSemTag"
+                android:layout_toRightOf="@+id/ownerSectionTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="A"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/ownerSemTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerBranchTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Semester:"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/ownerSem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ownerBranchTag"
+                android:layout_toRightOf="@+id/ownerSemTag"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="6th"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btncall"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/ownerSemTag"
+                android:background="#960404"
+                android:textColor="@color/white"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="40dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+                android:text="Call"/>
+
+            <Button
+                android:id="@+id/btninter"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/ownerSemTag"
+                android:background="#960404"
+                android:layout_toRightOf="@+id/btncall"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+                android:text="Interested"/>
+
+
+
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
