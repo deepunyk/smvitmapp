@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class studclassFragment extends Fragment {
 
     View view;
-    String url = "http://smvitmapp.xtoinfinity.tech/php/getClassroom.php?usn=";
+    String url = "http://smvitmapp.xtoinfinity.tech/php/classroom/getClassroom.php?usn=";
     SharedPreferences sp;
     String usn;
     RecyclerView recyclerView;

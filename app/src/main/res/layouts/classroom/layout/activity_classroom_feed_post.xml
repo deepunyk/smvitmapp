@@ -16,16 +16,18 @@
         android:ems="10"
         android:hint="Type here"
         android:inputType="textPersonName"
+        android:transitionName="classTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/postBut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:text="POST"
-        app:layout_constraintStart_toStartOf="@+id/postTxt"
+        android:background="@drawable/ic_send"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="@+id/postTxt"
         app:layout_constraintTop_toBottomOf="@+id/postTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

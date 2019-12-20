@@ -25,6 +25,7 @@
         <activity android:name=".main.faculty.facMainActivity" />
         <activity android:name=".profile.facProfileActivity" />
         <activity android:name=".auth.facultyLogin" />
+        <activity android:name=".profile.editStudProfActivity" />
         <activity android:name=".auth.selectLogin" />
         <activity android:name=".auth.loginActivity" />
         <activity android:name=".profile.studProfileActivity" />

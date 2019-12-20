@@ -20,11 +20,11 @@ public class studMainPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new studhomeFragment();
+                return new studclassFragment();
             case 1:
                 return new studaccFragment();
             case 2:
-                return new studclassFragment();
+                return new studhomeFragment();
             case 3:
                 return new studprofFragment();
             default:

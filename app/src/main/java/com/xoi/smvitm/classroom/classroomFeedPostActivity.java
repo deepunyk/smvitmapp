@@ -2,10 +2,15 @@ package com.xoi.smvitm.classroom;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -23,10 +28,10 @@ import java.util.Map;
 
 public class classroomFeedPostActivity extends AppCompatActivity {
 
-    String posturl = "http://smvitmapp.xtoinfinity.tech/php/postclassroomfeed.php";
+    String posturl = "http://smvitmapp.xtoinfinity.tech/php/classroom/postclassroomfeed.php";
     String usn, ccode,post;
     EditText postTxt;
-    Button postBut;
+    ImageButton postBut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +42,19 @@ public class classroomFeedPostActivity extends AppCompatActivity {
         ccode = getIntent().getStringExtra("ccode");
 
         postTxt = (EditText)findViewById(R.id.postTxt);
-        postBut = (Button)findViewById(R.id.postBut);
+        postBut = (ImageButton)findViewById(R.id.postBut);
 
         postBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                postBut.animate().alpha(0).setDuration(100);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        postBut.animate().alpha(1).setDuration(100);
+                    }
+                }, 100);
                 post = postTxt.getText().toString();
                 if(post.equals("")){
                     Toast.makeText(classroomFeedPostActivity.this, "Please enter the description", Toast.LENGTH_SHORT).show();
@@ -58,7 +71,6 @@ public class classroomFeedPostActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(classroomFeedPostActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 },
@@ -85,4 +97,10 @@ public class classroomFeedPostActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
+
+
+
+
+
+
 }

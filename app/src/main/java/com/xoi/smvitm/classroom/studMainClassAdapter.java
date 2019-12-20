@@ -1,21 +1,38 @@
 package com.xoi.smvitm.classroom;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdapter.ViewHolder>{
 
@@ -24,8 +41,9 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
     private ArrayList<String> link = new ArrayList<>();
     private ArrayList<String> arusn = new ArrayList<>();
     private ArrayList<String> datetime = new ArrayList<>();
+    LottieAnimationView deleteAnim;
 
-    public studMainClassAdapter(ArrayList<String> arccode, ArrayList<String> cfid, ArrayList<String> link, ArrayList<String> arusn, ArrayList<String> profpic, ArrayList<String> name, ArrayList<String> desc, ArrayList<String> datetime, String tname, String tphoto, Context mContext) {
+    public studMainClassAdapter(ArrayList<String> arccode, ArrayList<String> cfid, ArrayList<String> link, ArrayList<String> arusn, ArrayList<String> profpic, ArrayList<String> name, ArrayList<String> desc, ArrayList<String> datetime, String tname, String tphoto, Context mContext, LottieAnimationView deleteAnim) {
         this.arccode = arccode;
         this.cfid = cfid;
         this.link = link;
@@ -37,6 +55,7 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
         this.tname = tname;
         this.tphoto = tphoto;
         this.mContext = mContext;
+        this.deleteAnim = deleteAnim;
     }
 
     private ArrayList<String> profpic = new ArrayList<>();
@@ -73,7 +92,16 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
         viewHolder.descTxt.setText(desc.get(i));
         viewHolder.dateTxt.setText(datetime.get(i));
 
-        viewHolder.commentTxt.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences sp = mContext.getSharedPreferences("com.xoi.smvitm",Context.MODE_PRIVATE);
+        String userusn = sp.getString("usn","");
+        if(userusn.equals(arusn.get(i))){
+            viewHolder.deleteBut.setVisibility(View.VISIBLE);
+        }
+        else{
+            viewHolder.deleteBut.setVisibility(View.GONE);
+        }
+
+        viewHolder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, classroomCommmentActivity.class);
@@ -94,6 +122,12 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
                 mContext.startActivity(intent);
             }
         });
+        viewHolder.deleteBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePost(desc.get(i),datetime.get(i),cfid.get(i));
+            }
+        });
     }
 
     @Override
@@ -106,6 +140,7 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
         TextView nameTxt, dateTxt, descTxt, commentTxt;
         CircularImageView photoImg;
         ConstraintLayout parent_layout;
+        ImageView deleteBut;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,6 +150,48 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
             descTxt = itemView.findViewById(R.id.descTxt);
             photoImg = itemView.findViewById(R.id.photoImg);
             parent_layout = itemView.findViewById(R.id.parent_layout);
+            deleteBut = itemView.findViewById(R.id.deleteBut);
+
         }
+
     }
+
+    private void deletePost(final String desc, final String datetime,final String cfid){
+        String deleteUrl = "http://smvitmapp.xtoinfinity.tech/php/classroom/deleteClassroomFeed.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, deleteUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ((Activity) mContext).finish();
+                        ((Activity) mContext).overridePendingTransition(0, 0);
+                        ((Activity) mContext).startActivity(((Activity) mContext).getIntent());
+                        ((Activity) mContext).overridePendingTransition(0, 0);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(mContext, ""+error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("desc",desc);
+                params.put("datetime",datetime);
+                params.put("cfid",cfid);
+                return params;
+            };
+
+        };
+        int socketTimeOut = 50000;
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(retryPolicy);
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        queue.add(stringRequest);
+    }
+
+
+
 }
