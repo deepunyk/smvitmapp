@@ -69,23 +69,13 @@ public class FeedDetails extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.download_menu_icon, menu);
+        inflater.inflate(R.menu.share_menu_icon, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.download_pdf:
-                String pdfurl = getIntent().getStringExtra("pdfurl");
-                DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(pdfurl));
-                request.setTitle("PDF");
-                request.setDescription("Downloading");
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Document.pdf");
-                downloadmanager.enqueue(request);
-                return true;
-
             case R.id.share_pdf:
                 String shareimgurl = getIntent().getStringExtra("imgurl");
                 Intent intent = new Intent(Intent.ACTION_SEND);

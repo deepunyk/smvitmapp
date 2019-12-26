@@ -118,6 +118,7 @@ public class studMainClassroom extends AppCompatActivity {
     }
 
     private void parseItems(String jsonResposnce) {
+        doneLoad();
         try {
             JSONObject jobj = new JSONObject(jsonResposnce);
             JSONArray jarray = jobj.getJSONArray("class");

@@ -1,4 +1,4 @@
-package com.xoi.smvitm;
+package com.xoi.smvitm.home.student;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.xoi.smvitm.R;
 
 public class PDFReader extends AppCompatActivity {
     WebView webView;

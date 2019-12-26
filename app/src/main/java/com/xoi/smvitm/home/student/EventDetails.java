@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.xoi.smvitm.PDFReader;
 import com.xoi.smvitm.R;
 
 public class EventDetails extends AppCompatActivity {

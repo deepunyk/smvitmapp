@@ -18,7 +18,7 @@
         <activity android:name=".classroom.studMainClassroom" />
         <activity android:name=".home.student.EventDetails" />
         <activity android:name=".store.storeActivity" />
-        <activity android:name=".PDFReader" />
+        <activity android:name=".home.student.PDFReader" />
         <activity android:name=".store.storeProductDetails" />
         <activity android:name=".main.student.studMainActivity" />
         <activity android:name=".auth.facultyRegister" />
@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".home.student.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
