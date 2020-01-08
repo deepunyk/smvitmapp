@@ -30,4 +30,15 @@
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="@+id/postTxt"
         app:layout_constraintTop_toBottomOf="@+id/postTxt" />
+
+    <ImageView
+        android:id="@+id/addBut"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/postBut"
+        app:layout_constraintEnd_toStartOf="@+id/postBut"
+        app:layout_constraintTop_toTopOf="@+id/postBut"
+        app:srcCompat="@drawable/fab_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

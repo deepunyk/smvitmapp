@@ -1,20 +1,15 @@
-package com.xoi.smvitm.main.student;
-
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
+package com.xoi.smvitm.classroom;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -25,11 +20,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.classroom.studAddElectiveActivity;
-import com.xoi.smvitm.classroom.studClassDisplayAdapter;
-import com.xoi.smvitm.classroom.studMainClassroom;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,55 +28,41 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+public class studAddElectiveActivity extends AppCompatActivity {
 
-public class studclassFragment extends Fragment {
-
-    View view;
-    String url = "http://smvitmapp.xtoinfinity.tech/php/classroom/getClassroom.php?usn=";
+    String url = "http://smvitmapp.xtoinfinity.tech/php/classroom/showElective.php?usn=";
     SharedPreferences sp;
     String usn;
     RecyclerView recyclerView;
+    Toolbar toolbar;
     private ArrayList<String> code = new ArrayList<>();
     private ArrayList<String> sname = new ArrayList<>();
     private ArrayList<String> ccode = new ArrayList<>();
     private ArrayList<String> fname = new ArrayList<>();
     private ArrayList<String> fphoto = new ArrayList<>();
     private ArrayList<String> fid = new ArrayList<>();
-    studClassDisplayAdapter adapter;
-    Toolbar toolbar;
-    FloatingActionButton fab;
-
-    public studclassFragment() {
-    }
-
+    addElectiveAdapter adapter;
+    Button addBut;
+    TextView addText;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.fragment_studclass, container, false);
-        sp = getActivity().getSharedPreferences("com.xoi.smvitm", Context.MODE_PRIVATE);
-        toolbar = (Toolbar)view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        fab = (FloatingActionButton)view.findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), studAddElectiveActivity.class);
-                startActivity(i);
-            }
-        });
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_stud_add_elective);
+        sp = this.getSharedPreferences("com.xoi.smvitm", Context.MODE_PRIVATE);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        addBut = (Button)findViewById(R.id.addBut);
+        addText= (TextView) findViewById(R.id.addText);
         usn = sp.getString("usn","");
         if(usn.equals("")){
-            Toast.makeText(getContext(), "Please signout and sign in again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please signout and sign in again", Toast.LENGTH_SHORT).show();
         }
         else{
             getClasses();
         }
-        return view;
-
     }
+
     private void getClasses() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url+""+usn,
                 new Response.Listener<String>() {
@@ -105,7 +82,7 @@ public class studclassFragment extends Fragment {
         int socketTimeOut = 50000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
 
@@ -135,9 +112,9 @@ public class studclassFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new studClassDisplayAdapter(code,sname,ccode,fname,fphoto,fid,getActivity());
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new addElectiveAdapter(code,sname,ccode,fname,fphoto,fid,addBut,addText,this);
         recyclerView.setAdapter(adapter);
     }
 }

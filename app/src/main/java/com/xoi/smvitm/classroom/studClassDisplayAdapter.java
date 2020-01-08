@@ -61,6 +61,8 @@ public class studClassDisplayAdapter extends RecyclerView.Adapter<studClassDispl
                 intent.putExtra("code", ccode.get(i));
                 intent.putExtra("tempname", fname.get(i));
                 intent.putExtra("tempphoto", fphoto.get(i));
+                intent.putExtra("sname", sname.get(i));
+                intent.putExtra("fname", fname.get(i));
                 mContext.startActivity(intent);
             }
         });
