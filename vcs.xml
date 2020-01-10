@@ -6,7 +6,12 @@
           <option name="url" value="http://github.com" />
           <option name="userName" value="chethanpoojary459@gmail.com" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/deepunyk/smvitmapp" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
+    <option name="cloneParentDir" value="C:\Users\Computer\Downloads" />
   </component>
 </application>
