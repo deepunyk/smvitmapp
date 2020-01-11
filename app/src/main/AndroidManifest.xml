@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".classroom.studAddElectiveActivity"/>
+        <activity android:name=".academics.subject_selectActivity"></activity>
+        <activity android:name=".classroom.studAddElectiveActivity" />
         <activity android:name=".classroom.classroomCommmentActivity" />
         <activity android:name=".classroom.classroomFeedPostActivity" />
         <activity android:name=".classroom.studMainClassroom" />
@@ -32,6 +33,9 @@
         <activity android:name=".profile.studProfileActivity" />
         <activity android:name=".auth.studRegisterActivity" />
         <activity android:name=".home.student.FeedDetails" />
+        <activity android:name=".academics.editCalendarEvent" />
+        <activity android:name=".academics.addevent" />
+        <activity android:name=".academics.MainActivitycal" />
         <activity android:name=".auth.splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
