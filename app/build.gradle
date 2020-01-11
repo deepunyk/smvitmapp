@@ -25,7 +25,8 @@ android {
                            'src/main/res/layouts/studMain',
                            'src/main/res/layouts/store',
                            'src/main/res/layouts/facMain',
-                           'src/main/res/layouts/auth']
+                           'src/main/res/layouts/auth',
+                           'src/main/res/layouts/academics']
         }
     }
 }

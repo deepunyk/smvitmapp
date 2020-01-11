@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@android:color/black">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JAN" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FEB" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAR" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APR" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAY" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JUN" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JUL" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="740dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
