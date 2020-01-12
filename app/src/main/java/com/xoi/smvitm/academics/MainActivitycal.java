@@ -15,7 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.calendar.addevent;
 
 public class MainActivitycal extends AppCompatActivity {
      Toolbar toolbar;
