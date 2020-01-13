@@ -112,4 +112,33 @@
         app:lottie_fileName="delete.json"
         app:lottie_loop="true" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/emptyloadanim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/emptyloadtxt"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postLayout"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="empty.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/emptyloadtxt"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No posts yet"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emptyloadanim" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

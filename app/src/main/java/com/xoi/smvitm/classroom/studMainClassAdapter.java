@@ -89,12 +89,16 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
 
         viewHolder.descTxt.setText(desc.get(i));
         viewHolder.dateTxt.setText(datetime.get(i));
-        viewHolder.descTxt.setText(desc.get(i));
-        viewHolder.dateTxt.setText(datetime.get(i));
 
         SharedPreferences sp = mContext.getSharedPreferences("com.xoi.smvitm",Context.MODE_PRIVATE);
-        String userusn = sp.getString("usn","");
-        if(userusn.equals(arusn.get(i))){
+        String userusn;
+        if(sp.getString("login","").equals("1")) {
+            userusn = sp.getString("usn", "");
+        }
+        else{
+            userusn = sp.getString("fid", "");
+        }
+        if(userusn.equals(arusn.get(i)) || (sp.getString("login","").equals("2") &&arusn.get(i).equals("null"))){
             viewHolder.deleteBut.setVisibility(View.VISIBLE);
         }
         else{
@@ -132,7 +136,7 @@ public class studMainClassAdapter extends RecyclerView.Adapter<studMainClassAdap
 
     @Override
     public int getItemCount() {
-        return name.size();
+        return datetime.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

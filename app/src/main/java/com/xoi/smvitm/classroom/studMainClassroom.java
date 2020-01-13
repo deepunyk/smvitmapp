@@ -50,11 +50,11 @@ public class studMainClassroom extends AppCompatActivity {
     private ArrayList<String> datetime = new ArrayList<>();
     RecyclerView recyclerView;
     studMainClassAdapter adapter;
-    TextView postTxt, loadTxt;
+    TextView postTxt, loadTxt, emptyloadtxt;
     Button postBut;
     String post;
     ConstraintLayout postLayout;
-    LottieAnimationView loadAnim, deleteAnim;
+    LottieAnimationView loadAnim, deleteAnim, emptyloadanim;
     ConstraintLayout loadLayout;
 
     @Override
@@ -68,6 +68,11 @@ public class studMainClassroom extends AppCompatActivity {
         postLayout = (ConstraintLayout) findViewById(R.id.postLayout);
 
         deleteAnim = (LottieAnimationView) findViewById(R.id.deleteAnim);
+        emptyloadanim = (LottieAnimationView) findViewById(R.id.emptyloadanim);
+        emptyloadtxt = (TextView) findViewById(R.id.emptyloadtxt);
+
+        emptyloadanim.setVisibility(View.GONE);
+        emptyloadtxt.setVisibility(View.GONE);
 
         loadAnim = (LottieAnimationView) findViewById(R.id.loadanim);
         loadLayout = (ConstraintLayout) findViewById(R.id.loadLayout);
@@ -85,7 +90,12 @@ public class studMainClassroom extends AppCompatActivity {
             }
         });
 
-        usn = sp.getString("usn","");
+        if(sp.getString("login","").equals("1")) {
+            usn = sp.getString("usn", "");
+        }
+        else{
+            usn = sp.getString("fid", "");
+        }
         ccode = getIntent().getStringExtra("code");
         tname = getIntent().getStringExtra("tempname");
         tphoto = getIntent().getStringExtra("tempphoto");
@@ -99,8 +109,15 @@ public class studMainClassroom extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        parseItems(response);
-
+                        if(response.equals("Empty")) {
+                            emptyloadanim.setVisibility(View.VISIBLE);
+                            emptyloadtxt.setVisibility(View.VISIBLE);
+                            doneLoad();
+                        }else{
+                            emptyloadanim.setVisibility(View.GONE);
+                            emptyloadtxt.setVisibility(View.GONE);
+                            parseItems(response);
+                        }
 
                     }
                 },

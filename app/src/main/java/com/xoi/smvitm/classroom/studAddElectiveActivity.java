@@ -114,7 +114,7 @@ public class studAddElectiveActivity extends AppCompatActivity {
     private void initRecyclerView(){
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new addElectiveAdapter(code,sname,ccode,fname,fphoto,fid,addBut,addText,this);
+        adapter = new addElectiveAdapter(code,sname,ccode,fname,fphoto,fid,addBut,addText,usn,this);
         recyclerView.setAdapter(adapter);
     }
 }

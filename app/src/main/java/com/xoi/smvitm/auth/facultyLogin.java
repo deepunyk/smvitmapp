@@ -170,9 +170,9 @@ public class facultyLogin extends AppCompatActivity {
             JSONArray jarray = jobj.getJSONArray("permission");
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jo = jarray.getJSONObject(i);
-                permCircular = jo.getString("circular");
-                permEvent = jo.getString("event");
-                permFacClass = jo.getString("facClass");
+                permCircular = jo.optString("circular");
+                permEvent = jo.optString("event");
+                permFacClass = jo.optString("facClass");
 
             }
             sharedPreferences.edit().putString("fid",fid).apply();

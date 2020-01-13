@@ -15,7 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.calendar.addevent;
 
 public class MainActivitycal extends AppCompatActivity {
      Toolbar toolbar;
@@ -93,13 +92,13 @@ public class MainActivitycal extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_menu, menu);
+        //inflater.inflate(R.menu.add, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
+        /*switch (item.getItemId()) {
             case R.id.action_add:
                 Intent myIntent = new Intent(MainActivitycal.this, addevent.class);
                 startActivity(myIntent);
@@ -107,7 +106,8 @@ public class MainActivitycal extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
+        }*/
+        return super.onOptionsItemSelected(item);
     }
 
 }

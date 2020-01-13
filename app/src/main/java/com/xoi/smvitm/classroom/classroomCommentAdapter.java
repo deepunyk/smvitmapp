@@ -78,7 +78,7 @@ public class classroomCommentAdapter extends RecyclerView.Adapter<classroomComme
         }
         viewHolder.descTxt.setText(descAr.get(i));
         viewHolder.dateTxt.setText(datetimeAr.get(i));
-        if(userusn.equals(usnAr.get(i))){
+        if(userusn.equals(usnAr.get(i)) || (sp.getString("login","").equals("2") &&usnAr.get(i).equals("null"))){
             viewHolder.deleteBut.setVisibility(View.VISIBLE);
             viewHolder.editBut.setVisibility(View.VISIBLE);
         }

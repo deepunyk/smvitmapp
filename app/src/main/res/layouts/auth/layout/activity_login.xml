@@ -49,7 +49,7 @@
         app:layout_constraintGuide_percent="0.2" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/logCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
@@ -181,7 +181,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/logCard" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loadLayout"

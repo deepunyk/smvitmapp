@@ -5,6 +5,7 @@ package com.xoi.smvitm.main.student;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -37,6 +38,25 @@ public class studaccFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        ConstraintLayout smLayout, acLayout;
+        smLayout = (ConstraintLayout)view.findViewById(R.id.smLayout);
+        acLayout = (ConstraintLayout)view.findViewById(R.id.acLayout);
+
+        smLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        acLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
 
     }
