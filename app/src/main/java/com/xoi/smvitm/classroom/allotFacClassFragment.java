@@ -138,8 +138,8 @@ public class allotFacClassFragment extends Fragment{
 
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jo = jarray.getJSONObject(i);
-                sname.add(jo.optString("code"));
-                sid.add(jo.optString("name"));
+                sid.add(jo.optString("code"));
+                sname.add(jo.optString("name"));
             }
             allotClass();
         } catch (JSONException e) {

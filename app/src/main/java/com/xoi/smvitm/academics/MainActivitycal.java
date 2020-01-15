@@ -98,7 +98,7 @@ public class MainActivitycal extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        /*switch (item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_add:
                 Intent myIntent = new Intent(MainActivitycal.this, addevent.class);
                 startActivity(myIntent);
@@ -106,8 +106,7 @@ public class MainActivitycal extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }*/
-        return super.onOptionsItemSelected(item);
+        }
     }
 
 }

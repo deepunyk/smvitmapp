@@ -84,10 +84,11 @@ public class allotFacClassRVAdapter extends RecyclerView.Adapter<allotFacClassRV
             @Override
             public void onClick(View v) {
                 if(subNum<sid.size()) {
+                    allotBut.setVisibility(View.GONE);
                     selectSid.add(sid.get(subNum));
                     selectSname.add(sname.get(subNum));
-                    selectFid.add(fid.get(subNum));
-                    selectFname.add(fname.get(subNum));
+                    selectFid.add(fid.get(selectNum));
+                    selectFname.add(fname.get(selectNum));
                     subNum++;
                     selectNum=-1;
                     if(subNum<sid.size()) {
