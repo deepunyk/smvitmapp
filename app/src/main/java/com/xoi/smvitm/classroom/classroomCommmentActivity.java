@@ -62,8 +62,10 @@ public class classroomCommmentActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     EditText postTxt;
     ImageButton postBut;
-    LottieAnimationView loadAnim;
+    LottieAnimationView loadAnim, emptyloadanim;
     ConstraintLayout loadLayout;
+    TextView emptyloadtxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +75,17 @@ public class classroomCommmentActivity extends AppCompatActivity {
         sp = this.getSharedPreferences("com.xoi.smvitm", Context.MODE_PRIVATE);
 
         loadAnim = (LottieAnimationView) findViewById(R.id.loadanim);
+        emptyloadanim = (LottieAnimationView) findViewById(R.id.emptyloadanim);
+        emptyloadtxt = (TextView) findViewById(R.id.emptyloadtxt);
         loadLayout = (ConstraintLayout) findViewById(R.id.loadLayout);
         loadTxt = (TextView) findViewById(R.id.loadtxt);
 
-        usn = sp.getString("usn", "");
+
+        if(sp.getString("login","").equals("1")) {
+            usn = sp.getString("usn", "");
+        }else{
+            usn = sp.getString("fid", "");
+        }
         ccode = getIntent().getStringExtra("ccode");
         name = getIntent().getStringExtra("name");
         photo = getIntent().getStringExtra("photo");
@@ -139,7 +148,11 @@ public class classroomCommmentActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.equals("Empty")) {
                             doneLoad();
+                            emptyloadanim.setVisibility(View.VISIBLE);
+                            emptyloadtxt.setText("No comments");
                         } else {
+                            emptyloadanim.setVisibility(View.GONE);
+                            emptyloadtxt.setText("Comments");
                             parseItems(response);
                         }
                     }

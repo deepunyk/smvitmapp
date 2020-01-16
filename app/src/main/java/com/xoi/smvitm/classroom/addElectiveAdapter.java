@@ -1,5 +1,6 @@
 package com.xoi.smvitm.classroom;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,6 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
@@ -21,11 +30,13 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class addElectiveAdapter extends RecyclerView.Adapter<addElectiveAdapter.ViewHolder>{
 
-    public addElectiveAdapter(ArrayList<String> code, ArrayList<String> sname, ArrayList<String> ccode, ArrayList<String> fname, ArrayList<String> fphoto, ArrayList<String> fid, Button addBut, TextView addText, Context mContext) {
+    public addElectiveAdapter(ArrayList<String> code, ArrayList<String> sname, ArrayList<String> ccode, ArrayList<String> fname, ArrayList<String> fphoto, ArrayList<String> fid, Button addBut, TextView addText,String usn, Context mContext) {
         this.code = code;
         this.sname = sname;
         this.ccode = ccode;
@@ -34,6 +45,7 @@ public class addElectiveAdapter extends RecyclerView.Adapter<addElectiveAdapter.
         this.fid = fid;
         this.addBut = addBut;
         this.addText = addText;
+        this.usn = usn;
         this.mContext = mContext;
     }
 
@@ -48,6 +60,8 @@ public class addElectiveAdapter extends RecyclerView.Adapter<addElectiveAdapter.
     TextView addText,subTxt;
     ArrayList<String> select = new ArrayList<String>(2);
     String sub1, sub2;
+    String url = "http://smvitmapp.xtoinfinity.tech/php/classroom/addElective.php";
+    String usn;
 
 
     @NonNull
@@ -101,8 +115,7 @@ public class addElectiveAdapter extends RecyclerView.Adapter<addElectiveAdapter.
             public void onClick(View v) {
                 sub1 = ccode.get(sname.indexOf(select.get(0)));
                 sub2 = ccode.get(sname.indexOf(select.get(1)));
-
-                addText.setText(sub1+" "+sub2);
+                addUSN();
             }
         });
     }
@@ -129,5 +142,39 @@ public class addElectiveAdapter extends RecyclerView.Adapter<addElectiveAdapter.
             fphotoImg = itemView.findViewById(R.id.fphoto);
             parent_layout = itemView.findViewById(R.id.parent_layout);
         }
+    }
+
+    private void addUSN(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //finish();
+                        Toast.makeText(mContext, ""+response, Toast.LENGTH_SHORT).show();
+                        ((Activity)mContext).finish();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(mContext, ""+error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("usn",usn);
+                params.put("sub1",sub1);
+                params.put("sub2",sub2);
+                return params;
+            };
+
+        };
+        int socketTimeOut = 50000;
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(retryPolicy);
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        queue.add(stringRequest);
     }
 }

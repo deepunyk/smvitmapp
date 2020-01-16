@@ -1,6 +1,8 @@
 package com.xoi.smvitm.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +27,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.xoi.smvitm.R;
+import com.xoi.smvitm.main.faculty.facMainActivity;
 import com.xoi.smvitm.main.student.studMainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,9 +44,15 @@ public class loginActivity extends AppCompatActivity {
     TextView regTxt;
     String usn, pass;
     String url ="http://smvitmapp.xtoinfinity.tech/php/login.php";
+    String permUrl ="http://smvitmapp.xtoinfinity.tech/php/permission.php?id=";
     SharedPreferences sharedPreferences;
+    String permCircular, permEvent, permFacClass;
     ImageView bckImg;
     Animation _translateAnimation;
+    ConstraintLayout loadLayout;
+    LottieAnimationView loadAnim;
+    TextView loadTxt;
+    CardView logCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +73,10 @@ public class loginActivity extends AppCompatActivity {
         _translateAnimation.setInterpolator(new LinearInterpolator());
         bckImg.setAnimation(_translateAnimation);
 
-
+        loadAnim = (LottieAnimationView)findViewById(R.id.loadanim);
+        loadLayout = (ConstraintLayout)findViewById(R.id.loadLayout);
+        loadTxt = (TextView)findViewById(R.id.loadtxt);
+        logCard = (CardView)findViewById(R.id.logCard);
 
         regTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +108,7 @@ public class loginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(loginActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                         if(response.equals("success;")){
-                            sharedPreferences.edit().putString("usn",usn).apply();
-                            sharedPreferences.edit().putString("login","1").apply();
-                            Intent intent = new Intent(loginActivity.this, studMainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            getPermission();
                         }
                     }
                 },
@@ -120,6 +133,72 @@ public class loginActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(retryPolicy);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
+    }
+
+    private void getPermission(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, permUrl+usn,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        parseItems1(response);
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        doneLoad();
+
+                    }
+                }
+        );
+        int socketTimeOut = 50000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+
+    private void parseItems1(String jsonResposnce) {
+        try {
+            JSONObject jobj = new JSONObject(jsonResposnce);
+            JSONArray jarray = jobj.getJSONArray("permission");
+            for (int i = 0; i < jarray.length(); i++) {
+                JSONObject jo = jarray.getJSONObject(i);
+                permCircular = jo.optString("circular");
+                permEvent = jo.optString("event");
+                permFacClass = jo.optString("facClass");
+
+            }
+            sharedPreferences.edit().putString("usn",usn).apply();
+            sharedPreferences.edit().putString("login","1").apply();
+            sharedPreferences.edit().putString("permcircular",permCircular).apply();
+            sharedPreferences.edit().putString("permevent",permEvent).apply();
+            sharedPreferences.edit().putString("permfacclass",permFacClass).apply();
+            Intent intent = new Intent(loginActivity.this, facMainActivity.class);
+            startActivity(intent);
+            finish();
+            doneLoad();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load(){
+        loadTxt.setVisibility(View.VISIBLE);
+        loadLayout.setVisibility(View.VISIBLE);
+        loadAnim.setVisibility(View.VISIBLE);
+        logCard.setVisibility(View.GONE);
+        regTxt.setVisibility(View.GONE);
+    }
+
+    public void doneLoad(){
+        loadTxt.setVisibility(View.GONE);
+        loadLayout.setVisibility(View.GONE);
+        loadAnim.setVisibility(View.GONE);
+        logCard.setVisibility(View.VISIBLE);
+        regTxt.setVisibility(View.GONE);
+
     }
 
     @Override

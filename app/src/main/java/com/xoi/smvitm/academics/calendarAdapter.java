@@ -100,9 +100,9 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mContext, viewHolder.parent_layout);
                 //inflating menu from xml resource
-                popup.inflate(R.menu.main_menu);
+                //popup.inflate(R.menu.main_menu);
                 //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                /*popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -146,7 +146,7 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
                         }
                         return false;
                     }
-                });
+                });*/
                 //displaying the popup
                 popup.show();
                 return true;

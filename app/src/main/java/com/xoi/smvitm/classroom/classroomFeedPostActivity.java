@@ -50,10 +50,8 @@ public class classroomFeedPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classroom_feed_post);
 
-        //usn = getIntent().getStringExtra("usn");
-        //ccode = getIntent().getStringExtra("ccode");
-        usn = "4MW17CS022";
-        ccode = "12345";
+        usn = getIntent().getStringExtra("usn");
+        ccode = getIntent().getStringExtra("ccode");
 
         postTxt = (EditText)findViewById(R.id.postTxt);
         postBut = (ImageButton)findViewById(R.id.postBut);
@@ -93,7 +91,7 @@ public class classroomFeedPostActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //finish();
+                        finish();
                         Toast.makeText(classroomFeedPostActivity.this, "Done", Toast.LENGTH_SHORT).show();
                     }
                 },

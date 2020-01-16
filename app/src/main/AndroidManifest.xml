@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".auth.splashActivity"></activity>
+        <activity android:name=".classroom.allotClassActivity"></activity>
+        <activity android:name=".academics.subject_selectActivity" />
         <activity android:name=".classroom.studAddElectiveActivity" />
         <activity android:name=".classroom.classroomCommmentActivity" />
         <activity android:name=".classroom.classroomFeedPostActivity" />
@@ -21,6 +22,7 @@
         <activity android:name=".home.student.EventDetails" />
         <activity android:name=".store.storeActivity" />
         <activity android:name=".home.student.PDFReader" />
+        <activity android:name=".home.student.feedCommmentActivity" />
         <activity android:name=".store.storeProductDetails" />
         <activity android:name=".main.student.studMainActivity" />
         <activity android:name=".auth.facultyRegister" />
@@ -36,7 +38,7 @@
         <activity android:name=".academics.editCalendarEvent" />
         <activity android:name=".academics.addevent" />
         <activity android:name=".academics.MainActivitycal" />
-        <activity android:name=".academics.subject_selectActivity">
+        <activity android:name=".auth.splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
