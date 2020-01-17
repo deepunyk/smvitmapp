@@ -22,6 +22,7 @@
         <activity android:name=".home.student.EventDetails" />
         <activity android:name=".store.storeActivity" />
         <activity android:name=".home.student.PDFReader" />
+        <activity android:name=".home.student.feedCommmentActivity" />
         <activity android:name=".store.storeProductDetails" />
         <activity android:name=".main.student.studMainActivity" />
         <activity android:name=".auth.facultyRegister" />

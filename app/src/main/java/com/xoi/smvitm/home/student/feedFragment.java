@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -163,8 +160,45 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         final String photographer_name = items.getPhotographer_name();
         final String blogger_name = items.getBlogger_name();
 
+        //like status
+        SharedPreferences prefs = context.getSharedPreferences("com.xoi.smvitm", MODE_PRIVATE);
+        final String usn = prefs.getString("usn", "NULL");
+        String url2 = "http://smvitmapp.xtoinfinity.tech/php/home/feed_like_status.php?fid=" + fid + "&usn=" + usn;
+        StringRequest stringRequest2 = new StringRequest(url2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("user");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jo = jsonArray.getJSONObject(i);
+                        String like_status = jo.getString("liked");
+
+                        if (like_status.equals("liked")) {
+                            holder.like.setVisibility(View.GONE);
+                            holder.likefill.setVisibility(View.VISIBLE);
+                        } else {
+                            holder.like.setVisibility(View.VISIBLE);
+                            holder.likefill.setVisibility(View.GONE);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue1 = Volley.newRequestQueue(context);
+        requestQueue1.add(stringRequest2);
+
         holder.likes.setVisibility(View.VISIBLE);
-        String url1 = "http://smvitmapp.xtoinfinity.tech/php/home/likes_count.php?fid="+fid;
+        String url1 = "http://smvitmapp.xtoinfinity.tech/php/home/likes_count.php?fid=" + fid;
         StringRequest stringRequest1 = new StringRequest(url1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -174,7 +208,7 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jo = jsonArray.getJSONObject(i);
                         String like_count = jo.getString("likes");
-                        holder.likes.setText(like_count +" Likes");
+                        holder.likes.setText(like_count + " Likes");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -190,9 +224,6 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         requestQueue.add(stringRequest1);
 
 
-        SharedPreferences prefs = context.getSharedPreferences("com.xoi.smvitm", MODE_PRIVATE);
-        final String usn = prefs.getString("usn", "NULL");
-
         Glide.with(context)
                 .load(imgurl)
                 .placeholder(R.drawable.college_logo)
@@ -204,6 +235,7 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             public void onClick(View view) {
                 try {
                     Intent intent = new Intent(context, FeedDetails.class);
+                    intent.putExtra("fid", fid);
                     intent.putExtra("title", title);
                     intent.putExtra("description", description);
                     intent.putExtra("imgurl", imgurl);
@@ -224,7 +256,8 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(context, FeedDetails.class);
+                    Intent intent = new Intent(context, feedCommmentActivity.class);
+                    intent.putExtra("fid", fid);
                     intent.putExtra("title", title);
                     intent.putExtra("description", description);
                     intent.putExtra("imgurl", imgurl);
@@ -247,15 +280,13 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             public void onClick(View v) {
 
 
-
-
                 holder.like.setVisibility(View.GONE);
                 holder.likefill.setVisibility(View.VISIBLE);
 
 
                 Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show();
-                String url = "http://smvitmapp.xtoinfinity.tech/php/home/feed_likes.php?fid=" + fid + "&usn=" + usn;
-               // Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+                String url = "http://smvitmapp.xtoinfinity.tech/php/home/feed_likes.php?fid=" + fid + "&usn=" + usn + "&like=liked";
+                // Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
