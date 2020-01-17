@@ -1,11 +1,13 @@
 package com.xoi.smvitm.academics;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,11 +24,13 @@ public class MainActivitycal extends AppCompatActivity {
      TabItem tabitem1,tabitem2,tabitem3,tabitem4,tabitem5,tabitem6,tabitem7;
      ViewPager viewPager;
      public int loadbit=0;
+     SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincal);
         toolbar = findViewById(R.id.toolbar);
+        sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         tabLayout = findViewById(R.id.tablayout);
         tabitem1 = findViewById(R.id.tabitem1);
@@ -92,7 +96,7 @@ public class MainActivitycal extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.add, menu);
+        inflater.inflate(R.menu.add_menu, menu);
         return true;
     }
     @Override
@@ -100,10 +104,15 @@ public class MainActivitycal extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_add:
+              if(sp.contains("fid")){
                 Intent myIntent = new Intent(MainActivitycal.this, addevent.class);
                 startActivity(myIntent);
                 finish();
-                return true;
+                return true;}
+                else
+                {
+                    Toast.makeText(this, "Not available", Toast.LENGTH_SHORT).show();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

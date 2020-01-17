@@ -37,6 +37,7 @@
         <activity android:name=".academics.editCalendarEvent" />
         <activity android:name=".academics.addevent" />
         <activity android:name=".academics.MainActivitycal" />
+        <activity android:name=".academics.study_meterialsActivity" />
         <activity android:name=".auth.splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

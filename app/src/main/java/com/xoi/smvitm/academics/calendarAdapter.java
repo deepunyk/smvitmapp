@@ -36,10 +36,11 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
     private ArrayList<String> title = new ArrayList<String>();
     private ArrayList<String> date = new ArrayList<String>();
     private ArrayList<String> day = new ArrayList<String>();
-//    private ArrayList<String> type = new ArrayList<String>();
+    //    private ArrayList<String> type = new ArrayList<String>();
     private Context mContext;
-    private String dtitle,ddate;
-    SharedPreferences sharedPreferences;
+    private String dtitle,ddate,dday;
+    SharedPreferences sp;
+
 
     public calendarAdapter(ArrayList<String> title, ArrayList<String> date, ArrayList<String> day, Context mContext) {
         this.title = title;
@@ -91,29 +92,31 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
 //                popup.show();
 //            }
 //        });
-        viewHolder.parent_layout.setOnLongClickListener(new View.OnLongClickListener() {
+        sp = mContext.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
+if(sp.contains("fid")){
+       viewHolder.parent_layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 int i=viewHolder.getAdapterPosition();
                 dtitle=title.get(i);
                 ddate=date.get(i);
+                dday=day.get(i);
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mContext, viewHolder.parent_layout);
                 //inflating menu from xml resource
-                //popup.inflate(R.menu.main_menu);
+                popup.inflate(R.menu.main_menu);
                 //adding click listener
-                /*popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.edit:
 
-//                                sharedPreferences = mContext.getSharedPreferences("com.example.iamdone",MODE_PRIVATE);
-//                                sharedPreferences.edit().putString("dtitle",dtitle).apply();
-//                                sharedPreferences.edit().putString("ddate",ddate).apply();
+
                                 Intent myIntent = new Intent(mContext,editCalendarEvent.class);
                                 myIntent.putExtra("dtitle1",dtitle);
                                 myIntent.putExtra("ddate1",ddate);
+                                myIntent.putExtra("dday1",dday);
                                 mContext.startActivity(myIntent);
                                 break;
                             case R.id.delete:
@@ -124,21 +127,21 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
                                 builder.setTitle("Alert !");
                                 builder.setCancelable(false);
                                 builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog,
-                                                                int which)
-                                            {
-                                                deleteEvent();
-                                            }
-                                        });
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which)
+                                    {
+                                        deleteEvent();
+                                    }
+                                });
                                 builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog,
-                                                                        int which)
-                                                    {
-                                                        dialog.cancel();
-                                                    }
-                                                });
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which)
+                                    {
+                                        dialog.cancel();
+                                    }
+                                });
                                 AlertDialog alertDialog = builder.create();
                                 alertDialog.show();
                                 break;
@@ -146,13 +149,13 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
                         }
                         return false;
                     }
-                });*/
+                });
                 //displaying the popup
                 popup.show();
                 return true;
             }
-        });
-    }
+        });}
+   }
 
     @Override
     public int getItemCount() {
@@ -201,4 +204,4 @@ public class calendarAdapter extends RecyclerView.Adapter<calendarAdapter.ViewHo
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
     }
-    }
+}

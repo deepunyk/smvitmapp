@@ -17,7 +17,7 @@
         android:text="Cryptography, Network Secuirity and Cyber Laws"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorPrimary"
-        android:textSize="27dp"
+        android:textSize="20dp"
         android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

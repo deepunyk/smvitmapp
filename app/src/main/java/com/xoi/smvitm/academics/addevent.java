@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -37,6 +38,14 @@ public class addevent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addevent);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tbadd);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Add event");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         etdate=(EditText) findViewById(R.id.etdate);
         etdate.setText("2020-MM-DD");
@@ -104,5 +113,9 @@ public class addevent extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

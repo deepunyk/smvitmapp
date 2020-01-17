@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,20 +26,30 @@ import java.util.Map;
 public class editCalendarEvent extends AppCompatActivity {
     EditText etdate,ettitle,etday;
     Button btnupdate;
-    String date,title,day,dtitle,ddate;
+    String date,title,day,dtitle,ddate,dday;
     String url = "http://smvitmapp.xtoinfinity.tech/php/editcalendarevent.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_calendar_event);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tbedit);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit event");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         dtitle = getIntent().getExtras().getString("dtitle1");
         ddate = getIntent().getExtras().getString("ddate1");
+        dday = getIntent().getExtras().getString("dday1");
         etdate=(EditText) findViewById(R.id.etdate1);
         ettitle=(EditText) findViewById(R.id.ettitle1);
         etday=(EditText) findViewById(R.id.etday1);
         btnupdate=(Button) findViewById(R.id.btnupdate1);
         etdate.setText(ddate);
         ettitle.setText(dtitle);
+        etday.setText(dday);
         btnupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,5 +111,11 @@ public class editCalendarEvent extends AppCompatActivity {
         stringRequest.setRetryPolicy(retryPolicy);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

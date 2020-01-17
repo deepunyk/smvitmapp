@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -26,18 +27,37 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public class subject_selectActivity extends AppCompatActivity {
+    SharedPreferences sp;
     ArrayList<String> title_temp = new ArrayList<>();
     ArrayList<String> code_temp = new ArrayList<>();
     public int loadbit1=0;
     public ProgressDialog progressdialog;
     View view;
     RecyclerView recyclerView;
-    String url = "http://smvitmapp.xtoinfinity.tech/php/getsubjects.php?usn=4mw17cs022";
+    String studUrl = "http://smvitmapp.xtoinfinity.tech/php/getsubjects.php?usn=";
+    String facUrl = "http://smvitmapp.xtoinfinity.tech/php/getsubjectsfac.php?fid=";
+    String url;
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_select);
+        sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
+
+        if(sp.contains("usn")){
+            id = sp.getString("usn","");
+            url = studUrl;
+            Toast.makeText(subject_selectActivity.this,""+id,Toast.LENGTH_LONG).show();
+        }else{
+            id = sp.getString("fid","");
+            url = facUrl;
+            Toast.makeText(subject_selectActivity.this,""+id,Toast.LENGTH_LONG).show();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
@@ -45,11 +65,11 @@ public class subject_selectActivity extends AppCompatActivity {
     }
     private void getDetails() {
         //progressdialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url+""+id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(subject_selectActivity.this,""+response,Toast.LENGTH_LONG).show();
+//                        Toast.makeText(subject_selectActivity.this,""+response,Toast.LENGTH_LONG).show();
 
                         parseItems(response);
                     }

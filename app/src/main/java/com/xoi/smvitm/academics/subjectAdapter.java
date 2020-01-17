@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -47,6 +48,17 @@ public class subjectAdapter extends RecyclerView.Adapter<subjectAdapter.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         viewHolder.name_txt.setText(subname.get(i));
         viewHolder.code_txt.setText(subcode.get(i));
+        viewHolder.parent_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String scode=subcode.get(i);
+                String sname=subname.get(i);
+                Intent myIntent = new Intent(mContext,study_meterialsActivity.class);
+                myIntent.putExtra("subname",sname);
+                myIntent.putExtra("subcode",scode);
+                mContext.startActivity(myIntent);
+            }
+        });
 
     }
 

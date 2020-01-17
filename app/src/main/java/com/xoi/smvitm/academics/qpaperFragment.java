@@ -1,16 +1,16 @@
 package com.xoi.smvitm.academics;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -31,45 +31,30 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class janFragment extends Fragment {
+public class qpaperFragment extends Fragment {
 
+    ArrayList<String> title_temp = new ArrayList<>();
+    ArrayList<String> author_temp = new ArrayList<>();
+    ArrayList<String> pdflink_temp = new ArrayList<>();
 
-    public janFragment() {
+    public qpaperFragment() {
         // Required empty public constructor
     }
-    ArrayList<String> title_temp = new ArrayList<>();
-    ArrayList<String> date_temp = new ArrayList<>();
-    ArrayList<String> day_temp = new ArrayList<>();
-    //    ArrayList<String> type_temp = new ArrayList<>();
-    public int loadbit1=0;
-    public  ProgressDialog progressdialog;
     View view;
     RecyclerView recyclerView;
-    String url = "http://smvitmapp.xtoinfinity.tech/php/getcalendarevent.php?month=01";
-
+    String url = "http://smvitmapp.xtoinfinity.tech/php/getQpapers.php?scode=";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view= inflater.inflate(R.layout.fragment_jan, container, false);
         // Inflate the layout for this fragment
-//         String refreshbit = getActivity().getIntent().getExtras().getString("refreshbit");
-//        if(!refreshbit.isEmpty())
-//        {
-//            getDetails();
-//        }
-
-        //Toast.makeText(getActivity(),""loadbit,Toast.LENGTH_LONG).show();
-        progressdialog = new ProgressDialog(getActivity());
-        progressdialog.setMessage("Please Wait....");
-        progressdialog.setCancelable(false);
-        progressdialog.show();
+        view= inflater.inflate(R.layout.fragment_qpaper, container, false);
+        String scode;
+        scode =getActivity().getIntent().getExtras().getString("subcode");
+        url = "http://smvitmapp.xtoinfinity.tech/php/getstudymaterials.php?scode="+scode;
         title_temp.clear();
-        date_temp.clear();
-        day_temp.clear();
+        author_temp.clear();
         getDetails();
-        progressdialog.dismiss();
-
         return view;
     }
 
@@ -79,7 +64,7 @@ public class janFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(),""+response,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "" + response, Toast.LENGTH_SHORT).show();
                         parseItems(response);
                     }
                 },
@@ -103,20 +88,21 @@ public class janFragment extends Fragment {
             JSONArray jarray = jobj.getJSONArray("student");
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jo = jarray.getJSONObject(i);
-                String title = jo.getString("event_title");
-                String date = jo.getString("event_date");
-                String day = jo.getString("event_day");
+                String title = jo.getString("type");
+                String author = jo.getString("year");
+                String pdflink = jo.getString("pdflink");
                 title_temp.add(title);
-                date_temp.add(date);
-                day_temp.add(day);
+                author_temp.add(author);
+                pdflink_temp.add(pdflink);
             }
             recyclerView =view.findViewById(R.id.recyclerView);
-            calendarAdapter adapter = new calendarAdapter(title_temp,date_temp,day_temp,getActivity());
+            noteslistAdapter adapter = new noteslistAdapter(title_temp,author_temp,pdflink_temp,getActivity());
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
 
 }

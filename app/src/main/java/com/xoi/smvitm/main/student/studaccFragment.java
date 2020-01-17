@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.xoi.smvitm.R;
+import com.xoi.smvitm.academics.MainActivitycal;
+import com.xoi.smvitm.academics.subject_selectActivity;
 import com.xoi.smvitm.store.storeActivity;
 
 public class studaccFragment extends Fragment {
@@ -46,14 +48,16 @@ public class studaccFragment extends Fragment {
         smLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), subject_selectActivity.class);
+                startActivity(intent);
             }
         });
 
         acLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), MainActivitycal.class);
+                startActivity(intent);
             }
         });
 

@@ -6,14 +6,173 @@
     android:layout_height="match_parent"
     tools:context=".academics.addevent">
 
-    <EditText
-        android:id="@+id/ettitle"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbadd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="0dp"
+        android:scrollbarThumbVertical="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@android:color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardMaxElevation="5dp"
+                app:contentPadding="15dp"
+                app:contentPaddingBottom="40dp"
+                app:contentPaddingTop="40dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <TextView
+                        android:id="@+id/updateproPicTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Enter Details"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:labelText="TITLE"
+                        app:primaryColor="@color/colorPrimaryDark">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/ettitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorAccent" />
+
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:labelText="DAY"
+                        app:primaryColor="@color/colorPrimaryDark">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/etday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorAccent" />
+
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:labelText="DATE"
+                        app:primaryColor="@color/colorPrimaryDark">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/etdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorAccent" />
+
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+                    <Button
+                        android:id="@+id/btnadd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripplebutton"
+                        android:text="ADD"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.93" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".academics.addevent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbadd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+
+    <EditText
+        android:id="@+id/ettitle"
+        android:layout_width="218dp"
+        android:layout_height="37dp"
         android:layout_marginTop="144dp"
+        android:background="@drawable/rvacademics"
         android:ems="10"
+        android:hint="  Title"
         android:inputType="text"
-        android:hint="Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +180,13 @@
 
     <EditText
         android:id="@+id/etday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="37dp"
         android:layout_marginTop="60dp"
         android:ems="10"
+        android:background="@drawable/rvacademics"
         android:inputType="text"
-        android:hint="Day"
+        android:hint="  Day"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +194,13 @@
 
     <EditText
         android:id="@+id/etdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="37dp"
         android:layout_marginTop="60dp"
         android:ems="10"
         android:inputType="date"
-        android:hint="DD/MM"
+        android:background="@drawable/rvacademics"
+        android:hint="  YYYY/MM/DD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,13 +208,58 @@
 
     <Button
         android:id="@+id/btnadd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="216dp"
+        android:layout_height="51dp"
         android:layout_marginTop="60dp"
-        android:text="Add"
+        android:text="Update"
+        android:textColor="#ffff"
+        android:background="@drawable/ripplebutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etdate" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="260dp"
+        android:layout_marginBottom="12dp"
+        android:text="TITLE"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/ettitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbadd"
+        app:layout_constraintVertical_bias="0.946" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="DAY"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/etday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="DATE"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/etdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>-->

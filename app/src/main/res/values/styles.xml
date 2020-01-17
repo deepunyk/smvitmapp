@@ -19,4 +19,7 @@
     <style name = "fab" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
+    <style name="studymat" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">17dp</item>
+    </style>
 </resources>

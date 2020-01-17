@@ -48,6 +48,12 @@ public class PDFReader extends AppCompatActivity {
 
 
         String pdfurl = getIntent().getStringExtra("pdfurl");
+        String toolString = getIntent().getStringExtra("toolString");
+
+        if(toolString.equals("Study Materials")){
+            getSupportActionBar().setTitle("Study Material");
+        }
+
         //Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfurl;
 
