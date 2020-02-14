@@ -43,8 +43,8 @@ public class loginActivity extends AppCompatActivity {
     Button logBut;
     TextView regTxt;
     String usn, pass;
-    String url ="http://smvitmapp.xtoinfinity.tech/php/login.php";
-    String permUrl ="http://smvitmapp.xtoinfinity.tech/php/permission.php?id=";
+    String url = "http://smvitmapp.xtoinfinity.tech/php/login.php";
+    String permUrl = "http://smvitmapp.xtoinfinity.tech/php/permission.php?id=";
     SharedPreferences sharedPreferences;
     String permCircular, permEvent, permFacClass;
     ImageView bckImg;
@@ -59,12 +59,12 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sharedPreferences = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
-        usnTxt = (EditText)findViewById(R.id.usnTxt);
-        passTxt = (EditText)findViewById(R.id.passTxt);
-        logBut = (Button)findViewById(R.id.logBut);
+        sharedPreferences = this.getSharedPreferences("com.xoi.smvitm", MODE_PRIVATE);
+        usnTxt = (EditText) findViewById(R.id.usnTxt);
+        passTxt = (EditText) findViewById(R.id.passTxt);
+        logBut = (Button) findViewById(R.id.logBut);
         regTxt = (TextView) findViewById(R.id.regTxt);
-        bckImg = (ImageView)findViewById(R.id.bckImg);
+        bckImg = (ImageView) findViewById(R.id.bckImg);
 
         _translateAnimation = new TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, -100f, TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f);
         _translateAnimation.setDuration(10000);
@@ -73,10 +73,10 @@ public class loginActivity extends AppCompatActivity {
         _translateAnimation.setInterpolator(new LinearInterpolator());
         bckImg.setAnimation(_translateAnimation);
 
-        loadAnim = (LottieAnimationView)findViewById(R.id.loadanim);
-        loadLayout = (ConstraintLayout)findViewById(R.id.loadLayout);
-        loadTxt = (TextView)findViewById(R.id.loadtxt);
-        logCard = (CardView)findViewById(R.id.logCard);
+        loadAnim = (LottieAnimationView) findViewById(R.id.loadanim);
+        loadLayout = (ConstraintLayout) findViewById(R.id.loadLayout);
+        loadTxt = (TextView) findViewById(R.id.loadtxt);
+        logCard = (CardView) findViewById(R.id.logCard);
 
         regTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,22 +92,21 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 usn = usnTxt.getText().toString().toUpperCase();
                 pass = passTxt.getText().toString();
-                if(usn.equals("")||pass.equals("")){
+                if (usn.equals("") || pass.equals("")) {
                     Toast.makeText(loginActivity.this, "Please fill both the fields", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     login();
                 }
             }
         });
     }
 
-    public void login(){
+    public void login() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(loginActivity.this, ""+response, Toast.LENGTH_SHORT).show();
-                        if(response.equals("success;")){
+                        if (response.equals("success;")) {
                             getPermission();
                         }
                     }
@@ -115,17 +114,19 @@ public class loginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(loginActivity.this, ""+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(loginActivity.this, "" + error, Toast.LENGTH_SHORT).show();
                     }
                 }
-        ){
+        ) {
             @Override
-            protected Map<String, String> getParams(){
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("usn",usn);
-                params.put("pass",pass);
+                params.put("usn", usn);
+                params.put("pass", pass);
                 return params;
-            };
+            }
+
+            ;
 
         };
         int socketTimeOut = 50000;
@@ -135,12 +136,24 @@ public class loginActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void getPermission(){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, permUrl+usn,
+    private void getPermission() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, permUrl + usn,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        parseItems1(response);
+                        if (response.equals("no")) {
+                            sharedPreferences.edit().putString("usn", usn).apply();
+                            sharedPreferences.edit().putString("login", "1").apply();
+                            sharedPreferences.edit().putString("permcircular", "0").apply();
+                            sharedPreferences.edit().putString("permevent", "0").apply();
+                            sharedPreferences.edit().putString("permfacclass", "0").apply();
+                            Intent intent = new Intent(loginActivity.this, studMainActivity.class);
+                            startActivity(intent);
+                            finish();
+                            doneLoad();
+                        } else {
+                            parseItems1(response);
+                        }
                     }
                 },
 
@@ -170,21 +183,25 @@ public class loginActivity extends AppCompatActivity {
                 permFacClass = jo.optString("facClass");
 
             }
-            sharedPreferences.edit().putString("usn",usn).apply();
-            sharedPreferences.edit().putString("login","1").apply();
-            sharedPreferences.edit().putString("permcircular",permCircular).apply();
-            sharedPreferences.edit().putString("permevent",permEvent).apply();
-            sharedPreferences.edit().putString("permfacclass",permFacClass).apply();
+            sharedPreferences.edit().putString("usn", usn).apply();
+            sharedPreferences.edit().putString("login", "1").apply();
+            sharedPreferences.edit().putString("permcircular", permCircular).apply();
+            sharedPreferences.edit().putString("permevent", permEvent).apply();
+            sharedPreferences.edit().putString("permfacclass", permFacClass).apply();
             Intent intent = new Intent(loginActivity.this, facMainActivity.class);
             startActivity(intent);
             finish();
             doneLoad();
         } catch (JSONException e) {
+            Intent intent = new Intent(loginActivity.this, facMainActivity.class);
+            startActivity(intent);
+            finish();
+            doneLoad();
             e.printStackTrace();
         }
     }
 
-    public void load(){
+    public void load() {
         loadTxt.setVisibility(View.VISIBLE);
         loadLayout.setVisibility(View.VISIBLE);
         loadAnim.setVisibility(View.VISIBLE);
@@ -192,7 +209,7 @@ public class loginActivity extends AppCompatActivity {
         regTxt.setVisibility(View.GONE);
     }
 
-    public void doneLoad(){
+    public void doneLoad() {
         loadTxt.setVisibility(View.GONE);
         loadLayout.setVisibility(View.GONE);
         loadAnim.setVisibility(View.GONE);

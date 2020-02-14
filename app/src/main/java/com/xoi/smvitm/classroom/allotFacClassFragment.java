@@ -43,7 +43,7 @@ public class allotFacClassFragment extends Fragment{
     private allotFacClassRVAdapter adapter;
     private View view;
     String selectSem, selectSec, selectBr = "1";
-    Button allotBut;
+    Button allotBut, remSubBut, skipBut;
     TextView snameTxt, sidTxt;
 
     @Override
@@ -55,6 +55,8 @@ public class allotFacClassFragment extends Fragment{
         selectSec = ((allotClassActivity)getActivity()).selectSec;
 
         allotBut = (Button) view.findViewById(R.id.allotBut);
+        remSubBut = (Button) view.findViewById(R.id.remSubBut);
+        skipBut = (Button) view.findViewById(R.id.skipBut);
         snameTxt = (TextView) view.findViewById(R.id.snameTxt);
         sidTxt = (TextView) view.findViewById(R.id.sidTxt);
         getSubjects();
@@ -149,7 +151,7 @@ public class allotFacClassFragment extends Fragment{
     private void initRecyclerView(){
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new allotFacClassRVAdapter(fname,fid,sname,sid,snameTxt,sidTxt,allotBut,selectSec,selectBr,selectSem,getActivity());
+        adapter = new allotFacClassRVAdapter(fname,fid,sname,sid,snameTxt,sidTxt,allotBut,remSubBut, skipBut, selectSec,selectBr,selectSem,getActivity());
         recyclerView.setAdapter(adapter);
     }
 }

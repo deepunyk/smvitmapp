@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xoi.smvitm.R;
 
 import org.json.JSONArray;
@@ -47,7 +48,7 @@ public class feedFragment extends Fragment {
     private List<FeedItems> feedItems;
     LottieAnimationView loadAnim;
     TextView loadTxt;
-
+    FloatingActionButton fab;
 
     public feedFragment() {
     }
@@ -64,10 +65,18 @@ public class feedFragment extends Fragment {
         loadAnim.setVisibility(View.VISIBLE);
         loadTxt.setVisibility(View.VISIBLE);
 
+        fab = (FloatingActionButton)view.findViewById(R.id.fab);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), feedPostActivity.class);
+                startActivity(i);
+            }
+        });
         feedItems = new ArrayList<>();
 
         getItems();

@@ -40,7 +40,6 @@ public class facultyLogin extends AppCompatActivity {
 
     EditText fidTxt, passTxt;
     Button logBut;
-    TextView regTxt;
     String fid, pass;
     String url ="http://smvitmapp.xtoinfinity.tech/php/facLogin.php";
     String permUrl ="http://smvitmapp.xtoinfinity.tech/php/permission.php?id=";
@@ -63,7 +62,6 @@ public class facultyLogin extends AppCompatActivity {
         fidTxt = (EditText)findViewById(R.id.fidTxt);
         passTxt = (EditText)findViewById(R.id.passTxt);
         logBut = (Button)findViewById(R.id.logBut);
-        regTxt = (TextView) findViewById(R.id.regTxt);
         bckImg = (ImageView)findViewById(R.id.bckImg);
 
         loadAnim = (LottieAnimationView)findViewById(R.id.loadanim);
@@ -91,14 +89,7 @@ public class facultyLogin extends AppCompatActivity {
                 }
             }
         });
-        regTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(facultyLogin.this, facultyRegister.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
     }
 
     public void login(){
@@ -145,7 +136,19 @@ public class facultyLogin extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        parseItems1(response);
+                        if (response.equals("no")) {
+                            sharedPreferences.edit().putString("fid",fid).apply();
+                            sharedPreferences.edit().putString("login","2").apply();
+                            sharedPreferences.edit().putString("permcircular","0").apply();
+                            sharedPreferences.edit().putString("permevent","0").apply();
+                            sharedPreferences.edit().putString("permfacclass","0").apply();
+                            Intent intent = new Intent(facultyLogin.this, facMainActivity.class);
+                            startActivity(intent);
+                            finish();
+                            doneLoad();
+                        } else {
+                            parseItems1(response);
+                        }
                     }
                 },
 
@@ -201,7 +204,6 @@ public class facultyLogin extends AppCompatActivity {
         loadLayout.setVisibility(View.VISIBLE);
         loadAnim.setVisibility(View.VISIBLE);
         logCard.setVisibility(View.GONE);
-        regTxt.setVisibility(View.GONE);
     }
 
     public void doneLoad(){
@@ -209,7 +211,5 @@ public class facultyLogin extends AppCompatActivity {
         loadLayout.setVisibility(View.GONE);
         loadAnim.setVisibility(View.GONE);
         logCard.setVisibility(View.VISIBLE);
-        regTxt.setVisibility(View.GONE);
-
     }
 }

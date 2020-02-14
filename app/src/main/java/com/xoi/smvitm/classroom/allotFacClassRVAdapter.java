@@ -12,14 +12,26 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.xoi.smvitm.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class allotFacClassRVAdapter extends RecyclerView.Adapter<allotFacClassRVAdapter.ViewHolder> {
 
-    public allotFacClassRVAdapter(ArrayList<String> fname,ArrayList<String> fid,ArrayList<String> sname,ArrayList<String> sid,TextView snameTxt, TextView sidTxt, Button allotBut,String selectSec,String selectBr,String selectSem, Context mContext) {
+    public allotFacClassRVAdapter(ArrayList<String> fname,ArrayList<String> fid,ArrayList<String> sname,ArrayList<String> sid,TextView snameTxt, TextView sidTxt, Button allotBut, Button remBut, Button skipBut,String selectSec,String selectBr,String selectSem, Context mContext) {
         this.fname = fname;
         this.fid = fid;
         this.sname = sname;
@@ -27,6 +39,8 @@ public class allotFacClassRVAdapter extends RecyclerView.Adapter<allotFacClassRV
         this.snameTxt = snameTxt;
         this.sidTxt = sidTxt;
         this.allotBut = allotBut;
+        this.remBut = remBut;
+        this.skipBut = skipBut;
         this.selectSem = selectSem;
         this.selectSec = selectSec;
         this.selectBr = selectBr;
@@ -40,7 +54,7 @@ public class allotFacClassRVAdapter extends RecyclerView.Adapter<allotFacClassRV
     private ArrayList<String> sname = new ArrayList<>();
     private ArrayList<String> sid = new ArrayList<>();
     private Context mContext;
-    Button allotBut;
+    Button allotBut,remBut, skipBut;
     TextView snameTxt, sidTxt;
     int subNum = 0;
     int selectNum = -1;
@@ -79,6 +93,43 @@ public class allotFacClassRVAdapter extends RecyclerView.Adapter<allotFacClassRV
             viewHolder.parent_layout.setBackgroundColor(mContext.getResources().getColor(R.color.white));
             viewHolder.fnameTxt.setTextColor(mContext.getResources().getColor(R.color.black));
         }
+        skipBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                allotBut.setVisibility(View.GONE);
+                subNum++;
+                selectNum=-1;
+                if(subNum<sid.size()) {
+                    snameTxt.setText(sname.get(subNum));
+                    sidTxt.setText(sid.get(subNum));
+
+                }
+                else{
+                    ((allotClassActivity)mContext).loadFragment(new allotFacClassConfirmFragment(selectSid,selectSname,selectFid,selectFname,selectSec,selectBr,selectSem));
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+        remBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteSubject(sid.get(subNum),selectBr);
+                allotBut.setVisibility(View.GONE);
+                subNum++;
+                selectNum=-1;
+                if(subNum<sid.size()) {
+                    snameTxt.setText(sname.get(subNum));
+                    sidTxt.setText(sid.get(subNum));
+
+                }
+                else{
+                    ((allotClassActivity)mContext).loadFragment(new allotFacClassConfirmFragment(selectSid,selectSname,selectFid,selectFname,selectSec,selectBr,selectSem));
+                }
+                notifyDataSetChanged();
+            }
+        });
+
 
         allotBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,5 +171,33 @@ public class allotFacClassRVAdapter extends RecyclerView.Adapter<allotFacClassRV
             fnameTxt = itemView.findViewById(R.id.fnameTxt);
             parent_layout = itemView.findViewById(R.id.parent_layout);
         }
+    }
+
+    private void deleteSubject(String subcode, String branch){
+        String url = "http://smvitmapp.xtoinfinity.tech/php/classroom/removeSubject.php?code=";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+""+subcode+"&br="+branch,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("no")){
+                            Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(mContext, "Subject Removed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        int socketTimeOut = 50000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        queue.add(stringRequest);
     }
 }

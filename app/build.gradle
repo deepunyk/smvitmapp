@@ -7,8 +7,8 @@ android {
         applicationId "com.xoi.smvitm"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 12
+        versionName "3.0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,7 +26,9 @@ android {
                            'src/main/res/layouts/store',
                            'src/main/res/layouts/facMain',
                            'src/main/res/layouts/auth',
-                           'src/main/res/layouts/academics']
+                           'src/main/res/layouts/academics',
+                           'src/main/res/layouts/facultyDetail',
+                           'src/main/res/layouts/timetable']
         }
     }
 }
