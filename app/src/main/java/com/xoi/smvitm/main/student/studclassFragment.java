@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -54,6 +56,8 @@ public class studclassFragment extends Fragment {
     studClassDisplayAdapter adapter;
     Toolbar toolbar;
     FloatingActionButton fab;
+    LottieAnimationView loadAnim;
+    TextView loadTxt;
 
     public studclassFragment() {
     }
@@ -68,6 +72,8 @@ public class studclassFragment extends Fragment {
         toolbar = (Toolbar)view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
+        loadAnim = (LottieAnimationView)view.findViewById(R.id.noClassAnim);
+        loadTxt = (TextView)view.findViewById(R.id.loadTxt);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +87,8 @@ public class studclassFragment extends Fragment {
             Toast.makeText(getContext(), "Please signout and sign in again", Toast.LENGTH_SHORT).show();
         }
         else{
-            getClasses();
+            refreshList();
+            load();
         }
         return view;
 
@@ -91,7 +98,11 @@ public class studclassFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        parseItems(response);
+                        if(response.equals("no")){
+                            loadTxt.setText("No classrooms found.\nPlease wait for your HoD to allot you to your respective classrooms.");
+                        }else {
+                            parseItems(response);
+                        }
                     }
                 },
 
@@ -135,9 +146,31 @@ public class studclassFragment extends Fragment {
     }
 
     private void initRecyclerView(){
+        doneLoad();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new studClassDisplayAdapter(code,sname,ccode,fname,fphoto,fid,getActivity());
         recyclerView.setAdapter(adapter);
+    }
+
+    private void load(){
+        loadAnim.setVisibility(View.VISIBLE);
+        loadTxt.setVisibility(View.VISIBLE);
+        loadTxt.setText("Getting your classrooms");
+        fab.hide();
+    }
+    private void doneLoad(){
+        loadAnim.setVisibility(View.GONE);
+        loadTxt.setVisibility(View.GONE);
+        fab.show();
+    }
+    private void refreshList(){
+        code.clear();
+        sname.clear();
+        fname.clear();
+        fphoto.clear();
+        ccode.clear();
+        fid.clear();
+        getClasses();
     }
 }

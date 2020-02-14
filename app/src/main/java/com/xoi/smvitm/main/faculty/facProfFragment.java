@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
@@ -29,6 +30,8 @@ import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.auth.facultyLogin;
+import com.xoi.smvitm.profile.editFacProfActivity;
+import com.xoi.smvitm.profile.editStudProfActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,8 +50,8 @@ public class facProfFragment extends Fragment {
     String permUrl ="http://smvitmapp.xtoinfinity.tech/php/permission.php?id=";
 
     SharedPreferences sharedPreferences;
-    String fid, name, mobile, br, email, pic;
-    Button outBut;
+    String fid, name, mobile, br, email, pic, pass;
+    Button outBut, editBut;
     String permCircular, permEvent, permFacClass;
 
     ConstraintLayout loadLayout;
@@ -71,6 +74,7 @@ public class facProfFragment extends Fragment {
         fid= sharedPreferences.getString("fid","");
 
         outBut = (Button)view.findViewById(R.id.outBut);
+        editBut = (Button)view.findViewById(R.id.editBut);
         fidTxt = (TextView)view.findViewById(R.id.fidTxt);
         nameTxt = (TextView)view.findViewById(R.id.nameTxt);
         mobTxt = (TextView)view.findViewById(R.id.mobTxt);
@@ -96,7 +100,19 @@ public class facProfFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        editBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), editFacProfActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+
         fidTxt.setText(fid);
+
 
         AsyncJob.OnBackgroundJob usrDetails = new AsyncJob.OnBackgroundJob() {
             @Override
@@ -172,12 +188,20 @@ public class facProfFragment extends Fragment {
                 email = jo.getString("email");
                 pic = jo.getString("profilepic");
                 br = jo.getString("branchId");
+                pass = jo.getString("password");
             }
             nameTxt.setText(name);
             mobTxt.setText(mobile);
             emailTxt.setText(email);
             setBranch();
             Glide.with(this).load(pic).into(proPic);
+            sharedPreferences.edit().putString("fid",fid).apply();
+            sharedPreferences.edit().putString("name",name).apply();
+            sharedPreferences.edit().putString("mobile",mobile).apply();
+            sharedPreferences.edit().putString("branch",br).apply();
+            sharedPreferences.edit().putString("email",email).apply();
+            sharedPreferences.edit().putString("profilePic",pic).apply();
+            sharedPreferences.edit().putString("pass",pass).apply();
         } catch (JSONException e) {
             e.printStackTrace();
         }

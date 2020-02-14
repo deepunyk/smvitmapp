@@ -13,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.academics.MainActivitycal;
 import com.xoi.smvitm.academics.subject_selectActivity;
+import com.xoi.smvitm.facultyDetail.faculty_details_activity;
 import com.xoi.smvitm.store.storeActivity;
 
 public class studaccFragment extends Fragment {
@@ -32,35 +35,18 @@ public class studaccFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_studacc, container, false);
 
-        Button btnStore = (Button) view.findViewById(R.id.btnstore);
-        btnStore.setOnClickListener(new View.OnClickListener() {
+        LinearLayout brLayout = (LinearLayout)view.findViewById(R.id.brLayout);
+        LinearLayout smLayout = (LinearLayout)view.findViewById(R.id.smLayout);
+        LinearLayout fLayout = (LinearLayout)view.findViewById(R.id.fLayout);
+        LinearLayout acLayout = (LinearLayout)view.findViewById(R.id.acLayout);
+
+        fLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), storeActivity.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), faculty_details_activity.class);
+                startActivity(i);
             }
         });
-
-        ConstraintLayout smLayout, acLayout;
-        smLayout = (ConstraintLayout)view.findViewById(R.id.smLayout);
-        acLayout = (ConstraintLayout)view.findViewById(R.id.acLayout);
-
-        smLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), subject_selectActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        acLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivitycal.class);
-                startActivity(intent);
-            }
-        });
-
         return view;
 
     }

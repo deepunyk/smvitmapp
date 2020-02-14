@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xoi.smvitm.R;
+import com.xoi.smvitm.classroom.allotClassActivity;
 import com.xoi.smvitm.classroom.studAddElectiveActivity;
 import com.xoi.smvitm.classroom.studClassDisplayAdapter;
 
@@ -46,7 +49,7 @@ public class facClassFragment extends Fragment {
     View view;
     String url = "http://smvitmapp.xtoinfinity.tech/php/classroom/getFacultyClassroom.php?fid=";
     SharedPreferences sp;
-    String logfid;
+    String logfid, permission;
     RecyclerView recyclerView;
     private ArrayList<String> code = new ArrayList<>();
     private ArrayList<String> sname = new ArrayList<>();
@@ -57,7 +60,8 @@ public class facClassFragment extends Fragment {
     studClassDisplayAdapter adapter;
     Toolbar toolbar;
     FloatingActionButton fab;
-
+    LottieAnimationView loadAnim;
+    TextView loadTxt;
     public facClassFragment() {
     }
 
@@ -69,22 +73,32 @@ public class facClassFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_studclass, container, false);
         sp = getActivity().getSharedPreferences("com.xoi.smvitm", Context.MODE_PRIVATE);
         toolbar = (Toolbar)view.findViewById(R.id.toolbar);
+        permission = sp.getString("permfacclass","");
+
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
-
+        loadAnim = (LottieAnimationView)view.findViewById(R.id.noClassAnim);
+        loadTxt = (TextView)view.findViewById(R.id.loadTxt);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), studAddElectiveActivity.class);
+                Intent i = new Intent(getActivity(), allotClassActivity.class);
                 startActivity(i);
             }
         });
+
+        if(permission.equals("1")){
+            fab.show();
+        }else{
+            fab.hide();
+        }
         logfid = sp.getString("fid","");
         if(logfid.equals("")){
             Toast.makeText(getContext(), "Please signout and sign in again", Toast.LENGTH_SHORT).show();
         }
         else{
-            getClasses();
+            load();
+            refreshList();
         }
         return view;
 
@@ -94,7 +108,15 @@ public class facClassFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        parseItems(response);
+                        if(response.equals("no")){
+                            if(permission.equals("1")){
+                                loadTxt.setText("Click on the add button below to allot classes.");
+                            }else {
+                                loadTxt.setText("No classrooms found.\nPlease wait for your HoD to allot you to your respective classrooms.");
+                            }
+                            }else {
+                            parseItems(response);
+                        }
                     }
                 },
 
@@ -138,10 +160,29 @@ public class facClassFragment extends Fragment {
     }
 
     private void initRecyclerView(){
+        doneLoad();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new studClassDisplayAdapter(code,sname,ccode,fname,fphoto,fid,getActivity());
         recyclerView.setAdapter(adapter);
     }
+    private void load(){
+        loadAnim.setVisibility(View.VISIBLE);
+        loadTxt.setVisibility(View.VISIBLE);
+        loadTxt.setText("Getting your classrooms");
+    }
+    private void doneLoad(){
+        loadAnim.setVisibility(View.GONE);
+        loadTxt.setVisibility(View.GONE);
+    }
 
+    private void refreshList(){
+        code.clear();
+        sname.clear();
+        fname.clear();
+        fphoto.clear();
+        ccode.clear();
+        fid.clear();
+        getClasses();
+    }
 }

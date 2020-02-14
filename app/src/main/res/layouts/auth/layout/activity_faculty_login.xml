@@ -172,17 +172,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.90" />
 
-    <TextView
-        android:id="@+id/regTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New here? Click here to register"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logCard" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loadLayout"
         android:layout_width="0dp"

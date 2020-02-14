@@ -189,7 +189,6 @@ public class editStudProfActivity extends AppCompatActivity {
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
                 params.put("usn",usn);
-                // params.put("pass",pass);
                 params.put("name",username);
                 params.put("email",useremail);
                 params.put("br",userbr);

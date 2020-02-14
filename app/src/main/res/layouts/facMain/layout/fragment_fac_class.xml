@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.faculty.facClassFragment">
+    tools:context=".main.faculty.facClassFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
@@ -68,4 +69,30 @@
 
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/noClassAnim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="class.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/loadTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Loading"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noClassAnim" />
 </androidx.constraintlayout.widget.ConstraintLayout>
