@@ -30,7 +30,6 @@ public class study_meterialsActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayout1);
         tabitem1 = findViewById(R.id.ti1);
         tabitem2 = findViewById(R.id.ti2);
-        //toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
         viewPager = findViewById(R.id.viewPager1);
         notesAdapter pageAdapter = new notesAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);

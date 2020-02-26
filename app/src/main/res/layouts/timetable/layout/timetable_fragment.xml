@@ -19,13 +19,16 @@
 
     <TextView
         android:id="@+id/day_txt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@color/white"
         android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:padding="8dp"
         android:text="TextView"
         android:textColor="@color/colorPrimary"
-        android:textSize="30dp"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -19,7 +19,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.xoi.smvitm.R;
 
 public class MainActivitycal extends AppCompatActivity {
-     Toolbar toolbar;
      TabLayout tabLayout;
      TabItem tabitem1,tabitem2,tabitem3,tabitem4,tabitem5,tabitem6,tabitem7;
      ViewPager viewPager;
@@ -29,9 +28,7 @@ public class MainActivitycal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincal);
-        toolbar = findViewById(R.id.toolbar);
         sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
         tabLayout = findViewById(R.id.tablayout);
         tabitem1 = findViewById(R.id.tabitem1);
         tabitem2 = findViewById(R.id.tabitem2);
@@ -44,7 +41,6 @@ public class MainActivitycal extends AppCompatActivity {
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        setSupportActionBar(toolbar);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -98,24 +94,6 @@ public class MainActivitycal extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add_menu, menu);
         return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_add:
-              if(sp.contains("fid")){
-                Intent myIntent = new Intent(MainActivitycal.this, addevent.class);
-                startActivity(myIntent);
-                finish();
-                return true;}
-                else
-                {
-                    Toast.makeText(this, "Not available", Toast.LENGTH_SHORT).show();
-                }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
 }

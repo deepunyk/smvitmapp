@@ -16,6 +16,7 @@ import com.xoi.smvitm.R;
 import com.xoi.smvitm.home.student.circularsFragment;
 import com.xoi.smvitm.home.student.eventsFragment;
 import com.xoi.smvitm.home.student.feedFragment;
+import com.xoi.smvitm.home.student.feedFragmentNew;
 
 public class studhomeFragment extends Fragment {
 
@@ -34,7 +35,7 @@ public class studhomeFragment extends Fragment {
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new feedFragment()).commit();
+                    new feedFragmentNew()).commit();
         }
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,7 +45,7 @@ public class studhomeFragment extends Fragment {
 
                 switch (item.getItemId()) {
                     case R.id.feed:
-                        selectedFragment = new feedFragment();
+                        selectedFragment = new feedFragmentNew();
                         break;
                     case R.id.events:
                         selectedFragment = new eventsFragment();

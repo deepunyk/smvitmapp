@@ -51,26 +51,20 @@ public class subject_selectActivity extends AppCompatActivity {
         if(sp.contains("usn")){
             id = sp.getString("usn","");
             url = studUrl;
-            Toast.makeText(subject_selectActivity.this,""+id,Toast.LENGTH_LONG).show();
         }else{
             id = sp.getString("fid","");
             url = facUrl;
-            Toast.makeText(subject_selectActivity.this,""+id,Toast.LENGTH_LONG).show();
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
         getDetails();
     }
     private void getDetails() {
-        //progressdialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url+""+id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-//                        Toast.makeText(subject_selectActivity.this,""+response,Toast.LENGTH_LONG).show();
-
                         parseItems(response);
                     }
                 },

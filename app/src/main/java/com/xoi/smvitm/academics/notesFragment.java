@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,13 +30,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class notesFragment extends Fragment {
     ArrayList<String> title_temp = new ArrayList<>();
     ArrayList<String> author_temp = new ArrayList<>();
     ArrayList<String> pdflink_temp = new ArrayList<>();
+    LottieAnimationView loadAnim;
+    TextView loadTxt;
 
     public notesFragment() {
         // Required empty public constructor
@@ -46,13 +47,14 @@ public class notesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_notes, container, false);
         String scode;
         scode =getActivity().getIntent().getExtras().getString("subcode");
         url = "http://smvitmapp.xtoinfinity.tech/php/getstudymaterials.php?scode="+scode;
         title_temp.clear();
         author_temp.clear();
+        loadAnim = view.findViewById(R.id.loadanim);
+        loadTxt = view.findViewById(R.id.loadTxt);
         getDetails();
         return view;
     }
@@ -63,8 +65,15 @@ public class notesFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(), "" + response, Toast.LENGTH_SHORT).show();
-                        parseItems(response);
+                        if(response.equals("no")){
+                            loadTxt.setVisibility(View.VISIBLE);
+                            loadAnim.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            loadTxt.setVisibility(View.GONE);
+                            loadAnim.setVisibility(View.GONE);
+                            parseItems(response);
+                        }
                     }
                 },
 

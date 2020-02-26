@@ -27,11 +27,13 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 app:civ_border_color="@color/colorAccent"
                 app:civ_border_width="2dp"
                 app:civ_shadow="true"
                 app:civ_shadow_color="@color/colorPrimaryDark"
                 app:civ_shadow_radius="10"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_usrico" />
@@ -41,29 +43,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/roboto"
                 android:text="TextView"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/dateTxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/photoImg"
-                app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/usn" />
 
             <TextView
                 android:id="@+id/usn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/photoImg"
                 app:layout_constraintStart_toEndOf="@+id/photoImg"
                 app:layout_constraintTop_toTopOf="@+id/photoImg" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

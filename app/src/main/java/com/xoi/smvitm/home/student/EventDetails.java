@@ -17,7 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.xoi.smvitm.R;
 
 public class EventDetails extends AppCompatActivity {
-    TextView event_title,event_description,event_organizers,event_date;
+    TextView event_description,event_organizers,event_date;
     ImageView event_img;
     Button view_button,register_button;
 
@@ -28,11 +28,9 @@ public class EventDetails extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("SMVITM");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        event_title=(TextView)findViewById(R.id.event_title);
         event_description=(TextView)findViewById(R.id.event_description);
         event_organizers=(TextView)findViewById(R.id.event_organizers);
         event_date=(TextView)findViewById(R.id.event_date);
@@ -49,6 +47,8 @@ public class EventDetails extends AppCompatActivity {
         String e_date = getIntent().getStringExtra("event_date");
         final String e_pdflink = getIntent().getStringExtra("event_pdflink");
 
+        getSupportActionBar().setTitle(e_title);
+
         RequestOptions options = new RequestOptions()
                 .fitCenter()
                 .placeholder(R.drawable.college_logo);
@@ -57,7 +57,6 @@ public class EventDetails extends AppCompatActivity {
 
         Glide.with(this).load(e_imgurl).apply(options).into(event_img);
 
-        event_title.setText(e_title);
         event_description.setText(e_description);
         event_organizers.setText("Event Organizers : "+e_organizers);
         event_date.setText("Event Date : "+e_date);

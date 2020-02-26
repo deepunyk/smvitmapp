@@ -42,11 +42,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="6dp"
-                            android:fontFamily="monospace"
-                            android:padding="2dp"
-                            android:textSize="20sp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/roboto_medium"
                             android:maxLines="1"
-                            android:ellipsize="end">
+                            android:padding="2dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp">
 
                         </TextView>
 
@@ -55,8 +56,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="6dp"
-                            android:fontFamily="serif-monospace"
+                            android:fontFamily="@font/roboto"
                             android:padding="2dp"
+                            android:textColor="@color/black"
                             android:textSize="20sp">
 
                         </TextView>

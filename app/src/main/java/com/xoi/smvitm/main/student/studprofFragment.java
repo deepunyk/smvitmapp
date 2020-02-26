@@ -131,7 +131,6 @@ public class studprofFragment extends Fragment {
             semTxt.setText(sem);
             secTxt.setText(sec);
             emailTxt.setText(email);
-            setBranch();
             sharedPreferences.edit().putString("Username",name).apply();
             sharedPreferences.edit().putString("Usersem",sem).apply();
             sharedPreferences.edit().putString("Usersec",sec).apply();
@@ -139,6 +138,7 @@ public class studprofFragment extends Fragment {
             sharedPreferences.edit().putString("Userbranch",br).apply();
             sharedPreferences.edit().putString("Userprofilepic",pic).apply();
             Glide.with(this).load(pic).into(proPic);
+            setBranch();
         } catch (JSONException e) {
             e.printStackTrace();
         }
