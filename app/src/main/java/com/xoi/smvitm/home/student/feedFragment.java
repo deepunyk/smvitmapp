@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
 
 import org.json.JSONArray;
@@ -49,6 +53,8 @@ public class feedFragment extends Fragment {
     LottieAnimationView loadAnim;
     TextView loadTxt;
     FloatingActionButton fab;
+    TextView moreTxt;
+    int n = 0;
 
     public feedFragment() {
     }
@@ -62,8 +68,10 @@ public class feedFragment extends Fragment {
         loadAnim = (LottieAnimationView) view.findViewById(R.id.loadanim);
         loadTxt = (TextView) view.findViewById(R.id.loadtxt);
 
+
         loadAnim.setVisibility(View.VISIBLE);
         loadTxt.setVisibility(View.VISIBLE);
+
 
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -94,18 +102,21 @@ public class feedFragment extends Fragment {
                     loadAnim.setVisibility(View.GONE);
                     loadTxt.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("result");
+                    JSONArray jsonArray = jsonObject.getJSONArray("feed");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jo = jsonArray.getJSONObject(i);
 
                         FeedItems items = new FeedItems(
-                                jo.getString("fid"),
+                                jo.getString("feed_id"),
                                 jo.getString("name"),
                                 jo.getString("description"),
                                 jo.getString("imglink"),
                                 jo.getString("photographer_name"),
-                                jo.getString("blogger_name")
+                                jo.getString("blogger_name"),
+                                jo.getString("date"),
+                                jo.getString("user"),
+                                jo.getString("profilepic")
                         );
 
                         feedItems.add(items);
@@ -168,6 +179,16 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         final String description = items.getDescription();
         final String photographer_name = items.getPhotographer_name();
         final String blogger_name = items.getBlogger_name();
+        final String username = items.getUsername();
+        final String date = items.getDate();
+        final String profilepic = items.getProfilepic();
+
+        Glide.with(context)
+                .load(profilepic)
+                .placeholder(R.drawable.college_logo)
+                .into(holder.usrImg);
+        holder.usrName.setText(username);
+        holder.dateTxt.setText(date);
 
         //like status
         SharedPreferences prefs = context.getSharedPreferences("com.xoi.smvitm", MODE_PRIVATE);
@@ -207,6 +228,10 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         requestQueue1.add(stringRequest2);
 
         holder.likes.setVisibility(View.VISIBLE);
+
+        if(imgurl.equals("")){
+            holder.imgview.setVisibility(View.GONE);
+        }
         String url1 = "http://smvitmapp.xtoinfinity.tech/php/home/likes_count.php?fid=" + fid;
         StringRequest stringRequest1 = new StringRequest(url1, new Response.Listener<String>() {
             @Override
@@ -283,7 +308,7 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             }
         });
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        holder.likeLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -334,21 +359,26 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title, description, likes;
-        public ImageView imgview, like, comment, likefill;
+        private LinearLayout likeLayout, comment;
+        private TextView title, description, likes, usrName, dateTxt;
+        private ImageView imgview;
+        private ImageButton like, likefill;
+        private CircularImageView usrImg;
 
-        public ViewHolder(@NonNull View itemView) {
+        private ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
-            title = (TextView) itemView.findViewById(R.id.title);
+            usrName = (TextView) itemView.findViewById(R.id.usrName);
+            dateTxt = (TextView) itemView.findViewById(R.id.dateTxt);
+            usrImg = (CircularImageView) itemView.findViewById(R.id.usrImg);
+            title = (TextView) itemView.findViewById(R.id.titleTxt);
             //description = (TextView) itemView.findViewById(R.id.description);
-            likes = (TextView) itemView.findViewById(R.id.likes);
-            imgview = (ImageView) itemView.findViewById(R.id.imgview);
-            like = (ImageView) itemView.findViewById(R.id.like);
-            comment = (ImageView) itemView.findViewById(R.id.comment);
-            likefill = (ImageView) itemView.findViewById(R.id.likefill);
-
+            likes = (TextView) itemView.findViewById(R.id.likeNum);
+            imgview = (ImageView) itemView.findViewById(R.id.postImg);
+            like = (ImageButton) itemView.findViewById(R.id.like);
+            comment = (LinearLayout) itemView.findViewById(R.id.commentLayout);
+            likefill = (ImageButton) itemView.findViewById(R.id.likefill);
+            likeLayout = (LinearLayout)itemView.findViewById(R.id.likeLayout);
 
         }
     }
@@ -361,15 +391,21 @@ class FeedItems {
     private String imglink;
     private String photographer_name;
     private String blogger_name;
+    private String username;
+    private String date;
+    private String profilepic;
 
 
-    public FeedItems(String fid, String title, String description, String imglink, String photographer_name, String blogger_name) {
+    public FeedItems(String fid, String title, String description, String imglink, String photographer_name, String blogger_name, String date, String username, String profilepic) {
         this.fid = fid;
         this.title = title;
         this.description = description;
         this.imglink = imglink;
         this.photographer_name = photographer_name;
         this.blogger_name = blogger_name;
+        this.username = username;
+        this.date = date;
+        this.profilepic = profilepic;
     }
 
     public String getTitle() {
@@ -394,6 +430,18 @@ class FeedItems {
 
     public String getFid() {
         return fid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getProfilepic() {
+        return profilepic;
     }
 }
 

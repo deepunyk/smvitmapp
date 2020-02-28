@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -48,7 +49,7 @@ public class faculty_detail_rv_adapter extends RecyclerView.Adapter<faculty_deta
         viewHolder.nameTxt.setText(name.get(i));
         viewHolder.mobTxt.setText(mobile.get(i));
         viewHolder.emailTxt.setText(email.get(i));
-        Glide.with(context).load(profImg).into(viewHolder.profImg);
+        Glide.with(context).load(profImg.get(i)).into(viewHolder.profileImg);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class faculty_detail_rv_adapter extends RecyclerView.Adapter<faculty_deta
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameTxt, mobTxt, emailTxt;
-        CircularImageView profImg;
+        CircularImageView profileImg;
         ConstraintLayout parent_layout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,7 +68,7 @@ public class faculty_detail_rv_adapter extends RecyclerView.Adapter<faculty_deta
             nameTxt = itemView.findViewById(R.id.nameTxt);
             mobTxt = itemView.findViewById(R.id.mobTxt);
             emailTxt = itemView.findViewById(R.id.emailTxt);
-            profImg = itemView.findViewById(R.id.profileImg);
+            profileImg = itemView.findViewById(R.id.profileImg);
             parent_layout = itemView.findViewById(R.id.parent_layout);
         }
     }

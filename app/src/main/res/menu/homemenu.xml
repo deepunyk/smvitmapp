@@ -3,14 +3,17 @@
     <item
         android:id="@+id/feed"
         android:title="Feed"
+        android:icon="@drawable/ic_feed"
         />
     <item
         android:id="@+id/events"
         android:title="Events"
+        android:icon="@drawable/ic_medal"
         />
     <item
         android:id="@+id/circulars"
         android:title="Circulars"
+        android:icon="@drawable/ic_paper"
         />
 
 

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".auth.splashActivity"></activity>
+        <activity android:name=".timetable.timeMain"></activity>
         <activity android:name=".facultyDetail.faculty_details_activity" />
         <activity android:name=".home.student.feedPostActivity" />
         <activity android:name=".classroom.allotClassActivity" />
@@ -42,7 +42,7 @@
         <activity android:name=".academics.addevent" />
         <activity android:name=".academics.MainActivitycal" />
         <activity android:name=".academics.study_meterialsActivity" />
-        <activity android:name=".timetable.timeMain">
+        <activity android:name=".auth.splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

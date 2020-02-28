@@ -2,8 +2,10 @@ package com.xoi.smvitm.home.student;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +48,8 @@ public class feedPostActivity extends AppCompatActivity {
     int select = 0;
     String url = "http://smvitmapp.xtoinfinity.tech/php/home/feedPost.php";
     String id, title, desc, img, pName, bName;
+    SharedPreferences sp;
+    ConstraintLayout postLayout, loadLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,16 @@ public class feedPostActivity extends AppCompatActivity {
         imgSelect = (ImageView) findViewById(R.id.selectImg);
         postTxt = (EditText) findViewById(R.id.postTxt);
         titleTxt = (EditText) findViewById(R.id.titleTxt);
+        loadLayout = (ConstraintLayout)findViewById(R.id.loadLayout);
+        postLayout = (ConstraintLayout)findViewById(R.id.postLayout);
+
+        sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
+
+        if(sp.contains("usn")){
+            id = sp.getString("usn","");
+        }else{
+            id = sp.getString("fid","");
+        }
 
         backBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +97,6 @@ public class feedPostActivity extends AppCompatActivity {
                 if (title.equals("")) {
                     Toast.makeText(feedPostActivity.this, "Please enter the title", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(feedPostActivity.this, "Uploading, please wait", Toast.LENGTH_SHORT).show();
-
                     feedPost();
                 }
             }
@@ -125,6 +137,8 @@ public class feedPostActivity extends AppCompatActivity {
     }
 
     public void feedPost() {
+        postLayout.setVisibility(View.GONE);
+        loadLayout.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -136,6 +150,7 @@ public class feedPostActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(feedPostActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
         ) {
@@ -146,6 +161,7 @@ public class feedPostActivity extends AppCompatActivity {
                 params.put("title", title);
                 params.put("pName", pName);
                 params.put("bName", bName);
+                params.put("id", id);
                 if (select == 1) {
                     params.put("img", imgString(bitmap));
                 } else {

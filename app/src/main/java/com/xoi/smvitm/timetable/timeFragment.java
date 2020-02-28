@@ -56,9 +56,9 @@ public class timeFragment extends Fragment {
         view = inflater.inflate(R.layout.timetable_fragment,container,false);
 
         sp = getActivity().getSharedPreferences("com.xoi.smvitm", Context.MODE_PRIVATE);
-        branch = "1";//sp.getString("Userbranch","");
-        semester = "6";//sp.getString("Usersem","");
-        section = "A";//sp.getString("Usersec","");
+        branch = sp.getString("Userbranch","");
+        semester = sp.getString("Usersem","");
+        section = sp.getString("Usersec","");
 
         day_txt = view.findViewById(R.id.day_txt);
         day_txt.setText(day);
@@ -73,7 +73,7 @@ public class timeFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.equals("Empty")) {
+                        if(response.equals("no")) {
                             Toast.makeText(getActivity(), "No classes", Toast.LENGTH_SHORT).show();
                         }else{
                             parseItems(response);

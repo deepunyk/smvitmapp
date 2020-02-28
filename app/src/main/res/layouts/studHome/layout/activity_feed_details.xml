@@ -42,11 +42,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:text="SMVITM"
-                    android:gravity="center|start"
-                    android:textSize="20sp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center|start"
+                    android:text="SMVITM"
+                    android:textColor="@color/black"
+                    android:textSize="20sp">
 
                 </TextView>
 
@@ -72,21 +74,23 @@
             </ImageView>
 
             <TextView
-                android:layout_marginTop="6dp"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:fontFamily="serif"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
                 android:textSize="24sp">
 
             </TextView>
 
             <TextView
-                android:layout_marginTop="6dp"
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif-monospace"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/black"
                 android:textSize="18sp">
 
             </TextView>
@@ -161,10 +165,11 @@
                 android:id="@+id/phototgrapher_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textSize="16sp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/roboto_medium"
                 android:padding="2dp"
-                android:layout_marginTop="6dp">
+                android:textColor="@color/black"
+                android:textSize="16sp">
 
             </TextView>
 
@@ -172,10 +177,11 @@
                 android:id="@+id/blogger_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textSize="16sp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/roboto_medium"
                 android:padding="2dp"
-                android:layout_marginTop="6dp">
+                android:textColor="@color/black"
+                android:textSize="16sp">
 
             </TextView>
 

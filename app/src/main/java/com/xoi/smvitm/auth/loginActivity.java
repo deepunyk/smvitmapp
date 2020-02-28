@@ -26,6 +26,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.main.faculty.facMainActivity;
 import com.xoi.smvitm.main.student.studMainActivity;
@@ -41,10 +42,10 @@ public class loginActivity extends AppCompatActivity {
 
     EditText usnTxt, passTxt;
     Button logBut;
-    TextView regTxt;
     String usn, pass;
     String url = "http://smvitmapp.xtoinfinity.tech/php/login.php";
     String permUrl = "http://smvitmapp.xtoinfinity.tech/php/permission.php?id=";
+    String studUrl = "http://smvitmapp.xtoinfinity.tech/php/studDetails.php?usn=";
     SharedPreferences sharedPreferences;
     String permCircular, permEvent, permFacClass;
     ImageView bckImg;
@@ -53,6 +54,7 @@ public class loginActivity extends AppCompatActivity {
     LottieAnimationView loadAnim;
     TextView loadTxt;
     CardView logCard;
+    String name, sem, sec, email, pic, br;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,6 @@ public class loginActivity extends AppCompatActivity {
         usnTxt = (EditText) findViewById(R.id.usnTxt);
         passTxt = (EditText) findViewById(R.id.passTxt);
         logBut = (Button) findViewById(R.id.logBut);
-        regTxt = (TextView) findViewById(R.id.regTxt);
         bckImg = (ImageView) findViewById(R.id.bckImg);
 
         _translateAnimation = new TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, -100f, TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f);
@@ -78,14 +79,6 @@ public class loginActivity extends AppCompatActivity {
         loadTxt = (TextView) findViewById(R.id.loadtxt);
         logCard = (CardView) findViewById(R.id.logCard);
 
-        regTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(loginActivity.this, studRegisterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         logBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,10 +140,7 @@ public class loginActivity extends AppCompatActivity {
                             sharedPreferences.edit().putString("permcircular", "0").apply();
                             sharedPreferences.edit().putString("permevent", "0").apply();
                             sharedPreferences.edit().putString("permfacclass", "0").apply();
-                            Intent intent = new Intent(loginActivity.this, studMainActivity.class);
-                            startActivity(intent);
-                            finish();
-                            doneLoad();
+                            getDetails();
                         } else {
                             parseItems1(response);
                         }
@@ -188,12 +178,9 @@ public class loginActivity extends AppCompatActivity {
             sharedPreferences.edit().putString("permcircular", permCircular).apply();
             sharedPreferences.edit().putString("permevent", permEvent).apply();
             sharedPreferences.edit().putString("permfacclass", permFacClass).apply();
-            Intent intent = new Intent(loginActivity.this, facMainActivity.class);
-            startActivity(intent);
-            finish();
-            doneLoad();
+            getDetails();
         } catch (JSONException e) {
-            Intent intent = new Intent(loginActivity.this, facMainActivity.class);
+            Intent intent = new Intent(loginActivity.this, studMainActivity.class);
             startActivity(intent);
             finish();
             doneLoad();
@@ -206,7 +193,6 @@ public class loginActivity extends AppCompatActivity {
         loadLayout.setVisibility(View.VISIBLE);
         loadAnim.setVisibility(View.VISIBLE);
         logCard.setVisibility(View.GONE);
-        regTxt.setVisibility(View.GONE);
     }
 
     public void doneLoad() {
@@ -214,9 +200,59 @@ public class loginActivity extends AppCompatActivity {
         loadLayout.setVisibility(View.GONE);
         loadAnim.setVisibility(View.GONE);
         logCard.setVisibility(View.VISIBLE);
-        regTxt.setVisibility(View.GONE);
-
     }
+
+    private void getDetails() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, studUrl+usn,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        parseItems(response);
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        );
+        int socketTimeOut = 50000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+
+    private void parseItems(String jsonResposnce) {
+
+        try {
+            JSONObject jobj = new JSONObject(jsonResposnce);
+            JSONArray jarray = jobj.getJSONArray("student");
+            for (int i = 0; i < jarray.length(); i++) {
+                JSONObject jo = jarray.getJSONObject(i);
+                name = jo.getString("name");
+                sem = jo.getString("sem");
+                sec = jo.getString("section");
+                email = jo.getString("email");
+                pic = jo.getString("profilepic");
+                br = jo.getString("branchId");
+            }
+            sharedPreferences.edit().putString("Username",name).apply();
+            sharedPreferences.edit().putString("Usersem",sem).apply();
+            sharedPreferences.edit().putString("Usersec",sec).apply();
+            sharedPreferences.edit().putString("Useremail",email).apply();
+            sharedPreferences.edit().putString("Userbranch",br).apply();
+            sharedPreferences.edit().putString("Userprofilepic",pic).apply();
+            Intent intent = new Intent(loginActivity.this, studMainActivity.class);
+            startActivity(intent);
+            finish();
+            doneLoad();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onBackPressed() {

@@ -86,7 +86,7 @@ public class editStudProfActivity extends AppCompatActivity {
 
         updatesemSpin.setSelectedIndex(Arrays.asList(semAr).indexOf(usersem));
         updatesecSpin.setSelectedIndex(Arrays.asList(secAr).indexOf(usersec));
-        updatebrSpin.setSelectedIndex(Arrays.asList(brAr).indexOf(userbr));
+        updatebrSpin.setSelectedIndex(Integer.parseInt(userbr)-1);
 
         updatepropictext.setOnClickListener(new View.OnClickListener() {
             @Override

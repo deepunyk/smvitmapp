@@ -79,7 +79,6 @@ public class janFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(),""+response,Toast.LENGTH_LONG).show();
                         parseItems(response);
                     }
                 },
