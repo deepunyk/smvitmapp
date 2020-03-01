@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.home.student.circularsFragment;
-import com.xoi.smvitm.home.student.eventsFragment;
+import com.xoi.smvitm.home.student.eventsFragmentNew;
 import com.xoi.smvitm.home.student.feedFragmentNew;
 
 public class studhomeFragment extends Fragment {
@@ -47,7 +47,7 @@ public class studhomeFragment extends Fragment {
                         selectedFragment = new feedFragmentNew();
                         break;
                     case R.id.events:
-                        selectedFragment = new eventsFragment();
+                        selectedFragment = new eventsFragmentNew();
                         break;
                     case R.id.circulars:
                         selectedFragment = new circularsFragment();

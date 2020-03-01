@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".home.student.eventsPostActivity"></activity>
         <activity android:name=".updatesActivity" />
         <activity android:name=".auth.splashActivity" />
         <activity android:name=".varnothsava.vSelectActivity" />
@@ -34,7 +35,6 @@
         <activity android:name=".home.student.PDFReader" />
         <activity android:name=".home.student.feedCommmentActivity" />
         <activity android:name=".store.storeProductDetails" />
-        <activity android:name=".main.student.studMainActivity" />
         <activity android:name=".auth.facultyRegister" />
         <activity android:name=".main.faculty.facMainActivity" />
         <activity android:name=".profile.facProfileActivity" />
@@ -49,7 +49,8 @@
         <activity android:name=".academics.addevent" />
         <activity android:name=".academics.MainActivitycal" />
         <activity android:name=".academics.study_meterialsActivity" />
-        <activity android:name=".varnothsava.vMainActivity">
+        <activity android:name=".varnothsava.vMainActivity" />
+        <activity android:name=".main.student.studMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
