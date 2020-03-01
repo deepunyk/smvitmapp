@@ -1,9 +1,6 @@
 package com.xoi.smvitm.home.student;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -12,12 +9,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,10 +28,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.auth.facultyLogin;
-import com.xoi.smvitm.auth.facultyRegister;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -96,13 +94,23 @@ public class feedPostActivity extends AppCompatActivity {
                 bName = "";
                 if (title.equals("")) {
                     Toast.makeText(feedPostActivity.this, "Please enter the title", Toast.LENGTH_SHORT).show();
+                    closeKeyBoard();
                 } else {
+                    closeKeyBoard();
                     feedPost();
                 }
             }
         });
     }
 
+    private void closeKeyBoard(){
+        View view = this.getCurrentFocus();
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 
     public void setImage() {
         Intent intent = new Intent();

@@ -1,9 +1,6 @@
 package com.xoi.smvitm.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,11 +8,16 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
@@ -26,9 +28,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.main.faculty.facMainActivity;
 import com.xoi.smvitm.main.student.studMainActivity;
 
 import org.json.JSONArray;
@@ -85,15 +85,17 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 usn = usnTxt.getText().toString().toUpperCase();
                 pass = passTxt.getText().toString();
+                closeKeyBoard();
                 if (usn.equals("") || pass.equals("")) {
                     Toast.makeText(loginActivity.this, "Please fill both the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     login();
+                    Toast.makeText(loginActivity.this, "Please wait, authenticating user.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
 
+    }
     public void login() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -101,6 +103,8 @@ public class loginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.equals("success;")) {
                             getPermission();
+                        }else{
+                            Toast.makeText(loginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -252,7 +256,14 @@ public class loginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    private void closeKeyBoard(){
+        View view = this.getCurrentFocus();
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 
     @Override
     public void onBackPressed() {

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="1dp"
-    android:background="@color/white">
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:elevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/userLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:paddingTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,46 +19,39 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/usrImg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="w,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15" />
 
         <TextView
             android:id="@+id/usrName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_bold"
             android:text="TextView"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline21"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/usrImg"
+            app:layout_constraintTop_toTopOf="@+id/usrImg" />
 
         <TextView
             android:id="@+id/dateTxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_light"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline21"
+            app:layout_constraintStart_toEndOf="@+id/usrImg"
             app:layout_constraintTop_toBottomOf="@+id/usrName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -67,6 +60,7 @@
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userLayout" />
@@ -75,7 +69,9 @@
         android:id="@+id/titleTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="TextView"
         android:textColor="@color/black"
@@ -85,6 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/postImg" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comLayout"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
@@ -100,10 +97,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
+            android:paddingLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/likeLayout"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -116,46 +113,10 @@
 
             <ImageButton
                 android:id="@+id/commentBut"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="#00ffffff"
                 app:srcCompat="@drawable/ic_comment" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/likeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/commentLayout"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/likeNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/colorPrimary" />
-
-            <ImageButton
-                android:id="@+id/like"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-
-                android:background="#00ffffff"
-                app:srcCompat="@drawable/ic_like" />
-
-            <ImageButton
-                android:id="@+id/likefill"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="#00ffffff"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_like_fill" />
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

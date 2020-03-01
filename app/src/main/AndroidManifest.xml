@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xoi.smvitm">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -13,7 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".timetable.timeMain"></activity>
+        <activity android:name=".updatesActivity" />
+        <activity android:name=".auth.splashActivity" />
+        <activity android:name=".varnothsava.vSelectActivity" />
+        <activity android:name=".home.student.addCircularActivity" />
+        <activity android:name=".home.student.addEventActivity" />
+        <activity android:name=".timetable.timeMain" />
         <activity android:name=".facultyDetail.faculty_details_activity" />
         <activity android:name=".home.student.feedPostActivity" />
         <activity android:name=".classroom.allotClassActivity" />
@@ -42,7 +49,7 @@
         <activity android:name=".academics.addevent" />
         <activity android:name=".academics.MainActivitycal" />
         <activity android:name=".academics.study_meterialsActivity" />
-        <activity android:name=".auth.splashActivity">
+        <activity android:name=".varnothsava.vMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

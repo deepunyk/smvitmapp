@@ -48,10 +48,13 @@ public class PDFReader extends AppCompatActivity {
 
 
         String pdfurl = getIntent().getStringExtra("pdfurl");
-        String toolString = getIntent().getStringExtra("toolString");
+        try{String toolString = getIntent().getStringExtra("toolString");
 
         if(toolString.equals("Study Materials")){
             getSupportActionBar().setTitle("Study Material");
+        }}
+        catch (Exception e){
+
         }
 
         //Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();

@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:title="Study Materials"
+        app:title="Notes and Q/P"
         app:titleTextColor="@color/colorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -30,4 +30,34 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar1" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/emptyloadanim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="empty.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/emptyTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="No subjects found. Please wait for your HoD to allot you to your respective subjects."
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emptyloadanim" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

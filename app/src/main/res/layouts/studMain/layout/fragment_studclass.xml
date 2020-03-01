@@ -42,29 +42,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:pressedTranslationZ="12dp" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/noClassAnim"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="class.json"
-        app:lottie_loop="true" />
-
     <TextView
         android:id="@+id/loadTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="Loading"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noClassAnim" />
+        app:layout_constraintTop_toBottomOf="@+id/loadImg" />
+
+    <ImageView
+        android:id="@+id/loadImg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_video_lecture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintStart_toStartOf="@+id/guideline18"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

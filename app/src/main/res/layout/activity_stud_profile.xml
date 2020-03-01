@@ -80,9 +80,11 @@
                     android:id="@+id/brTxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline10"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -97,20 +99,6 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline10"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-                <Button
-                    android:id="@+id/outBut"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="32dp"
-                    android:background="@drawable/ripplebutton"
-                    android:text="SIGNOUT"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline10"
-                    app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toBottomOf="@+id/editBut" />
 
                 <TextView
                     android:id="@+id/secTxt"
@@ -236,17 +224,6 @@
                     android:orientation="horizontal"
                     app:layout_constraintGuide_percent="0.25" />
 
-                <Button
-                    android:id="@+id/editBut"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/ripplebutton"
-                    android:text="EDIT PROFILE"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline10"
-                    app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toBottomOf="@+id/brTxt" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

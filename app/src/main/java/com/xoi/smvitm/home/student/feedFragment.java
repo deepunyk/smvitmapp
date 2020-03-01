@@ -373,12 +373,8 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             usrImg = (CircularImageView) itemView.findViewById(R.id.usrImg);
             title = (TextView) itemView.findViewById(R.id.titleTxt);
             //description = (TextView) itemView.findViewById(R.id.description);
-            likes = (TextView) itemView.findViewById(R.id.likeNum);
             imgview = (ImageView) itemView.findViewById(R.id.postImg);
-            like = (ImageButton) itemView.findViewById(R.id.like);
             comment = (LinearLayout) itemView.findViewById(R.id.commentLayout);
-            likefill = (ImageButton) itemView.findViewById(R.id.likefill);
-            likeLayout = (LinearLayout)itemView.findViewById(R.id.likeLayout);
 
         }
     }

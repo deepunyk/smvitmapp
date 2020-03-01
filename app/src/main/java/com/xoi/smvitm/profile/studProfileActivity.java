@@ -32,8 +32,7 @@ public class studProfileActivity extends AppCompatActivity {
     CircularImageView proPic;
     String url = "http://smvitmapp.xtoinfinity.tech/php/studDetails.php?usn=";
     SharedPreferences sharedPreferences;
-    String usn, name, sec, sem, br, email, pic;
-    Button outBut;
+    String tusn, name, sec, sem, br, email, pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +41,8 @@ public class studProfileActivity extends AppCompatActivity {
 
         sharedPreferences = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
 
-        usn= sharedPreferences.getString("usn","");
+        tusn= sharedPreferences.getString("tusn","");
 
-        outBut = (Button)findViewById(R.id.outBut);
         usnTxt = (TextView)findViewById(R.id.usnTxt);
         nameTxt = (TextView)findViewById(R.id.nameTxt);
         secTxt = (TextView)findViewById(R.id.secTxt);
@@ -53,16 +51,7 @@ public class studProfileActivity extends AppCompatActivity {
         emailTxt = (TextView)findViewById(R.id.emailTxt);
         proPic = (CircularImageView)findViewById(R.id.profileImg);
 
-        outBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sharedPreferences.edit().clear().apply();
-                Intent intent = new Intent(studProfileActivity.this, loginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        usnTxt.setText(usn);
+        usnTxt.setText(tusn);
 
         getDetails();
 
@@ -70,7 +59,7 @@ public class studProfileActivity extends AppCompatActivity {
     }
 
     private void getDetails() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+usn,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+tusn,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

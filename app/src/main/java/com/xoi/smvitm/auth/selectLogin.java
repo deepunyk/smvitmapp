@@ -1,8 +1,5 @@
 package com.xoi.smvitm.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +7,12 @@ import android.os.Handler;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.xoi.smvitm.R;
+import com.xoi.smvitm.varnothsava.vSelectActivity;
 
 public class selectLogin extends AppCompatActivity {
 
@@ -65,20 +65,8 @@ public class selectLogin extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+        Intent intent = new Intent(selectLogin.this, vSelectActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

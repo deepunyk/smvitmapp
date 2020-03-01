@@ -1,17 +1,11 @@
 package com.xoi.smvitm.academics;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabItem;
@@ -20,7 +14,7 @@ import com.xoi.smvitm.R;
 
 public class MainActivitycal extends AppCompatActivity {
      TabLayout tabLayout;
-     TabItem tabitem1,tabitem2,tabitem3,tabitem4,tabitem5,tabitem6,tabitem7;
+     TabItem tabitem2,tabitem3,tabitem4,tabitem5,tabitem6,tabitem7;
      ViewPager viewPager;
      public int loadbit=0;
      SharedPreferences sp;
@@ -30,7 +24,6 @@ public class MainActivitycal extends AppCompatActivity {
         setContentView(R.layout.activity_maincal);
         sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
         tabLayout = findViewById(R.id.tablayout);
-        tabitem1 = findViewById(R.id.tabitem1);
         tabitem2 = findViewById(R.id.tabitem2);
         tabitem3 = findViewById(R.id.tabitem3);
         tabitem4 = findViewById(R.id.tabitem4);

@@ -130,34 +130,16 @@
                     android:id="@+id/view_button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/ripplebutton"
                     android:text="VIEW PDF"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline19"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/event_date">
-
-                </Button>
-
-                <Button
-                    android:id="@+id/register_button"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="@drawable/ripplebutton"
-                    android:text="Register"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline19"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/event_date">
 
                 </Button>

@@ -19,7 +19,7 @@ import com.xoi.smvitm.R;
 public class EventDetails extends AppCompatActivity {
     TextView event_description,event_organizers,event_date;
     ImageView event_img;
-    Button view_button,register_button;
+    Button view_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public class EventDetails extends AppCompatActivity {
         event_img=(ImageView)findViewById(R.id.imgview);
 
         view_button=(Button)findViewById(R.id.view_button);
-        register_button=(Button)findViewById(R.id.register_button);
 
         String e_title = getIntent().getStringExtra("event_title");
         String e_description = getIntent().getStringExtra("event_description");
@@ -80,12 +79,6 @@ public class EventDetails extends AppCompatActivity {
             }
         });
 
-        register_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(EventDetails.this, "Register button clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 

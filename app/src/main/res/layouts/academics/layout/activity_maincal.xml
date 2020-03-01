@@ -20,12 +20,6 @@
         app:tabTextColor="#F8D1DB">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabitem1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JAN" />
-
-        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabitem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

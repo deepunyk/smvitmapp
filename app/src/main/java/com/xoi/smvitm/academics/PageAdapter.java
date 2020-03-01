@@ -17,18 +17,16 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new janFragment();
-            case 1:
                 return new febFragment();
-            case 2:
+            case 1:
                 return new marFragment();
-            case 3:
+            case 2:
                 return new aprFragment();
-            case 4:
+            case 3:
                 return new mayFragment();
-            case 5:
+            case 4:
                 return new junFragment();
-            case 6:
+            case 5:
                 return new julFragment();
             default:
                 return null;

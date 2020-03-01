@@ -5,6 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,13 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,7 +30,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.classroom.studAddElectiveActivity;
 import com.xoi.smvitm.classroom.studClassDisplayAdapter;
-import com.xoi.smvitm.classroom.studMainClassroom;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,7 +54,7 @@ public class studclassFragment extends Fragment {
     studClassDisplayAdapter adapter;
     Toolbar toolbar;
     FloatingActionButton fab;
-    LottieAnimationView loadAnim;
+    ImageView loadImg;
     TextView loadTxt;
 
     public studclassFragment() {
@@ -72,7 +70,7 @@ public class studclassFragment extends Fragment {
         toolbar = (Toolbar)view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
-        loadAnim = (LottieAnimationView)view.findViewById(R.id.noClassAnim);
+        loadImg = (ImageView) view.findViewById(R.id.loadImg);
         loadTxt = (TextView)view.findViewById(R.id.loadTxt);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -154,13 +152,13 @@ public class studclassFragment extends Fragment {
     }
 
     private void load(){
-        loadAnim.setVisibility(View.VISIBLE);
+        loadImg.setVisibility(View.VISIBLE);
         loadTxt.setVisibility(View.VISIBLE);
         loadTxt.setText("Getting your classrooms");
         fab.hide();
     }
     private void doneLoad(){
-        loadAnim.setVisibility(View.GONE);
+        loadImg.setVisibility(View.GONE);
         loadTxt.setVisibility(View.GONE);
         fab.show();
     }

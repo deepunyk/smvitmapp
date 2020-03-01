@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="5dp"
     android:weightSum="4"
     tools:context=".main.student.studaccFragment">
 
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/white"
+        android:elevation="8dp"
         android:gravity="center"
         android:paddingStart="2dp"
         android:paddingTop="8dp"
@@ -30,51 +32,10 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="2dp"
-        android:background="@color/white"
+        android:layout_marginTop="2dp"
         android:orientation="vertical"
         android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline18">
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="Upcoming Updates"
-            android:textColor="@color/black" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/noClassAnim"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_weight="1"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="workinprogress.json"
-            app:lottie_loop="true" />
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:orientation="vertical"
-        android:weightSum="2"
-        app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView24">
@@ -90,21 +51,19 @@
                 android:id="@+id/timeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:elevation="8dp"
                 android:orientation="vertical"
                 android:weightSum="3">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/timeAnim"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
                     android:layout_weight="1"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="timetable.json"
-                    app:lottie_loop="true" />
+                    android:padding="25dp"
+                    android:src="@drawable/ic_stopclock" />
 
                 <TextView
                     android:id="@+id/textView14"
@@ -120,21 +79,19 @@
                 android:id="@+id/smLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:elevation="8dp"
                 android:orientation="vertical"
                 android:weightSum="3">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/smAnim"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
                     android:layout_weight="1"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="sm.json"
-                    app:lottie_loop="true" />
+                    android:padding="25dp"
+                    android:src="@drawable/ic_science" />
 
                 <TextView
                     android:id="@+id/textView15"
@@ -142,7 +99,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Study Materials"
+                    android:text="Notes and Q/P"
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
@@ -158,25 +115,19 @@
                 android:id="@+id/acLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:elevation="8dp"
                 android:orientation="vertical"
                 android:weightSum="3">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/acAnim"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
                     android:layout_weight="1"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="ac.json"
-                    app:lottie_loop="true" />
+                    android:padding="25dp"
+                    android:src="@drawable/ic_calendar" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -192,21 +143,19 @@
                 android:id="@+id/fLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:elevation="8dp"
                 android:orientation="vertical"
                 android:weightSum="3">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/facultyAnim"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
                     android:layout_weight="1"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="faculty.json"
-                    app:lottie_loop="true" />
+                    android:padding="25dp"
+                    android:src="@drawable/ic_teacher" />
 
                 <TextView
                     android:id="@+id/textView17"
@@ -214,7 +163,69 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Facultyt Details"
+                    android:text="Faculty Details"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/vLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:elevation="8dp"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="25dp"
+                    android:src="@drawable/vlog" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Varnothsava"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/upLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:elevation="8dp"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="25dp"
+                    android:src="@drawable/ic_work" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Upcoming Updates"
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>

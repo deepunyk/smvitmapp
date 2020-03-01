@@ -93,6 +93,7 @@
                     android:id="@+id/passTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorAccent" />
@@ -127,6 +128,7 @@
                     android:id="@+id/usnTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorAccent" />

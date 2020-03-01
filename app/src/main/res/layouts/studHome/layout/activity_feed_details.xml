@@ -25,71 +25,36 @@
             android:padding="6dp">
 
 
-            <LinearLayout
-                android:layout_marginTop="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_marginStart="10dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/college_logo"
-                    android:scaleType="fitCenter">
-
-                </ImageView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center|start"
-                    android:text="SMVITM"
-                    android:textColor="@color/black"
-                    android:textSize="20sp">
-
-                </TextView>
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="10dp"
-                android:background="@android:color/darker_gray" />
-
             <ImageView
                 android:id="@+id/imgview"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:padding="10dp"
                 android:scaleType="fitCenter">
 
             </ImageView>
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/textView19"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/black"
-                android:textSize="24sp">
-
-            </TextView>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="start"
+                android:text="Description"
+                android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/roboto"
+                android:gravity="start"
                 android:textColor="@color/black"
                 android:textSize="18sp">
 
@@ -160,30 +125,6 @@
 
 
               </LinearLayout>-->
-
-            <TextView
-                android:id="@+id/phototgrapher_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/roboto_medium"
-                android:padding="2dp"
-                android:textColor="@color/black"
-                android:textSize="16sp">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/blogger_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/roboto_medium"
-                android:padding="2dp"
-                android:textColor="@color/black"
-                android:textSize="16sp">
-
-            </TextView>
 
 
         </LinearLayout>

@@ -1,16 +1,17 @@
 package com.xoi.smvitm.academics;
 
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,8 +28,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-
 public class subject_selectActivity extends AppCompatActivity {
     SharedPreferences sp;
     ArrayList<String> title_temp = new ArrayList<>();
@@ -41,12 +40,17 @@ public class subject_selectActivity extends AppCompatActivity {
     String facUrl = "http://smvitmapp.xtoinfinity.tech/php/getsubjectsfac.php?fid=";
     String url;
     String id;
+    LottieAnimationView emptyAnim;
+    TextView emptyTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_select);
         sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
+
+        emptyAnim = (LottieAnimationView)findViewById(R.id.emptyloadanim);
+        emptyTxt = (TextView)findViewById(R.id.emptyTxt);
 
         if(sp.contains("usn")){
             id = sp.getString("usn","");
@@ -65,7 +69,12 @@ public class subject_selectActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        parseItems(response);
+                        if(response.equals("no")){
+                            emptyAnim.setVisibility(View.VISIBLE);
+                            emptyTxt.setVisibility(View.VISIBLE);
+                        }else {
+                            parseItems(response);
+                        }
                     }
                 },
 

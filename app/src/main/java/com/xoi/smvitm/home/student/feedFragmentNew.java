@@ -1,6 +1,7 @@
 package com.xoi.smvitm.home.student;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.classroom.allotSelectSemRVAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +44,7 @@ public class feedFragmentNew extends Fragment {
     private ArrayList<String> date = new ArrayList<>();
     private ArrayList<String> profilepic = new ArrayList<>();
     private ArrayList<String> fid = new ArrayList<>();
+    private ArrayList<String> user_id = new ArrayList<>();
     feedFragmentRVAdapter adapter;
     LottieAnimationView loadAnim;
     TextView loadTxt;
@@ -104,17 +105,9 @@ public class feedFragmentNew extends Fragment {
     }
 
     private void getFeed() {
-        moreTxt.setVisibility(View.GONE);
-        bckTxt.setVisibility(View.GONE);
-        title.clear();
-        description.clear();
-        imglink.clear();
-        photographer_name.clear();
-        blogger_name.clear();
-        username.clear();
-        date.clear();
-        profilepic.clear();
-        fid.clear();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url + "?num="+n,
                 new Response.Listener<String>() {
@@ -122,7 +115,20 @@ public class feedFragmentNew extends Fragment {
                     public void onResponse(String response) {
                         if(response.equals("no")){
                             Toast.makeText(getActivity(), "You have come to the end of the feed", Toast.LENGTH_SHORT).show();
+                            n -= 5;
                         }else{
+                            moreTxt.setVisibility(View.GONE);
+                            bckTxt.setVisibility(View.GONE);
+                            title.clear();
+                            description.clear();
+                            imglink.clear();
+                            photographer_name.clear();
+                            blogger_name.clear();
+                            username.clear();
+                            date.clear();
+                            profilepic.clear();
+                            fid.clear();
+                            user_id.clear();
                             parseItems(response);
                         }
                     }
@@ -143,6 +149,8 @@ public class feedFragmentNew extends Fragment {
         stringRequest.setRetryPolicy(policy);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(stringRequest);
+            }
+        });
     }
 
     private void parseItems(String jsonResposnce) {
@@ -161,6 +169,7 @@ public class feedFragmentNew extends Fragment {
                 username.add(jo.optString("user"));
                 date.add(jo.optString("date"));
                 profilepic.add(jo.optString("profilepic"));
+                user_id.add(jo.optString("user_id"));
             }
             loadAnim.setVisibility(View.GONE);
             loadTxt.setVisibility(View.GONE);
@@ -180,7 +189,7 @@ public class feedFragmentNew extends Fragment {
         moreTxt.setVisibility(View.VISIBLE);
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new feedFragmentRVAdapter(title, description, imglink,photographer_name,blogger_name,username,date,profilepic,fid,moreTxt, getActivity());
+        adapter = new feedFragmentRVAdapter(title, description, imglink,photographer_name,blogger_name,username,date,profilepic,fid,moreTxt,user_id,getActivity());
         recyclerView.setAdapter(adapter);
     }
 

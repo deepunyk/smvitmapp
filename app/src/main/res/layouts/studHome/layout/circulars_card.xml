@@ -105,14 +105,14 @@
                 android:id="@+id/viewpdf_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
                 android:layout_marginTop="6dp"
-                android:background="@color/colorPrimaryDark"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ripplebutton"
                 android:padding="2dp"
                 android:text="VIEW PDF"
-                android:textColor="@color/white"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="10dp">
+                android:textColor="@color/white">
 
             </Button>
 

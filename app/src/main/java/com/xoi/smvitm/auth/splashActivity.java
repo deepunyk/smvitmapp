@@ -1,7 +1,5 @@
 package com.xoi.smvitm.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.main.faculty.facMainActivity;
 import com.xoi.smvitm.main.student.studMainActivity;
+import com.xoi.smvitm.varnothsava.vSelectActivity;
 
 public class splashActivity extends AppCompatActivity {
 
@@ -62,7 +63,7 @@ public class splashActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Intent intent = new Intent(splashActivity.this, selectLogin.class);
+                    Intent intent = new Intent(splashActivity.this, vSelectActivity.class);
                     ActivityOptions option = ActivityOptions.makeSceneTransitionAnimation(splashActivity.this,
                             Pair.<View, String>create(splashLogo,"colLogo"));
                     startActivity(intent,option.toBundle());

@@ -2,14 +2,13 @@ package com.xoi.smvitm.home.student;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,17 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.classroom.allotClassActivity;
-import com.xoi.smvitm.classroom.allotFacClassFragment;
-import com.xoi.smvitm.classroom.allotSelectSemRVAdapter;
-
+import com.xoi.smvitm.profile.studProfileActivity;
 
 import java.util.ArrayList;
 
-public class feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAdapter.ViewHolder> {
+public class  feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAdapter.ViewHolder> {
 
 
-    public feedFragmentRVAdapter(ArrayList<String> title, ArrayList<String> description, ArrayList<String> imglink, ArrayList<String> photographer_name, ArrayList<String> blogger_name, ArrayList<String> username, ArrayList<String> date, ArrayList<String> profilepic, ArrayList<String> id, TextView moreTxt, Context mContext) {
+    public feedFragmentRVAdapter(ArrayList<String> title, ArrayList<String> description, ArrayList<String> imglink, ArrayList<String> photographer_name, ArrayList<String> blogger_name, ArrayList<String> username, ArrayList<String> date, ArrayList<String> profilepic, ArrayList<String> id, TextView moreTxt,ArrayList<String> user_id, Context mContext) {
         this.title = title;
         this.description = description;
         this.imglink = imglink;
@@ -41,9 +37,10 @@ public class feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAd
         this.profilepic = profilepic;
         this.id = id;
         this.moreTxt = moreTxt;
+        this.user_id = user_id;
         this.mContext = mContext;
     }
-
+    private ArrayList<String> user_id = new ArrayList<>();
     private ArrayList<String> title = new ArrayList<>();
     private ArrayList<String> description = new ArrayList<>();
     private ArrayList<String> imglink = new ArrayList<>();
@@ -97,6 +94,14 @@ public class feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAd
             @Override
             public void onClick(View v) {
                 try {
+                    final Handler handler = new Handler();
+                    viewHolder.comment.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimaryLight));
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewHolder.comment.setBackgroundColor(mContext.getResources().getColor(R.color.feedComment));
+                        }
+                    }, 50);
                     Intent intent = new Intent(mContext, feedCommmentActivity.class);
                     intent.putExtra("fid", id.get(i));
                     intent.putExtra("title", title.get(i));
@@ -112,6 +117,17 @@ public class feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAd
                     Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+
+        viewHolder.user_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = mContext.getSharedPreferences("com.xoi.smvitm",Context.MODE_PRIVATE);
+                sp.edit().putString("tusn",user_id.get(i)).apply();
+                Intent go = new Intent(mContext, studProfileActivity.class);
+                mContext.startActivity(go);
             }
         });
 
@@ -134,12 +150,10 @@ public class feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private LinearLayout likeLayout, comment;
         private TextView title, description, likes, usrName, dateTxt;
         private ImageView imgview;
-        private ImageButton like, likefill;
         private CircularImageView usrImg;
-        private ConstraintLayout parent_layout;
+        private ConstraintLayout parent_layout, user_layout, comment;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -148,12 +162,9 @@ public class feedFragmentRVAdapter extends RecyclerView.Adapter<feedFragmentRVAd
             dateTxt = (TextView) itemView.findViewById(R.id.dateTxt);
             usrImg = (CircularImageView) itemView.findViewById(R.id.usrImg);
             title = (TextView) itemView.findViewById(R.id.titleTxt);
-            likes = (TextView) itemView.findViewById(R.id.likeNum);
             imgview = (ImageView) itemView.findViewById(R.id.postImg);
-            like = (ImageButton) itemView.findViewById(R.id.like);
-            comment = (LinearLayout) itemView.findViewById(R.id.commentLayout);
-            likefill = (ImageButton) itemView.findViewById(R.id.likefill);
-            likeLayout = (LinearLayout)itemView.findViewById(R.id.likeLayout);
+            comment = (ConstraintLayout) itemView.findViewById(R.id.comLayout);
+            user_layout = (ConstraintLayout) itemView.findViewById(R.id.userLayout);
         }
     }
 }
