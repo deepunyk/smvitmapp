@@ -37,7 +37,7 @@ public class vSelectActivity extends AppCompatActivity {
         varnothsava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(vSelectActivity.this, vMainActivity.class);
+                Intent intent = new Intent(vSelectActivity.this, vLoginActivity.class);
                 startActivity(intent);
                 finish();
             }
