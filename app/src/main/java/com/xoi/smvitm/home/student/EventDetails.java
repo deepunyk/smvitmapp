@@ -64,17 +64,13 @@ public class EventDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                try {
-                    Intent intent = new Intent(EventDetails.this, PDFReader.class);
-                    intent.putExtra("pdfurl", e_pdflink);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    }
-                    EventDetails.this.startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(EventDetails.this, e.toString(), Toast.LENGTH_SHORT).show();
-                }
+                String sharepdfurl = getIntent().getStringExtra("event_imgurl");
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String share_body = sharepdfurl;
+                intent.putExtra(Intent.EXTRA_SUBJECT, share_body);
+                intent.putExtra(Intent.EXTRA_TEXT, share_body);
+                startActivity(Intent.createChooser(intent, "Share Using"));
 
             }
         });

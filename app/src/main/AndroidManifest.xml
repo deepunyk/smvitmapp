@@ -15,12 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".home.student.eventsPostActivity"></activity>
         <activity android:name=".updatesActivity" />
         <activity android:name=".auth.splashActivity" />
         <activity android:name=".varnothsava.vSelectActivity" />
-        <activity android:name=".home.student.addCircularActivity" />
-        <activity android:name=".home.student.addEventActivity" />
         <activity android:name=".timetable.timeMain" />
         <activity android:name=".facultyDetail.faculty_details_activity" />
         <activity android:name=".home.student.feedPostActivity" />

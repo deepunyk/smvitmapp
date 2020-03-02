@@ -47,17 +47,8 @@ public class PDFReader extends AppCompatActivity {
         loadTxt = (TextView)findViewById(R.id.loadtxt);
 
 
-        String pdfurl = getIntent().getStringExtra("pdfurl");
-        try{String toolString = getIntent().getStringExtra("toolString");
+        String pdfurl = getIntent().getStringExtra("circular_pdflink");
 
-        if(toolString.equals("Study Materials")){
-            getSupportActionBar().setTitle("Study Material");
-        }}
-        catch (Exception e){
-
-        }
-
-        //Toast.makeText(this, pdfurl, Toast.LENGTH_LONG).show();
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfurl;
 
         webView = (WebView) findViewById(R.id.webView);
@@ -101,7 +92,7 @@ public class PDFReader extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.download_pdf:
-                String pdfurl = getIntent().getStringExtra("pdfurl");
+                String pdfurl = getIntent().getStringExtra("circular_pdflink");
                 DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(pdfurl));
                 request.setTitle("PDF");
@@ -111,7 +102,7 @@ public class PDFReader extends AppCompatActivity {
                 return true;
 
             case R.id.share_pdf:
-                String sharepdfurl = getIntent().getStringExtra("pdfurl");
+                String sharepdfurl = getIntent().getStringExtra("circular_pdflink");
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 String share_body = sharepdfurl;

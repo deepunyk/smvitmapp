@@ -33,26 +33,21 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class eventsFragmentNew extends Fragment {
-
-    private String url = "http://smvitmapp.xtoinfinity.tech/php/home/events.php";
+public class circularsFragmentNew extends Fragment {
+    private String url = "http://smvitmapp.xtoinfinity.tech/php/home/circulars.php";
     private ArrayList<String> title = new ArrayList<>();
-    private ArrayList<String> description = new ArrayList<>();
-    private ArrayList<String> organizer = new ArrayList<>();
     private ArrayList<String> date = new ArrayList<>();
-    private ArrayList<String> imglink = new ArrayList<>();
     private ArrayList<String> pdflink = new ArrayList<>();
 
-    eventsFragmentRVAdapter adapter;
+    circularsFragmentRVAdapter adapter;
     LottieAnimationView loadAnim;
     TextView loadTxt;
     FloatingActionButton fab;
     private RecyclerView recyclerView;
     private View view;
 
-    public eventsFragmentNew() {
+    public circularsFragmentNew() {
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,7 +64,7 @@ public class eventsFragmentNew extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uriString = "http://smvitmapp.xtoinfinity.tech/php/home/eventfileupload.php";
+                String uriString = "http://smvitmapp.xtoinfinity.tech/php/home/circularfileupload.php";
 
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uriString));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -98,7 +93,7 @@ public class eventsFragmentNew extends Fragment {
                             @Override
                             public void onResponse(String response) {
 
-                                    parseItems(response);
+                                parseItems(response);
 
                             }
                         },
@@ -129,22 +124,20 @@ public class eventsFragmentNew extends Fragment {
 
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jo = jarray.getJSONObject(i);
-                title.add(jo.optString("event_title"));
-                description.add(jo.optString("event_description"));
-                imglink.add(jo.optString("event_imglink"));
-                date.add(jo.optString("event_date"));
-                organizer.add(jo.optString("event_organizers"));
-                pdflink.add(jo.optString("event_pdflink"));
+                title.add(jo.optString("circular_title"));
+                date.add(jo.optString("circular_date"));
+                pdflink.add(jo.optString("circular_pdflink"));
             }
             loadAnim.setVisibility(View.GONE);
             loadTxt.setVisibility(View.GONE);
 
             recyclerView = view.findViewById(R.id.recyclerview);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            adapter = new eventsFragmentRVAdapter(title, description, imglink,pdflink,date,organizer,getActivity());
+            adapter = new circularsFragmentRVAdapter(title,date,pdflink,getActivity());
             recyclerView.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 }
+
