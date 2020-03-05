@@ -1,9 +1,5 @@
 package com.xoi.smvitm.varnothsava;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,9 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.xoi.smvitm.R;
-import com.xoi.smvitm.auth.loginActivity;
-import com.xoi.smvitm.home.student.MainActivity;
-import com.xoi.smvitm.main.student.studMainActivity;
+import com.xoi.smvitm.auth.splashActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -192,11 +190,31 @@ public class vLoginActivity extends AppCompatActivity {
             sharedPreferences.edit().putString("email",email).apply();
             sharedPreferences.edit().putString("phonenumber",phno).apply();
             sharedPreferences.edit().putString("college",college).apply();
-            Intent intent = new Intent(vLoginActivity.this, studMainActivity.class);
+            if(sharedPreferences.contains("login")) {
+                sharedPreferences.edit().putString("colLogin", "1").apply();
+            }else {
+                sharedPreferences.edit().putString("login", "3").apply();
+            }
+            Intent intent = new Intent(vLoginActivity.this, vMainActivity.class);
             startActivity(intent);
             finish();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
+
+        if(sp.contains("login")){
+            Intent go = new Intent(vLoginActivity.this, splashActivity.class);
+            startActivity(go);
+            finish();
+        }else {
+            Intent go = new Intent(vLoginActivity.this, vSelectActivity.class);
+            startActivity(go);
+            finish();
         }
     }
 }

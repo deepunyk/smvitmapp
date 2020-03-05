@@ -1,7 +1,6 @@
 package com.xoi.smvitm.home.student;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,32 +82,33 @@ public class feedFragmentNew extends Fragment {
         });
         bckTxt.setVisibility(View.GONE);
 
-        bckTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                n-=5;
-                getFeed();
-            }
-        });
+        try {
+            bckTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    n -= 5;
+                    getFeed();
+                }
+            });
 
-        moreTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                n += 5;
-                bckTxt.setVisibility(View.VISIBLE);
-                getFeed();
+            moreTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    n += 5;
+                    bckTxt.setVisibility(View.VISIBLE);
+                    getFeed();
 
-            }
-        });
+                }
+            });
+        }
+        catch (Exception e){
+            Toast.makeText(getActivity(), ""+e, Toast.LENGTH_SHORT).show();
+        }
 
         return view;
     }
 
     private void getFeed() {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url + "?num="+n,
                 new Response.Listener<String>() {
                     @Override
@@ -149,8 +149,6 @@ public class feedFragmentNew extends Fragment {
         stringRequest.setRetryPolicy(policy);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(stringRequest);
-            }
-        });
     }
 
     private void parseItems(String jsonResposnce) {

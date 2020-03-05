@@ -15,10 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".varnothsava.vRegisterActivity"></activity>
+        <activity android:name=".DeveloperActivity"/>
+        <activity android:name=".varnothsava.contactActivity" />
+        <activity android:name=".varnothsava.vEventActivity" />
+        <activity android:name=".varnothsava.vEventDetailActivity" />
+        <activity android:name=".varnothsava.vRegisterActivity" />
         <activity android:name=".varnothsava.vLoginActivity" />
         <activity android:name=".updatesActivity" />
-        <activity android:name=".auth.splashActivity" />
+        <activity android:name=".varnothsava.vSelectActivity" />
         <activity android:name=".main.student.studMainActivity" />
         <activity android:name=".timetable.timeMain" />
         <activity android:name=".facultyDetail.faculty_details_activity" />
@@ -49,7 +53,7 @@
         <activity android:name=".academics.MainActivitycal" />
         <activity android:name=".academics.study_meterialsActivity" />
         <activity android:name=".varnothsava.vMainActivity" />
-        <activity android:name=".varnothsava.vSelectActivity">
+        <activity android:name=".auth.splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

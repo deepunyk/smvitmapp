@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/aladin</item>
+        <item>@font/almendra_sc</item>
         <item>@font/archivo_black</item>
+        <item>@font/arizonia</item>
         <item>@font/basic</item>
+        <item>@font/boogaloo</item>
+        <item>@font/clicker_script</item>
         <item>@font/coda</item>
         <item>@font/playfair_display_sc_bold</item>
         <item>@font/roboto</item>
@@ -11,5 +16,6 @@
         <item>@font/roboto_medium</item>
         <item>@font/roboto_thin</item>
         <item>@font/unlock</item>
+        <item>@font/vampiro_one</item>
     </array>
 </resources>

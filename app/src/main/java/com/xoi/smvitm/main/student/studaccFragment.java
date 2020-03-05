@@ -2,6 +2,7 @@ package com.xoi.smvitm.main.student;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -17,10 +18,14 @@ import com.xoi.smvitm.academics.subject_selectActivity;
 import com.xoi.smvitm.facultyDetail.faculty_details_activity;
 import com.xoi.smvitm.timetable.timeMain;
 import com.xoi.smvitm.updatesActivity;
+import com.xoi.smvitm.varnothsava.vLoginActivity;
 import com.xoi.smvitm.varnothsava.vMainActivity;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class studaccFragment extends Fragment {
 
+    SharedPreferences sp;
 
     public studaccFragment() {
     }
@@ -38,7 +43,7 @@ public class studaccFragment extends Fragment {
         final LinearLayout acLayout = (LinearLayout)view.findViewById(R.id.acLayout);
         final LinearLayout upLayout = (LinearLayout)view.findViewById(R.id.upLayout);
         final LinearLayout vLayout = (LinearLayout)view.findViewById(R.id.vLayout);
-
+        sp = getActivity().getSharedPreferences("com.xoi.smvitm", MODE_PRIVATE);
         fLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,8 +175,15 @@ public class studaccFragment extends Fragment {
                     @Override
                     public void run() {
                         vLayout.setBackgroundColor(getResources().getColor(R.color.white));
-                        Intent i = new Intent(getActivity(), vMainActivity.class);
-                        startActivity(i);
+                        if(sp.contains("colLogin")) {
+                            Intent i = new Intent(getActivity(), vMainActivity.class);
+                            startActivity(i);
+                        }else{
+                            Intent i = new Intent(getActivity(), vLoginActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        }
+
                     }
                 }, 100);
 
