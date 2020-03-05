@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".main.faculty.facClassFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/collapseToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Classroom" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/noClassAnim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="class.json"
+        app:lottie_loop="true"
+        fab:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/loadTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Loading"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noClassAnim" />
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
@@ -18,14 +54,14 @@
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="#DA4336"
-        fab:menu_colorPressed="#E75043"
+        fab:menu_colorNormal="#9e1441"
+        fab:menu_colorPressed="@color/colorPrimary"
         fab:menu_colorRipple="#99FFFFFF"
         fab:menu_fab_label="Close"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
-        fab:menu_labels_colorNormal="#333333"
-        fab:menu_labels_colorPressed="#444444"
+        fab:menu_labels_colorNormal="#ffffff"
+        fab:menu_labels_colorPressed="@color/colorPrimaryLight"
         fab:menu_labels_colorRipple="#66FFFFFF"
         fab:menu_labels_cornerRadius="3dp"
         fab:menu_labels_ellipsize="none"
@@ -41,7 +77,7 @@
         fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
         fab:menu_labels_showShadow="true"
         fab:menu_labels_singleLine="false"
-        fab:menu_labels_textColor="#FFFFFF"
+        fab:menu_labels_textColor="@color/colorPrimary"
         fab:menu_labels_textSize="14sp"
         fab:menu_openDirection="up"
         fab:menu_shadowColor="#66000000"
@@ -67,32 +103,5 @@
             fab:fab_size="mini" />
 
 
-
     </com.github.clans.fab.FloatingActionMenu>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/noClassAnim"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="class.json"
-        app:lottie_loop="true" />
-
-    <TextView
-        android:id="@+id/loadTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:text="Loading"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noClassAnim" />
 </androidx.constraintlayout.widget.ConstraintLayout>
