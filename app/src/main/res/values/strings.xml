@@ -3,4 +3,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_var">• All teams must register by 15 March 2020.\n\n
+• <b>Registration fee:</b>\n
+        \t SMVITM Students: <b>₹200.00</b> per student.\n
+\t External Students: <b>₹200.00</b> per student.\n
+• Participants are requested to follow the punctuality and also should not disclose their identity or college name
+during the competition.\n\n
+• The participants should bring their valid college identity cards.\n\n
+• Organizers hold the right to change the rules of the event before the event begins.\n\n
+• The decision of the judges for all the competitions will be final and no further argument will be entertained.\n\n
+• The college which bags the highest and second highest points will be crowned the overall winners and runners
+respectively.</string>
 </resources>

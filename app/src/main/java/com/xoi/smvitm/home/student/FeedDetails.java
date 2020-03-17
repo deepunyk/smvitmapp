@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import com.xoi.smvitm.R;
 
 public class FeedDetails extends AppCompatActivity {
     ImageView feed_img;
-    TextView feed_description;
+    TextView feed_description, dupDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,17 @@ public class FeedDetails extends AppCompatActivity {
 
         feed_img=(ImageView)findViewById(R.id.imgview);
         feed_description=(TextView)findViewById(R.id.description);
+        dupDesc=(TextView)findViewById(R.id.dupDesc);
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
         String imgurl = getIntent().getStringExtra("imgurl");
         String photo_name = getIntent().getStringExtra("photographer_name");
         String blog_name = getIntent().getStringExtra("blogger_name");
+
+        if(description.equals("")){
+            dupDesc.setVisibility(View.GONE);
+        }
 
         getSupportActionBar().setTitle(title);
 

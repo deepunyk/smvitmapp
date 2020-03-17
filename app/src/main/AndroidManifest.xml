@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DeveloperActivity"/>
+        <activity android:name=".varnothsava.vRules"/>
+        <activity android:name=".DeveloperActivity" />
         <activity android:name=".varnothsava.contactActivity" />
         <activity android:name=".varnothsava.vEventActivity" />
         <activity android:name=".varnothsava.vEventDetailActivity" />

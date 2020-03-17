@@ -5,8 +5,9 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:background="@color/white">
+    android:layout_margin="8dp"
+    android:background="@color/white"
+    android:elevation="4dp">
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/profileImg"

@@ -2,6 +2,7 @@ package com.xoi.smvitm.varnothsava;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,20 +64,38 @@ public class vEventAdapter extends RecyclerView.Adapter<vEventAdapter.ViewHolder
         viewHolder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(mContext,vEventDetailActivity.class);
-                in.putExtra("date", date.get(i));
-                in.putExtra("name", name.get(i));
-                in.putExtra("startTime", startTime.get(i));
-                in.putExtra("venue", venue.get(i));
-                in.putExtra("rules", rules.get(i));
-                in.putExtra("type", type.get(i));
-                in.putExtra("coordinator", coordinator.get(i));
-                in.putExtra("id", id.get(i));
-                in.putExtra("photo", photo.get(i));
-                in.putExtra("rulebook", ruleBook.get(i));
-                mContext.startActivity(in);
+                viewHolder.parent_layout.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        viewHolder.parent_layout.animate().scaleX(1f).scaleY(1f).setDuration(100);
+                    }
+                }, 100);
+
+                final Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent in = new Intent(mContext,vEventDetailActivity.class);
+                        in.putExtra("date", date.get(i));
+                        in.putExtra("name", name.get(i));
+                        in.putExtra("startTime", startTime.get(i));
+                        in.putExtra("venue", venue.get(i));
+                        in.putExtra("rules", rules.get(i));
+                        in.putExtra("type", type.get(i));
+                        in.putExtra("coordinator", coordinator.get(i));
+                        in.putExtra("id", id.get(i));
+                        in.putExtra("photo", photo.get(i));
+                        in.putExtra("rulebook", ruleBook.get(i));
+
+                        mContext.startActivity(in);
+                    }
+                }, 200);
+
             }
         });
+
     }
 
     @Override

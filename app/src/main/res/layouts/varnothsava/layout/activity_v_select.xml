@@ -53,19 +53,19 @@
         android:id="@+id/varImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:transitionName="varImg"
         app:layout_constraintBottom_toTopOf="@+id/guideline24"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23"
-        app:srcCompat="@drawable/vlog"
-        android:transitionName="varImg"/>
+        app:srcCompat="@drawable/vlog" />
 
     <ImageView
         android:id="@+id/colLogo"
-        android:transitionName="colLogo"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:transitionName="colLogo"
         app:layout_constraintBottom_toTopOf="@+id/guideline22"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="parent"

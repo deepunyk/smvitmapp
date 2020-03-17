@@ -57,7 +57,7 @@ public class vMainActivity extends AppCompatActivity {
     private ConstraintLayout detailLayout;
     private ImageView qrCode;
     private String nameStr, pidStr;
-    ConstraintLayout conLayout;
+    ConstraintLayout conLayout, ruleLayout;
     boolean doubleBackToExitPressedOnce = false;
     private ArrayList<String> date = new ArrayList<>();
     private ArrayList<String> name = new ArrayList<>();
@@ -105,8 +105,24 @@ public class vMainActivity extends AppCompatActivity {
         conLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(vMainActivity.this,contactActivity.class);
-                startActivity(i);
+                conLayout.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        conLayout.animate().scaleX(1f).scaleY(1f).setDuration(100);
+                    }
+                }, 100);
+
+                final Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(vMainActivity.this,contactActivity.class);
+                        startActivity(i);
+                    }
+                }, 200);
+
             }
         });
 
@@ -154,6 +170,7 @@ public class vMainActivity extends AppCompatActivity {
         fab = (FloatingActionButton)findViewById(R.id.fab);
 
         detailLayout = (ConstraintLayout)findViewById(R.id.detailLayout);
+        ruleLayout = (ConstraintLayout)findViewById(R.id.ruleLayout);
         qrCode = (ImageView)findViewById(R.id.qrImg);
         scrollLayout = (ScrollView)findViewById(R.id.scrollLayout);
         nameTxt = (TextView) findViewById(R.id.nameTxt);
@@ -164,6 +181,29 @@ public class vMainActivity extends AppCompatActivity {
 
         fab.hide();
 
+        ruleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ruleLayout.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ruleLayout.animate().scaleX(1f).scaleY(1f).setDuration(100);
+                    }
+                }, 100);
+
+                final Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(vMainActivity.this,vRules.class);
+                        startActivity(i);
+                    }
+                }, 200);
+
+            }
+        });
         qrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,30 +213,6 @@ public class vMainActivity extends AppCompatActivity {
                 changeBounds.setInterpolator(new OvershootInterpolator());
                 TransitionManager.beginDelayedTransition(layout, changeBounds);
                 user.applyTo(layout);
-            }
-        });
-
-        detailLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_down_fab));
-                fab.show();
-                Transition changeBounds = new ChangeBounds();
-                changeBounds.setInterpolator(new OvershootInterpolator());
-                TransitionManager.beginDelayedTransition(layout, changeBounds);
-                detail.applyTo(layout);
-            }
-        });
-
-        scrollLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_down_fab));
-                fab.show();
-                Transition changeBounds = new ChangeBounds();
-                changeBounds.setInterpolator(new OvershootInterpolator());
-                TransitionManager.beginDelayedTransition(layout, changeBounds);
-                detail.applyTo(layout);
             }
         });
 
@@ -296,7 +312,7 @@ public class vMainActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.spotlightRV);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         vSpotAdapter adapter = new vSpotAdapter(date, name, startTime, venue, rules, type,coordinator, id, photo, ruleBook, this);
         recyclerView.setAdapter(adapter);
     }

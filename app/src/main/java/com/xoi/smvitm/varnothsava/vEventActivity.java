@@ -1,9 +1,9 @@
 package com.xoi.smvitm.varnothsava;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +42,8 @@ public class vEventActivity extends AppCompatActivity {
     String url = "http://smvitmapp.xtoinfinity.tech/php/varnothsava/eventDate.php?type=";
     RecyclerView recyclerView;
     String typeStr, dateStr;
+    TextView typeTxt, vTxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,10 @@ public class vEventActivity extends AppCompatActivity {
         sp = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
         typeStr = getIntent().getStringExtra("type");
         dateStr = getIntent().getStringExtra("date");
+        typeTxt = (TextView)findViewById(R.id.typeTxt);
+        vTxt = (TextView)findViewById(R.id.vTxt);
+        typeTxt.setText(dateStr);
+        vTxt.setText(typeStr);
         getEvents();
     }
 
@@ -120,8 +126,6 @@ public class vEventActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-            Intent intent = new Intent(vEventActivity.this, vMainActivity.class);
-            startActivity(intent);
             finish();
     }
 }

@@ -5,8 +5,9 @@
     android:id="@+id/parent_layout"
     android:layout_width="300dp"
     android:layout_height="200dp"
+    android:layout_margin="8dp"
     android:background="#f5f5f5"
-    android:elevation="8dp">
+    android:elevation="4dp">
 
     <ImageView
         android:id="@+id/eImg"

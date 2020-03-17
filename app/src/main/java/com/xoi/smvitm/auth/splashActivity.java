@@ -110,7 +110,7 @@ public class splashActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(version.equals(response) || response.equals("ok")){
+                        if(version.equals(response) || response.equals("ok") || response.equals("main")){
                             checkLogin();
                         }
                         else if(response.equals("main")){
