@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -39,7 +40,7 @@
             android:text="TextView"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/moreImg"
             app:layout_constraintStart_toEndOf="@+id/usrImg"
             app:layout_constraintTop_toTopOf="@+id/usrImg" />
 
@@ -50,9 +51,23 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_light"
             android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/usrName"
             app:layout_constraintStart_toEndOf="@+id/usrImg"
             app:layout_constraintTop_toBottomOf="@+id/usrName" />
+
+        <ImageButton
+            android:id="@+id/moreImg"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="#00ffffff"
+            android:scaleType="fitCenter"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_morefeed" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -80,6 +95,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postImg" />
 
+    <TextView
+        android:id="@+id/descTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="3"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/titleTxt"
+        app:layout_constraintStart_toStartOf="@+id/titleTxt"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/comLayout"
         android:layout_width="0dp"
@@ -89,7 +118,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt">
+        app:layout_constraintTop_toBottomOf="@+id/descTxt">
 
         <LinearLayout
             android:id="@+id/commentLayout"

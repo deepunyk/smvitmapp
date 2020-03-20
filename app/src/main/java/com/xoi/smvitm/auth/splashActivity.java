@@ -1,6 +1,8 @@
 package com.xoi.smvitm.auth;
 
 import android.app.ActivityOptions;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -25,6 +28,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.main.faculty.facMainActivity;
 import com.xoi.smvitm.main.student.studMainActivity;
@@ -43,9 +47,24 @@ public class splashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notify=new Notification.Builder
+                (getApplicationContext()).setContentTitle("YOLO").setContentText("Checking checking").
+                setContentTitle("again?").setSmallIcon(R.drawable.college_logo).build();
+
+        notify.flags |= Notification.FLAG_AUTO_CANCEL;
+        notif.notify(0, notify);
+
         sharedPreferences = this.getSharedPreferences("com.xoi.smvitm",MODE_PRIVATE);
         splashLogo = (ImageView)findViewById(R.id.splashLogo);
         descLayout = (LinearLayout)findViewById(R.id.descLayout);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Glide.get(splashActivity.this).clearDiskCache();
+            }
+        });
+
 
         descLayout.animate().translationYBy(-100).setDuration(1000);
         descLayout.animate().scaleYBy(0.2f).scaleXBy(0.2f).setDuration(1000);

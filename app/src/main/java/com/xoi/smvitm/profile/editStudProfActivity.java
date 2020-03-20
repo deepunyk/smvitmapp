@@ -1,12 +1,10 @@
 package com.xoi.smvitm.profile;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -15,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,9 +26,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
+import com.xoi.smvitm.home.student.feedEditActivity;
 import com.xoi.smvitm.main.student.studMainActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -76,7 +80,13 @@ public class editStudProfActivity extends AppCompatActivity {
         usersec=sharedPreferences.getString("Usersec","");
         userbr=sharedPreferences.getString("Userbranch","");
         userpic=sharedPreferences.getString("Userprofilepic","");
-        Glide.with(this).load(userpic).into(updateprofileImg);
+        Glide.with(this)
+                .load(userpic)
+                .fitCenter()
+                .signature(new ObjectKey(userpic))
+                .placeholder(getResources().getDrawable(R.drawable.user))
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .into(updateprofileImg);
         updatenametext.setText(username);
         updateemailtext.setText(useremail);
 
@@ -145,10 +155,11 @@ public class editStudProfActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==IMG_REQUEST && resultCode==RESULT_OK && data!=null){
             Uri path = data.getData();
+
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
-                int nh = (int) ( bitmap.getHeight() * (512.0 / bitmap.getWidth()) );
-                bitmap = Bitmap.createScaledBitmap(bitmap, 512, nh, true);
+                int nh = (int) ( bitmap.getHeight() * (250.0 / bitmap.getWidth()) );
+                bitmap = Bitmap.createScaledBitmap(bitmap, 250, nh, true);
                 updateprofileImg.setImageBitmap(bitmap);
                 //Glide.with(this).load(path).into(profileImg);
                 select = 1;
@@ -157,6 +168,7 @@ public class editStudProfActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public String imgString(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -174,6 +186,12 @@ public class editStudProfActivity extends AppCompatActivity {
                         if(response.equals("success;")){
                             Intent intent = new Intent(editStudProfActivity.this, studMainActivity.class);
                             startActivity(intent);
+                            AsyncTask.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Glide.get(editStudProfActivity.this).clearDiskCache();
+                                }
+                            });
                             finish();
                         }
                     }

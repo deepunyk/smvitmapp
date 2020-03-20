@@ -53,33 +53,37 @@ public class    feedCommmentActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeKeyBoard();
-                Toast.makeText(feedCommmentActivity.this, "Adding comment, please wait", Toast.LENGTH_SHORT).show();
                 EditText comment_text = (EditText) findViewById(R.id.comment_text);
                 String comment = comment_text.getText().toString();
-                comment_text.setText("");
-                String url = "http://smvitmapp.xtoinfinity.tech/php/home/add_feed_comment.php?fid=" + fid + "&usn=" + usn + "&comment=" + comment;
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(feedCommmentActivity.this, "Comment added", Toast.LENGTH_SHORT).show();
-                                getFeed();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(feedCommmentActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                closeKeyBoard();
+                if(comment.equals("")){
+                    Toast.makeText(feedCommmentActivity.this, "Please enter something", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(feedCommmentActivity.this, "Adding comment, please wait", Toast.LENGTH_SHORT).show();
+                    comment_text.setText("");
+                    String url = "http://smvitmapp.xtoinfinity.tech/php/home/add_feed_comment.php?fid=" + fid + "&usn=" + usn + "&comment=" + comment;
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(feedCommmentActivity.this, "Comment added", Toast.LENGTH_SHORT).show();
+                                    getFeed();
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(feedCommmentActivity.this, "Error", Toast.LENGTH_SHORT).show();
 
+                                }
                             }
-                        }
-                );
-                int socketTimeOut = 50000;
-                RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-                stringRequest.setRetryPolicy(retryPolicy);
-                RequestQueue queue = Volley.newRequestQueue(feedCommmentActivity.this);
-                queue.add(stringRequest);
+                    );
+                    int socketTimeOut = 50000;
+                    RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                    stringRequest.setRetryPolicy(retryPolicy);
+                    RequestQueue queue = Volley.newRequestQueue(feedCommmentActivity.this);
+                    queue.add(stringRequest);
+                }
             }
 
         });

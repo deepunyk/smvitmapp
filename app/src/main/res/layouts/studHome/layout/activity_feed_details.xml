@@ -56,6 +56,7 @@
                 android:fontFamily="@font/roboto"
                 android:gravity="start"
                 android:textColor="@color/black"
+                android:autoLink="all"
                 android:textSize="18sp">
 
             </TextView>

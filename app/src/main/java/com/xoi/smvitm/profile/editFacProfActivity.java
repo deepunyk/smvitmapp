@@ -1,12 +1,10 @@
 package com.xoi.smvitm.profile;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -15,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -29,7 +30,6 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xoi.smvitm.R;
 import com.xoi.smvitm.main.faculty.facMainActivity;
-import com.xoi.smvitm.main.student.studMainActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -181,6 +181,12 @@ public class editFacProfActivity extends AppCompatActivity {
                         if(response.equals("success;")){
                             Intent intent = new Intent(editFacProfActivity.this, facMainActivity.class);
                             startActivity(intent);
+                            AsyncTask.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Glide.get(editFacProfActivity.this).clearDiskCache();
+                                }
+                            });
                             finish();
                         }
                     }

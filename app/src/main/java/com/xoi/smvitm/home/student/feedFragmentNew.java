@@ -33,22 +33,23 @@ import java.util.ArrayList;
 
 public class feedFragmentNew extends Fragment {
 
-    private String url = "http://smvitmapp.xtoinfinity.tech/php/home/feed_info.php";
+    private String url = "http://smvitmapp.xtoinfinity.tech/php/home/feedInfoNew.php";
+    private ArrayList<String> feedId = new ArrayList<>();
     private ArrayList<String> title = new ArrayList<>();
     private ArrayList<String> description = new ArrayList<>();
     private ArrayList<String> imglink = new ArrayList<>();
-    private ArrayList<String> photographer_name = new ArrayList<>();
-    private ArrayList<String> blogger_name = new ArrayList<>();
-    private ArrayList<String> username = new ArrayList<>();
     private ArrayList<String> date = new ArrayList<>();
-    private ArrayList<String> profilepic = new ArrayList<>();
-    private ArrayList<String> fid = new ArrayList<>();
-    private ArrayList<String> user_id = new ArrayList<>();
+    private ArrayList<String> sId = new ArrayList<>();
+    private ArrayList<String> sPic = new ArrayList<>();
+    private ArrayList<String> sName = new ArrayList<>();
+    private ArrayList<String> fId = new ArrayList<>();
+    private ArrayList<String> fPic = new ArrayList<>();
+    private ArrayList<String> fName = new ArrayList<>();
     feedFragmentRVAdapter adapter;
     LottieAnimationView loadAnim;
     TextView loadTxt;
     FloatingActionButton fab;
-    TextView moreTxt, bckTxt;
+    TextView moreTxt;
     int n = 0;
 
     public feedFragmentNew() {
@@ -64,9 +65,9 @@ public class feedFragmentNew extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_feed, container, false);
         moreTxt = (TextView)view.findViewById(R.id.moreTxt);
-        bckTxt = (TextView)view.findViewById(R.id.bckTxt);
         loadAnim = (LottieAnimationView) view.findViewById(R.id.loadanim);
         loadTxt = (TextView) view.findViewById(R.id.loadtxt);
+
 
         loadAnim.setVisibility(View.VISIBLE);
         loadTxt.setVisibility(View.VISIBLE);
@@ -80,22 +81,12 @@ public class feedFragmentNew extends Fragment {
                 startActivity(i);
             }
         });
-        bckTxt.setVisibility(View.GONE);
 
         try {
-            bckTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    n -= 5;
-                    getFeed();
-                }
-            });
-
             moreTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     n += 5;
-                    bckTxt.setVisibility(View.VISIBLE);
                     getFeed();
 
                 }
@@ -118,8 +109,7 @@ public class feedFragmentNew extends Fragment {
                             n -= 5;
                         }else{
                             moreTxt.setVisibility(View.GONE);
-                            bckTxt.setVisibility(View.GONE);
-                            title.clear();
+                            /*title.clear();
                             description.clear();
                             imglink.clear();
                             photographer_name.clear();
@@ -128,7 +118,7 @@ public class feedFragmentNew extends Fragment {
                             date.clear();
                             profilepic.clear();
                             fid.clear();
-                            user_id.clear();
+                            user_id.clear();*/
                             parseItems(response);
                         }
                     }
@@ -158,16 +148,17 @@ public class feedFragmentNew extends Fragment {
 
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jo = jarray.getJSONObject(i);
-                fid.add(jo.optString("feed_id"));
-                title.add(jo.optString("name"));
+                feedId.add(jo.optString("feedId"));
+                title.add(jo.optString("title"));
                 description.add(jo.optString("description"));
-                imglink.add(jo.optString("imglink"));
-                photographer_name.add(jo.optString("photographer_name"));
-                blogger_name.add(jo.optString("blogger_name"));
-                username.add(jo.optString("user"));
+                imglink.add(jo.optString("imgLink"));
                 date.add(jo.optString("date"));
-                profilepic.add(jo.optString("profilepic"));
-                user_id.add(jo.optString("user_id"));
+                sName.add(jo.optString("sName"));
+                sId.add(jo.optString("sId"));
+                sPic.add(jo.optString("sPic"));
+                fName.add(jo.optString("fName"));
+                fId.add(jo.optString("fId"));
+                fPic.add(jo.optString("fPic"));
             }
             loadAnim.setVisibility(View.GONE);
             loadTxt.setVisibility(View.GONE);
@@ -178,16 +169,14 @@ public class feedFragmentNew extends Fragment {
     }
 
     private void initRecyclerView() {
-        if(n==0) {
-            bckTxt.setVisibility(View.GONE);
-        }
-        else{
-            bckTxt.setVisibility(View.VISIBLE);
-        }
         moreTxt.setVisibility(View.VISIBLE);
         recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new feedFragmentRVAdapter(title, description, imglink,photographer_name,blogger_name,username,date,profilepic,fid,moreTxt,user_id,getActivity());
+        LinearLayoutManager lm  = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(lm);
+        if(n!=0) {
+            lm.scrollToPositionWithOffset(n - 1, 0);
+        }
+        adapter = new feedFragmentRVAdapter(feedId,title, description,imglink, date, sId, sPic,sName,fId, fPic, fName,moreTxt,getActivity());
         recyclerView.setAdapter(adapter);
     }
 

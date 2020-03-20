@@ -1,7 +1,9 @@
 package com.xoi.smvitm.home.student;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,6 +47,7 @@ public class circularsFragmentNew extends Fragment {
     FloatingActionButton fab;
     private RecyclerView recyclerView;
     private View view;
+    SharedPreferences sp;
 
     public circularsFragmentNew() {
     }
@@ -56,10 +59,19 @@ public class circularsFragmentNew extends Fragment {
         loadAnim = (LottieAnimationView) view.findViewById(R.id.loadanim);
         loadTxt = (TextView) view.findViewById(R.id.loadtxt);
 
+        sp = getActivity().getSharedPreferences("com.xoi.smvitm", Context.MODE_PRIVATE);
+
         loadAnim.setVisibility(View.VISIBLE);
         loadTxt.setVisibility(View.VISIBLE);
 
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
+
+        if(sp.contains("fid")){
+            fab.show();
+        }else{
+            fab.hide();
+        }
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
